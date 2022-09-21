@@ -7,13 +7,7 @@ import styled from 'styled-components';
 const Home: NextPage = () => {
   return (
     <>
-      <Image
-        src="/images/background.png"
-        alt="메인 배경 이미지"
-        layout="fill"
-        objectFit="cover"
-        objectPosition="center"
-      />
+      
       <HomeWrapper>
         <MainBanner>
           <Image
@@ -34,9 +28,7 @@ export default Home;
 
 const HomeWrapper = styled.div`
   display: flex;
-  position: relative;
   color: white;
-  z-index: 1;
   flex-direction: column;
   align-items: center;
 `;
