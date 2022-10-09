@@ -2,11 +2,12 @@ import type { AppProps } from 'next/app';
 import styled, { createGlobalStyle } from 'styled-components';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { RecoilRoot } from 'recoil';
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <RecoilRoot>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <GlobalStyles />
@@ -14,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Hydrate>
         <ReactQueryDevtools />
       </QueryClientProvider>
-    </>
+    </RecoilRoot>
   );
 }
 
