@@ -13,19 +13,19 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <BackgroundWrapper>
+      <BackgroundWrapper>
         <OverlayWrapper>
-          <Header logo="FionDB" pageList={["전적검색", "랭킹"]} />
+          <Header logo="FionDB" pageList={['전적검색', '랭킹']} />
           <GlobalStyles />
           <Component {...pageProps} />
         </OverlayWrapper>
-      <Image
-        src="/images/background.png"
-        alt="메인 배경 이미지"
-        layout="fill"
-        objectFit="cover"
-        objectPosition="center"
-        />  
+        <Image
+          src="/images/background.png"
+          alt="메인 배경 이미지"
+          layout="fill"
+          objectFit="cover"
+          objectPosition="center"
+        />
       </BackgroundWrapper>
         </Hydrate>
         <ReactQueryDevtools />
@@ -37,15 +37,15 @@ function MyApp({ Component, pageProps }: AppProps) {
 export default MyApp;
 
 const BackgroundWrapper = styled.div`
-  width:100%;
-  height:100%;
-`
+  width: 100%;
+  height: 100%;
+`;
 const OverlayWrapper = styled.div`
   z-index: 1;
-  position:absolute;
+  position: absolute;
   height: 100%;
   width: 100%;
-`
+`;
 
 const GlobalStyles = createGlobalStyle`
 
