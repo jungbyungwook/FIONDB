@@ -1,6 +1,6 @@
 import instance from '../instance';
 
-interface UserTierRecord {
+export interface UserTierRecord {
   matchType: number; // 매치종류
   division: number; // 등급 식별자
   achievementDate: string; // 최고등급 달성일자
