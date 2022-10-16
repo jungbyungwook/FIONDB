@@ -1,16 +1,24 @@
+// 모든페이지에 적용되는 파일
 import type { AppProps } from 'next/app';
 import styled, { createGlobalStyle } from 'styled-components';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 const queryClient = new QueryClient();
+import {Header, Footer} from '@components';
+import background from '/images/background.png'
+import Image from 'next/image';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
+      <BackgroundWrapper>
+          <Header />
           <GlobalStyles />
           <Component {...pageProps} />
+        <Footer /> 
+      </BackgroundWrapper>
         </Hydrate>
         <ReactQueryDevtools />
       </QueryClientProvider>
@@ -19,6 +27,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default MyApp;
+
+const BackgroundWrapper = styled.div`
+  width: 100%;
+  background-image:url("/images/background.png") ;
+`;
 
 const GlobalStyles = createGlobalStyle`
 html,
