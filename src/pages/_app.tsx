@@ -10,6 +10,8 @@ import {
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { RecoilRoot } from 'recoil';
 import { Header, Footer } from '@components';
+import background from '/images/background.png';
+import Image from 'next/image';
 
 const queryClient = new QueryClient();
 

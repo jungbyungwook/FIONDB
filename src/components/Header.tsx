@@ -2,16 +2,29 @@ import Image from 'next/image';
 import React from 'react';
 import type { FC } from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 
 const Header = () => {
   return (
     <HeaderWrapper>
       <ul>
         <li>
-          <img src="/images/FION.DB.png" alt="" />
+          <Link href="/">
+            <a>
+              <img src="/images/FION.DB.png" alt="" />
+            </a>
+          </Link>
         </li>
-        <li>전적검색</li>
-        <li>랭킹</li>
+        <li>
+          <Link href="/">
+            <a>전적검색</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/ranking">
+            <a>랭킹</a>
+          </Link>
+        </li>
       </ul>
     </HeaderWrapper>
   );
