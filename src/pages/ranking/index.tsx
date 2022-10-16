@@ -6,7 +6,6 @@ import styled from 'styled-components';
 const Ranking: NextPage = () => {
   return (
     <>
-      
       <RankingWrapper>
         <h1>ranking</h1>
       </RankingWrapper>
@@ -22,5 +21,5 @@ const RankingWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   height: 744px;
-  padding-top:100px;
+  padding-top: 100px;
 `;

@@ -4,8 +4,8 @@ import styled, { createGlobalStyle } from 'styled-components';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 const queryClient = new QueryClient();
-import {Header, Footer} from '@components';
-import background from '/images/background.png'
+import { Header, Footer } from '@components';
+import background from '/images/background.png';
 import Image from 'next/image';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -13,12 +13,12 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-      <BackgroundWrapper>
-          <Header />
-          <GlobalStyles />
-          <Component {...pageProps} />
-        <Footer /> 
-      </BackgroundWrapper>
+          <BackgroundWrapper>
+            <Header />
+            <GlobalStyles />
+            <Component {...pageProps} />
+            <Footer />
+          </BackgroundWrapper>
         </Hydrate>
         <ReactQueryDevtools />
       </QueryClientProvider>
@@ -30,7 +30,7 @@ export default MyApp;
 
 const BackgroundWrapper = styled.div`
   width: 100%;
-  background-image:url("/images/background.png") ;
+  background-image: url('/images/background.png');
 `;
 
 const GlobalStyles = createGlobalStyle`
