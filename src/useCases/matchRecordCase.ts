@@ -20,23 +20,22 @@ const pickBestPlayer = (data?: MatchInfo) => {
 };
 
 // 🟡 result를 string 보다 확실하게 할 수 있다.
-interface GetMatchResultReturn {
-  type: '공식경기' | '감독경기'; // 우선은 여기까지
-  date: string; // '몇일전' | '일주일전' 등
-  result: string; //
-}
+// interface GetMatchResultReturn {
+//   type: '공식경기' | '감독경기'; // 우선은 여기까지
+//   date: string; // '몇일전' | '일주일전' 등
+//   result: string; //
+// }
 
 // MatchInfo 타입의 객체에서 UI에서 필요한 데이터만 추상화하는 부분
 // 단일책임:  받은 데이터에서 필요한 데이터만 추상화해서 보내주는 역할
-const getMatchResult = (data: MatchInfo): GetMatchResultReturn => {
-  const { matchDetail } = data;
-  // matchDetail.matchResult;
-  return {
-    type: '공식경기',
-    date: '하루전',
-    result: matchDetail.matchResult,
-  };
-};
+// const getMatchResult = (data: MatchInfo): GetMatchResultReturn => {
+//   const { matchDetail } = data;
+//   return {
+//     type: '공식경기',
+//     date: '하루전',
+//     result: matchDetail.matchResult,
+//   };
+// };
 
 const playerSpIdToImage = (spid: number) => {
   const image = getPlayerImage(spid);
@@ -46,4 +45,4 @@ const playerSpIdToImage = (spid: number) => {
 // change date to string
 const changeDateToString = () => {};
 
-export { pickBestPlayer, getMatchResult, playerSpIdToImage };
+export { pickBestPlayer, playerSpIdToImage };
