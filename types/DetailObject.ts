@@ -1,3 +1,21 @@
+interface MatchInfoBody {
+  matchId: string;
+  matchDate: string;
+  matchType: number;
+  matchInfo: MatchInfo[];
+}
+
+interface MatchInfo {
+  accessId: string;
+  nickname: string;
+  matchDetail: MatchDetailDTO;
+  shoot: ShootDTO;
+  shootDetail: ShootDetailDTO;
+  pass: PassDTO;
+  defence: DefenceDTO;
+  player: PlayerDTO[];
+}
+
 interface MatchDetailDTO {
   seasonId: number; //	시즌 ID
   matchResult: string; //	매치 결과 (“승”, “무”, “패”)
@@ -13,6 +31,16 @@ interface MatchDetailDTO {
   OffsideCount: number; //	오프사이드 수
   averageRating: any; // Double; //	경기 평점
   controller: string; //	사용한 컨트롤러 타입 (keyboard / pad / etc 중 1)
+}
+
+interface MatchInfoDTO {
+  accessId: string; // 유저 고유 식별자
+  nickname: string; // 닉네임
+  matchDetail: MatchDetailDTO; // 매치 결과 상세 정보
+  shoot: ShootDTO; // 슈팅정보
+  pass: PassDTO; // 패스정보
+  defence: DefenceDTO; // 수비정보
+  player: any[]; // 경기 사용 선수 정보
 }
 
 interface ShootDTO {
@@ -76,15 +104,6 @@ interface DefenceDTO {
   tackleTry: number; //	태클 시도 수
   tackleSuccess: number; //	태클 성공 수
 }
-interface MatchInfoDTO {
-  accessId: string; // 유저 고유 식별자
-  nickname: string; // 닉네임
-  matchDetail: MatchDetailDTO; // 매치 결과 상세 정보
-  shoot: ShootDTO; // 슈팅정보
-  pass: PassDTO; // 패스정보
-  defence: DefenceDTO; // 수비정보
-  player: any[]; // 경기 사용 선수 정보
-}
 
 interface PlayerDTO {
   spId: number; //	선수 고유 식별자 (/metadata/spid API 참고)
@@ -118,6 +137,8 @@ interface StatusDTO {
   spRating: any; //Float //	선수 평점
 }
 export type {
+  MatchInfoBody,
+  MatchInfo,
   MatchInfoDTO,
   MatchDetailDTO,
   ShootDTO,

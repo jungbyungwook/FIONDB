@@ -1,4 +1,4 @@
-import instance from '../instance';
+import { apiInstance } from '../instance';
 
 // interface DetailMatch {
 //   matchId: string; //매치 고유 식별자
@@ -25,6 +25,6 @@ export const getUserMatch = async (
   // test data
   const [matchtype, offset, limit]: number[] = [50, 0, 20];
   const params: getUserMatchParams = { matchtype, offset, limit };
-  const { data } = await instance(API_URL, { params });
+  const { data } = await apiInstance(API_URL, { params });
   return data;
 };

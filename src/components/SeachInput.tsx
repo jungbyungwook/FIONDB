@@ -4,10 +4,10 @@ import type { FC } from 'react';
 import styled from 'styled-components';
 
 const SearchInput: FC = (props) => {
-  const { text } = props;
+  // const { text } = props;
   return (
     <SearchInputWrapper>
-      <StyledInput placeholder={text} />
+      {/* <StyledInput placeholder={text} /> */}
     </SearchInputWrapper>
   );
 };

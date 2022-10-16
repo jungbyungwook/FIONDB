@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['ssl.nexon.com'],
+    domains: ['ssl.nexon.com', 'fo4.dn.nexoncdn.co.kr'],
   },
 };
 

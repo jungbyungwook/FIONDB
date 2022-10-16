@@ -1,4 +1,4 @@
-import instance from '../instance';
+import { apiInstance } from '../instance';
 
 export interface UserTierRecord {
   matchType: number; // 매치종류
@@ -12,7 +12,7 @@ export const getUserTopTier = async (
   accessId: string | undefined,
 ): Promise<ResponseData> => {
   const API_URL = `users/${accessId}/maxdivision`;
-  const { data } = await instance(API_URL);
+  const { data } = await apiInstance(API_URL);
 
   return data;
 };
