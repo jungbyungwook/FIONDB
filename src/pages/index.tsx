@@ -31,12 +31,13 @@ const HomeWrapper = styled.div`
   color: white;
   flex-direction: column;
   align-items: center;
+  height: 744px;
 `;
 
 const MainBanner = styled.div`
   position: relative;
   width: 48.5rem;
   height: 25.4rem;
-  margin-top: 10rem;
+  margin-top: 15rem;
   margin-bottom: 5rem;
 `;

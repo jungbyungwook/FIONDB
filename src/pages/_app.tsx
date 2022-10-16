@@ -4,7 +4,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 const queryClient = new QueryClient();
-import {Header} from '@components';
+import {Header, Footer} from '@components';
 import background from '/images/background.png'
 import Image from 'next/image';
 
@@ -14,18 +14,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
       <BackgroundWrapper>
-        <OverlayWrapper>
-          <Header logo="FionDB" pageList={['전적검색', '랭킹']} />
+          <Header />
           <GlobalStyles />
           <Component {...pageProps} />
-        </OverlayWrapper>
-        <Image
-          src="/images/background.png"
-          alt="메인 배경 이미지"
-          layout="fill"
-          objectFit="cover"
-          objectPosition="center"
-        />
+        <Footer /> 
       </BackgroundWrapper>
         </Hydrate>
         <ReactQueryDevtools />
@@ -38,17 +30,10 @@ export default MyApp;
 
 const BackgroundWrapper = styled.div`
   width: 100%;
-  height: 100%;
-`;
-const OverlayWrapper = styled.div`
-  z-index: 1;
-  position: absolute;
-  height: 100%;
-  width: 100%;
+  background-image:url("/images/background.png") ;
 `;
 
 const GlobalStyles = createGlobalStyle`
-
 html,
 body {
     padding: 0;
