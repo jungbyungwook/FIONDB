@@ -1,4 +1,4 @@
-import { apiInstance } from '../instance';
+import { apiInstance } from 'src/pages/api/instance';
 
 // interface DetailMatch {
 //   matchId: string; //매치 고유 식별자

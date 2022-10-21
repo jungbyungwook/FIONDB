@@ -1,4 +1,4 @@
-import getPlayerImage from 'api/user/getPlayerImage';
+import getPlayerImage from 'src/pages/api/user/getPlayerImage';
 import { MatchInfo } from '../../types/DetailObject';
 
 // const matchRecordCase = () => {};

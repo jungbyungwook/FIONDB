@@ -1,4 +1,4 @@
-import { apiInstance } from 'api/instance';
+import { apiInstance } from 'src/pages/api/instance';
 
 interface Params {
   nickName: string;

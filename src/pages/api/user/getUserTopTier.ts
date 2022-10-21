@@ -1,4 +1,4 @@
-import { apiInstance } from '../instance';
+import { apiInstance } from 'src/pages/api/instance';
 
 export interface UserTierRecord {
   matchType: number; // 매치종류

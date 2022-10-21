@@ -1,4 +1,4 @@
-import { apiInstance } from 'api/instance';
+import { apiInstance } from 'src/pages/api/instance';
 import { MatchInfoBody } from 'types/DetailObject';
 
 export const getMatchInfo = async (matchId: string): Promise<MatchInfoBody> => {
