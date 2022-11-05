@@ -9,13 +9,14 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 import { getUserAccessId } from 'src/pages/api/user/getUserAccessId';
-import { getMatchInfo } from 'src/pages/api/user/getMatchInfo';
-import { MatchInfo } from 'types/DetailObject';
+// import { getMatchInfo } from 'src/pages/api/user/get';
+import { MatchInfo, MatchInfoBody } from 'types/DetailObject';
 
 export interface Props {
   children?: ReactNode;
-  matchId: string;
-  nickName: string | undefined;
+  // matchId: string;
+  // nickName: string | undefined;
+  matchDetailData: MatchInfoBody;
 }
 
 interface ViewData {
@@ -29,48 +30,26 @@ interface ViewData {
   bestPlayers: {}[];
 }
 
-// 1. matchInfo의 nickName을 기준으로 정렬해주자.
-// 2. 렌더링에 필요한 데이터를 추출하여 state로 만들자.
-// 3. 컴포넌트에 뿌려주자.
+const TestMatchResultBox = ({ matchDetailData }: Props) => {
+  // if (isSuccess) {
 
-const TestMatchResultBox = ({ matchId, nickName }: Props) => {
-  // const [matchInfoState, setMatchInfoState] = useState<MatchInfo[]>();
-  // const {
-  //   data: matchInfoData,
-  //   status,
-  //   isLoading,
-  //   isSuccess,
-  // } = useGetMatchInfo(matchId);
-  console.log(matchId);
-
-  const {
-    data: matchInfoData,
-    status,
-    isLoading,
-    isSuccess,
-  } = useQuery(['matchInfo'], () => getMatchInfo(matchId));
-
-  // const { data: userData } = useQuery(['useAccessId'], () =>
-  //   getUserAccessId(nickName),
-  // );
-
-  if (isLoading) {
-    // console.log(userData);
-    console.log(matchId, nickName);
-    return <div> loading... </div>;
-  }
-
-  if (isSuccess) {
+  // if (!matchDetailData) return;
+  if (matchDetailData) {
     // console.log(nickName);
-    const { matchType, matchInfo, matchDate } = matchInfoData;
+    const { matchType, matchInfo, matchDate } = matchDetailData;
     // usecases로 분리할 수 있지 않을까?
-    const leftPlayer =
-      matchInfo[0].nickname === nickName ? matchInfo[0] : matchInfo[1];
-    const rightPlayer =
-      matchInfo[1].nickname === nickName ? matchInfo[0] : matchInfo[1];
-    matchInfo[1];
+    // const leftPlayer =
+    //   matchInfo[0].nickname === nickName ? matchInfo[0] : matchInfo[1];
+
+    const leftPlayer = matchInfo[0];
     const leftGoal = leftPlayer.shoot.goalTotal;
+    const rightPlayer = matchInfo[1];
     const rightGoal = rightPlayer.shoot.goalTotal;
+    // const rightPlayer =
+    //   matchInfo[1].nickname === nickName ? matchInfo[0] : matchInfo[1];
+    // matchInfo[1];
+    // const leftGoal = leftPlayer.shoot.goalTotal;
+    // const rightGoal = rightPlayer.shoot.goalTotal;
 
     return (
       <>

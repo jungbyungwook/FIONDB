@@ -1,124 +1,141 @@
-export {};
-/*
-import { FlexItem, FlexBox } from '@components';
-import { useGetMatchInfo } from 'hooks/useGetMatchInfo';
-import Image from 'next/image';
-import { ReactNode } from 'react';
-import {
-  pickBestPlayer,
-  playerSpIdToImage,
-} from 'src/useCases/matchRecordCase';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { IMatchDetailData } from 'types/DetailObject';
+import { changeDateUtil } from 'util/chageDate';
 import PercentBar from '../UI/bar/PercentBar';
+import { ImageWithFallback } from '../UI/Image/ImageWithFallback';
 
-// build 과정에서 error가 발생하여 주석처리 해놓은 파일입니다.
-// 해당 파일의 역할은 TestMatchResult.tsx가 대체할 예정입니다.
-
-
-export interface MatchRecordBoxProps {
-  children?: ReactNode;
-  matchId: string;
+interface Props {
+  matchDetailData: IMatchDetailData;
+  nickName: string;
 }
 
-const MatchResultBox = ({ children, matchId }: MatchRecordBoxProps) => {
-  const {
-    data: matchInfoData,
-    isLoading,
-    isSuccess,
-  } = useGetMatchInfo(matchId);
+interface IViewData {
+  matchType: string;
+  mathResult: string;
+  leftPlayer: {
+    goalCount: number;
+    bestPlayer: {
+      name: string;
+      position: string;
+      status: {};
+    };
+  };
+  rightPlayer: {
+    goalCount: number;
+    bestPlayer: {
+      name: string;
+      position: string;
+      status: {};
+    };
+  };
+  matchDetail: {};
+}
 
-  if (isLoading) return <div>loading...</div>;
-  if (isSuccess) {
-    const leftBestPlayer = pickBestPlayer(matchInfoData?.matchInfo[0]);
-    const rightBestPlayer = pickBestPlayer(matchInfoData?.matchInfo[1]);
+export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
+  // 필요한 것만 추출하는 부분
+  // name을 기준으로 left 한다.
+  console.log('----------');
+  console.log(matchDetailData);
 
-    return (
-      <>
-        <FlexBox style={{}}>
-          <FlexItem style={{ flex: 4 }}>
-            <FlexBox style={{}}>
-              <FlexItem style={{ flex: 1 }}>
-                <div>{matchInfoData.matchDate}</div>
-                <div>{matchInfoData.matchType}</div>
-                <div>{matchInfoData.matchInfo[0].matchDetail.matchResult}</div>
-              </FlexItem>
-              <FlexItem style={{ flex: 3 }}>
-                <div>평점: {leftBestPlayer?.status.spRating}</div>
-                <Image
-                  src={`https://fo4.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${leftBestPlayer?.spId}.png`}
-                  width="100px"
-                  height="100px"
-                  // placeholder=""
-                  // blurDataURL=""
-                />
-                <div>
-                  선수 골{leftBestPlayer?.status.goal} , 어시:
-                  {leftBestPlayer?.status.assist}
-                </div>
-              </FlexItem>
-            </FlexBox>
-          </FlexItem>
-          <FlexItem style={{ flex: 1 }}>
-            <div>vs</div>
-          </FlexItem>
-          <FlexItem style={{ flex: 4 }}>
-            <FlexBox style={{}}>
-              <FlexItem style={{ flex: 1 }}>
-                <div>평점: {rightBestPlayer?.status.spRating}</div>
-              </FlexItem>
-              <FlexItem style={{ flex: 9 }}>
-                <Image
-                  src={`https://fo4.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${rightBestPlayer?.spId}.png`}
-                  width="100px"
-                  height="100px"
-                />
-                <div>
-                  선수 골{rightBestPlayer?.status.goal} , 어시:
-                  {rightBestPlayer?.status.assist}
-                </div>
-              </FlexItem>
-            </FlexBox>
-          </FlexItem>
-          <FlexItem>
-            <AbsoluteButton text="화살표화살표화살표화살표화살표화살표화살표화살표" />
-          </FlexItem>
-        </FlexBox>
-        <StyledBottom>
-          <StyledInlineBlock
-            width={matchInfoData?.matchInfo[0].matchDetail.possession}
-            backgroundColor="orange"
-          >
-            {matchInfoData.matchInfo[0].nickname}
-          </StyledInlineBlock>
-          <StyledInlineBlock
-            width={matchInfoData?.matchInfo[1].matchDetail.possession}
-            backgroundColor="green"
-          >
-            {matchInfoData.matchInfo[1].nickname}
-          </StyledInlineBlock>
-        </StyledBottom>
-      </>
-    );
-  }
-  return <div>null</div>;
+  const changeServerDataIntoRenderData = (data: any) => {
+    // 시간변환
+    changeDateUtil(data.matchData);
+    // matchType => 한글
+    // 승, 패
+  };
+
+  const [sortedData, setSortedData] = useState({
+    leftPlayer: {},
+    rightPlayer: {},
+  });
+
+  return (
+    <StyleContainer>
+      {/* <StyleTop /> */}
+      <StyleCenter>
+        <StyleResult>
+          <div>{matchDetailData.matchType}</div>
+          <div>승</div>
+          <div>{matchDetailData.matchType}</div>
+        </StyleResult>
+        <StyleLeftPlayer>
+          <StyleBestPlayer>
+            <ImageWithFallback fallbackSrc={''} src={''} />
+            <div>이름</div>
+          </StyleBestPlayer>
+          <StyleBestPlayerStatus>113/112/111</StyleBestPlayerStatus>
+        </StyleLeftPlayer>
+        <StyleGoals>3 vs 4</StyleGoals>
+        <StyleRightPlayer>
+          <StyleBestPlayer>
+            <ImageWithFallback fallbackSrc={''} src={''} />
+            <div>이름</div>
+          </StyleBestPlayer>
+          <StyleBestPlayerStatus>113/112/111</StyleBestPlayerStatus>
+        </StyleRightPlayer>
+        <StyleDetail></StyleDetail>
+      </StyleCenter>
+      <StyleBottom>
+        <PercentBar />
+        <PercentBar />
+      </StyleBottom>
+    </StyleContainer>
+  );
 };
 
-const StyledBottom = styled.div`
+const StyleContainer = styled.div`
+  /* display: flex; */
   width: 100%;
+  height: 100%;
+  border: 1px solid green;
 `;
 
-// props로 퍼센트를 받아와서 width 적용해줄 수 있지 않을까?
-// mutable width Span ?
-const StyledInlineBlock = styled.span<{
-  width: number;
-  backgroundColor: string;
-}>`
-  display: inline-block;
-  width: ${({ width }) => (width ? width : 50)}%;
-  background-color: ${({ backgroundColor }) =>
-    backgroundColor ? backgroundColor : null};
+const StyleTop = styled.div`
+  border: 1px solid green;
+`;
+const StyleBottom = styled.div`
+  border: 1px solid green;
+`;
+const StyleCenter = styled.div`
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  border: 1px solid green;
+  height: 100%;
+  flex-basis: 100%;
+`;
+const StyleResult = styled.div`
+  border: 1px solid green;
+  flex-basis: 10rem;
+`;
+const StyleDetail = styled.div`
+  border: 1px solid green;
+  flex-basis: 5rem;
+`;
+const StyleGoals = styled.div`
+  border: 1px solid green;
+  flex-basis: 10rem;
+`;
+const StyleLeftPlayer = styled.div`
+  display: flex;
+  border: 1px solid green;
+  flex: 1;
+`;
+const StyleRightPlayer = styled.div`
+  display: flex;
+  border: 1px solid green;
+  flex: 1;
 `;
 
-export default MatchResultBox;
-
-*/
+const StyleBestPlayer = styled.div`
+  border: 1px solid green;
+  flex: 1;
+  flex-basis: 10rem;
+`;
+const StyleBestPlayerStatus = styled.div`
+  border: 1px solid green;
+  flex: 1;
+  flex-basis: 10rem;
+`;

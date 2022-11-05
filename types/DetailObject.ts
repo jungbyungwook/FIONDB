@@ -1,4 +1,4 @@
-interface MatchInfoBody {
+interface IMatchDetailData {
   matchId: string;
   matchDate: string;
   matchType: number;
@@ -137,7 +137,7 @@ interface StatusDTO {
   spRating: any; //Float //	선수 평점
 }
 export type {
-  MatchInfoBody,
+  IMatchDetailData,
   MatchInfo,
   MatchInfoDTO,
   MatchDetailDTO,

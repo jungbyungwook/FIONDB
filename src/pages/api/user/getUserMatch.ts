@@ -1,11 +1,6 @@
 import { apiInstance } from 'src/pages/api/instance';
-
-// interface DetailMatch {
-//   matchId: string; //매치 고유 식별자
-//   matchDate: string; //매치 일자 (ex. 2019-05-13T18:03:10)
-//   matchType: string[]; //매치 종류 (/metadata/matchtype API 참고)
-//   matchInfo: any[];
-// }
+import { IMatchDetailData } from 'types/DetailObject';
+import { getMatchDetailData } from './getMatchDetailData';
 
 type UserMatchRecord = string[];
 interface getUserMatchParams {
@@ -16,15 +11,20 @@ interface getUserMatchParams {
 
 type ResponseData = UserMatchRecord;
 
-export const getUserMatch = async (
+export const getMatchDetailDatas = async (
   accessId: string | undefined,
-): Promise<ResponseData> => {
+): Promise<IMatchDetailData[]> => {
   const API_URL = `users/${accessId}/matches?`;
   // 어떤걸로 매치타입을 받아오더라? 여기서 matchtype, offset, limit은
 
   // test data
   const [matchtype, offset, limit]: number[] = [50, 0, 20];
   const params: getUserMatchParams = { matchtype, offset, limit };
-  const { data } = await apiInstance(API_URL, { params });
-  return data;
+  const { data }: { data: ResponseData } = await apiInstance(API_URL, {
+    params,
+  });
+
+  const promises = data.map((postId: string) => getMatchDetailData(postId));
+
+  return await Promise.all(promises);
 };

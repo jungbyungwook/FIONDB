@@ -1,5 +1,5 @@
 // import { getMatchInfo } from 'api/user/getMatchInfo';
-import { getMatchInfo } from 'src/pages/api/user/getMatchInfo';
+import { getMatchInfo } from 'src/pages/api/user/get`';
 import { useQuery } from 'react-query';
 
 export const useGetMatchInfo = (matchId: string) => {
