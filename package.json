@@ -5,13 +5,14 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next build && next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@types/styled-components": "^5.1.26",
     "axios": "^0.27.2",
     "babel-plugin-module-resolver": "^4.1.0",
+    "dayjs": "^1.11.6",
     "next": "12.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",

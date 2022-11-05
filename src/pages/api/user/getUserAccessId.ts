@@ -11,7 +11,7 @@ export interface UserProfile {
 }
 
 export const getUserAccessId = async (
-  nickName: string,
+  nickName: string = '',
 ): Promise<UserProfile> => {
   const API_URL = 'users?';
   const params: Params = { nickName };

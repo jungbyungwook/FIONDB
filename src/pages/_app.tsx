@@ -12,13 +12,15 @@ import { RecoilRoot } from 'recoil';
 import { Header, Footer } from '@components';
 import background from '/images/background.png';
 import Image from 'next/image';
+import { useState } from 'react';
 
-const queryClient = new QueryClient();
+// const queryClient = new QueryClient();
 
 function MyApp({
   Component,
   pageProps,
 }: AppProps<{ dehydratedState: DehydratedState }>) {
+  const [queryClient] = useState(() => new QueryClient());
   return (
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
