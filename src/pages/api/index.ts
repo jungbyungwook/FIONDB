@@ -6,13 +6,3 @@ export const api = axios.create({
     Authorization: process.env.NEXT_PUBLIC_API_KEY,
   },
 });
-
-// const cdnInstance = axios.create({
-//   baseURL: 'https://fo4.dn.nexoncdn.co.kr/',
-//   method: 'get',
-//   headers: {
-//     Authorization: process.env.NEXT_PUBLIC_API_KEY,
-//   },
-// });
-
-// export { instance, cdnInstance };

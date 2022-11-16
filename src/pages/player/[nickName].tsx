@@ -1,75 +1,117 @@
-import { useGetUserAccessId } from 'hooks/useGetUserAccessId';
-import useGetUserRecord from 'hooks/useGetUserRecord';
-import { GetServerSideProps, NextPage } from 'next';
-import { useRouter } from 'next/router';
+// import { useGetUserAccessId } from 'hooks/useGetUserAccessId';
+// import useGetUserRecord from 'hooks/useGetUserRecord';
+// import { useRouter } from 'next/router';
+// import TestMatchResultBox from 'src/components/player/TestMatchResultBox';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { ParsedUrlQuery } from 'querystring';
+import { dehydrate, QueryClient, useQuery } from 'react-query';
 import { Layout } from 'src/components/Layout';
-import TestMatchResultBox from 'src/components/player/TestMatchResultBox';
+import { MatchResultBox } from 'src/components/player/MatchResultBox';
+import { getBestPlayerNicknameBySpId } from 'src/pages/player/useCases/matchRecordCase';
 import styled from 'styled-components';
+import {
+  useCustomInfiniteQuery,
+  useCustomPrefetchInfiniteQuery,
+} from '../api/hooks/query/useCustomInfiniteQuery';
+import { useGetTopTierQuery } from '../api/hooks/query/useGetTopTierQuery';
+import { useGetUserProfileQuery } from '../api/hooks/query/useGetUserProfileQuery';
+import { IUserProfile } from '../api/hooks/query/useGetUserProfileQuery';
 
-interface Query extends ParsedUrlQuery {
-  nickName: string;
-}
-// InferGetServerSidePropsType<typeof getServerSideProps>
-// 외부로 맡기면 여기는 무조근 nickName이 존재하는 상태일 것이다
-const PlayerNickName: NextPage = (props) => {
-  const router = useRouter();
-  const { nickName } = router.query as Query;
-  const { data: nickNameData } = useGetUserAccessId(nickName);
-  const {
-    userMatchQuery: { data: matchData, status: matchStatus },
-  } = useGetUserRecord(nickNameData?.accessId);
+type PagePropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
+const Page = ({ nickName }: PagePropsType) => {
+  const userProfileQuery = useGetUserProfileQuery(nickName);
+  const topTierQuery = useGetTopTierQuery(userProfileQuery.data?.accessId);
+  const matchListInfiniteQuery = useCustomInfiniteQuery(
+    userProfileQuery.data?.accessId,
+  );
+  const soccerPlayerMetaQuery = useQuery(['soccerPlayerMeta'], () =>
+    getBestPlayerNicknameBySpId(),
+  );
 
-  if (matchStatus === 'loading') return <div>Loading...</div>;
-  if (matchStatus === 'error')
-    return <div>존재하지 않는 감독이거나 전적이 없습니다.</div>;
-  if (matchStatus === 'success') {
-    return (
-      <Layout>
-        <StyledScetion>
-          {matchData?.map((matchId) => (
-            <TestMatchResultBox matchId={matchId} nickName={nickName} />
-          ))}
-          {/* <UserProfileBox
-  //         nickName={nickName}
-  //         rankList={userTopTierQuery?.data}
-  //         level={userBaseProfile?.level}
-  //       />
-  //       {userMatchQuery.data?.map((matchId) => (
-  //         <MatchResultBox matchId={matchId} />
-  //       ))} */}
-        </StyledScetion>
-      </Layout>
-    );
-  }
+  const fetchNextPageOnClick = () => matchListInfiniteQuery?.fetchNextPage();
+
+  return (
+    <Layout>
+      <StyledScetion>
+        <StyledUl>
+          {matchListInfiniteQuery?.data?.pages.map((page, index) =>
+            page.currentPageData.map((data) => (
+              <MatchResultBox
+                key={data.matchId}
+                matchDetailData={data}
+                nickName={nickName}
+              />
+            )),
+          )}
+        </StyledUl>
+        <button onClick={fetchNextPageOnClick}>더 불러오기</button>
+      </StyledScetion>
+    </Layout>
+  );
+  // const router = useRouter();
+  // const { nickName } = router.query as IParams;
+  // const { data: nickNameData } = useGetUserAccessId(nickName);
+  // const {
+  //   userMatchQuery: { data: matchData, status: matchStatus },
+  // } = useGetUserRecord(nickNameData?.accessId);
+
+  // if (matchStatus === 'loading') return <div>Loading...</div>;
+  // if (matchStatus === 'error')
+  // return <div>존재하지 않는 감독이거나 전적이 없습니다.</div>;
+  // if (matchStatus === 'success') {
+  //   return (
+  //     <Layout>
+  //       <StyledScetion>
+  //         {matchData?.map((matchId) => (
+  //           <TestMatchResultBox matchId={matchId} nickName={nickName} />
+  //         ))}
+  //       </StyledScetion>
+  //     </Layout>
+  //   );
+  // }
 
   return <Layout />;
 };
 
-// interface Query extends ParsedUrlQuery {
-//   nickName: string;
-// }
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   // const queryClient = new QueryClient();
-//   // await queryClient.prefetchQuery()\
-//   // 더 좋은 방법은없을까..
-//   const { nickName } = context.query as Query;
-//   const { data: nickNameData } = useGetUserAccessId(nickName);
-//   const {
-//     userMatchQuery: { data: matchData, status: matchStatus },
-//   } = useGetUserRecord(nickNameData?.accessId);
+interface IProps {
+  nickName: string;
+}
+interface IParams extends ParsedUrlQuery {
+  nickName: string;
+}
 
-//   // const nicknName = context.params;
-//   return {
-//     props: {
-//       matchData,
-//     },
-//   };
-// };
+export const getServerSideProps: GetServerSideProps<IProps> = async (
+  context,
+) => {
+  const { nickName } = context.query as IParams;
+  const queryClient = new QueryClient();
+  const prefetchUserProfileQuery = useGetUserProfileQuery(
+    nickName,
+    queryClient,
+  );
+  await prefetchUserProfileQuery();
 
+  const { accessId } = queryClient.getQueryData([
+    'userProfile',
+    nickName,
+  ]) as IUserProfile;
+  await useCustomPrefetchInfiniteQuery(accessId, queryClient);
+
+  return {
+    props: {
+      nickName: nickName,
+      dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+    },
+  };
+};
 const StyledScetion = styled.section`
   width: 80%;
   margin: 0 auto;
 `;
 
-export default PlayerNickName;
+const StyledUl = styled.ul`
+  display: grid;
+  grid-row-gap: 3rem;
+`;
+
+export default Page;

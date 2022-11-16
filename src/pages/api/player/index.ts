@@ -1,8 +1,6 @@
-import { AxiosResponse } from 'axios';
-import { off } from 'process';
 import { api } from 'src/pages/api';
 import { IMatchDetailData } from 'types/DetailObject';
-import { UserProfile } from './getUserAccessId';
+import { IUserProfile } from '../hooks/query/useGetUserProfileQuery';
 
 export type AccessId = string;
 export type MatchId = string;
@@ -21,7 +19,7 @@ const baseURL = {
 };
 
 const userAPI = {
-  getUserProfile: async (nickName: NickName): Promise<UserProfile> => {
+  getUserProfile: async (nickName: NickName): Promise<IUserProfile> => {
     const params: { nickname: string } = { nickname: nickName };
     const response = await api.get(baseURL.getUserProfile(), { params });
     return response.data;
@@ -53,4 +51,9 @@ const matchAPI = {
   },
 };
 
-export { userAPI, matchAPI };
+const metaAPI = {
+  getSoccerPlayerMeta: async () =>
+    api.get('https://static.api.nexon.co.kr/fifaonline4/latest/spid.json'),
+};
+
+export { userAPI, matchAPI, metaAPI };

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { pickBestPlayer } from 'src/useCases/matchRecordCase';
+import { pickBestPlayer } from 'src/pages/player/useCases/matchRecordCase';
 import { MatchInfo } from 'types/DetailObject';
 
 interface Props {

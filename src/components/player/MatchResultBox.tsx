@@ -1,7 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useQueryClient } from 'react-query';
+import {
+  getDateByDateString,
+  getMatchStringByMatchId,
+  pickBestPlayer,
+} from 'src/pages/player/useCases/matchRecordCase';
 import styled from 'styled-components';
-import { IMatchDetailData } from 'types/DetailObject';
+import { IMatchDetailData, PlayerDTO } from 'types/DetailObject';
 import { changeDateUtil } from 'util/chageDate';
+import { binarySearch } from 'util/search';
 import PercentBar from '../UI/bar/PercentBar';
 import { ImageWithFallback } from '../UI/Image/ImageWithFallback';
 
@@ -12,76 +18,172 @@ interface Props {
 
 interface IViewData {
   matchType: string;
-  mathResult: string;
+  matchResult: string;
+  matchDate: string;
   leftPlayer: {
+    nickName: string;
     goalCount: number;
     bestPlayer: {
+      id: number;
       name: string;
       position: string;
       status: {};
+      // dto: PlayerDTO;
     };
   };
   rightPlayer: {
+    nickName: string;
     goalCount: number;
     bestPlayer: {
+      id: number;
       name: string;
       position: string;
       status: {};
+      // dto: PlayerDTO;
     };
   };
   matchDetail: {};
 }
 
 export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
-  // 필요한 것만 추출하는 부분
-  // name을 기준으로 left 한다.
-  console.log('----------');
-  console.log(matchDetailData);
-
-  const changeServerDataIntoRenderData = (data: any) => {
+  const changeServerDataIntoRenderData = (data: any, userNickName: string) => {
+    const newState: IViewData = {
+      matchType: '',
+      matchResult: '',
+      matchDate: '',
+      leftPlayer: {
+        nickName: '',
+        goalCount: 0,
+        bestPlayer: {
+          id: 0,
+          name: '',
+          position: '',
+          status: {},
+          dto: {},
+        },
+      },
+      rightPlayer: {
+        nickName: '',
+        goalCount: 0,
+        bestPlayer: {
+          id: 0,
+          name: '',
+          position: '',
+          status: {},
+          dto: {},
+        },
+      },
+      matchDetail: {},
+    };
     // 시간변환
-    changeDateUtil(data.matchData);
-    // matchType => 한글
-    // 승, 패
+    newState.matchDate = changeDateUtil(data.matchData);
+
+    // leftPlyaer, rightPlaery
+    // left: 검색한 본인
+    if (userNickName === matchDetailData.matchInfo[1].nickname) {
+      const sercherData = matchDetailData.matchInfo[1];
+      const opponentData = matchDetailData.matchInfo[0];
+      newState.leftPlayer.goalCount = sercherData.shoot.goalTotal;
+      newState.rightPlayer.goalCount = opponentData.shoot.goalTotal;
+      newState.leftPlayer.nickName = sercherData.nickname;
+      newState.rightPlayer.nickName = opponentData.nickname;
+      newState.matchResult = sercherData.matchDetail.matchResult;
+
+      newState.leftPlayer.bestPlayer.dto = pickBestPlayer(sercherData);
+      newState.rightPlayer.bestPlayer.dto = pickBestPlayer(opponentData);
+    } else {
+      const sercherData = matchDetailData.matchInfo[0];
+      const opponentData = matchDetailData.matchInfo[1];
+      newState.leftPlayer.goalCount = sercherData.shoot.goalTotal;
+      newState.rightPlayer.goalCount = opponentData.shoot.goalTotal;
+      newState.leftPlayer.nickName = sercherData.nickname;
+      newState.rightPlayer.nickName = opponentData.nickname;
+      newState.matchResult = sercherData.matchDetail.matchResult;
+
+      newState.leftPlayer.bestPlayer.dto = pickBestPlayer(opponentData);
+      newState.rightPlayer.bestPlayer.dto = pickBestPlayer(sercherData);
+
+      // newState.leftPlayer.bestPlayer.id =
+      // newState.leftPlayer.bestPlayer.dto.spId;
+      // newState.rightPlayer.bestPlayer.id =
+      // newState.rightPlayer.bestPlayer.dto.spId;
+    }
+    return newState;
   };
 
-  const [sortedData, setSortedData] = useState({
-    leftPlayer: {},
-    rightPlayer: {},
-  });
+  const queryClient = useQueryClient();
+  const data = queryClient.getQueryData(['soccerPlayerMeta']);
+  const sortedData = changeServerDataIntoRenderData(matchDetailData, nickName);
+
+  const getSoccerPlayerNameBySpId = (spId: number) => {
+    if (!data) return;
+    // if (typeof data?.data === 'object') {
+    return binarySearch(data?.data, spId, 0, data?.data.length);
+    // }
+  };
 
   return (
     <StyleContainer>
-      {/* <StyleTop /> */}
       <StyleCenter>
         <StyleResult>
-          <div>{matchDetailData.matchType}</div>
-          <div>승</div>
-          <div>{matchDetailData.matchType}</div>
+          <div>{getMatchStringByMatchId(matchDetailData.matchType)}</div>
+          <div>{sortedData.matchResult}</div>
+          <div>{getDateByDateString(matchDetailData.matchDate)}</div>
         </StyleResult>
         <StyleLeftPlayer>
           <StyleBestPlayer>
-            <ImageWithFallback fallbackSrc={''} src={''} />
-            <div>이름</div>
+            <ImageWithFallback
+              fallbackSrc={''}
+              width={50}
+              height={50}
+              src={`https://fo4.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${sortedData.leftPlayer.bestPlayer.dto.spId}.png`}
+            />
+            {/* <div>{sortedData.leftPlayer.nickName}</div> */}
+            <div>
+              {
+                getSoccerPlayerNameBySpId(
+                  sortedData.leftPlayer.bestPlayer.dto.spId,
+                )?.result
+              }
+            </div>
           </StyleBestPlayer>
-          <StyleBestPlayerStatus>113/112/111</StyleBestPlayerStatus>
+          <StyleBestPlayerStatus>
+            능력치를 제공해주는 API는 존재하지 않는 것 같다.
+          </StyleBestPlayerStatus>
         </StyleLeftPlayer>
-        <StyleGoals>3 vs 4</StyleGoals>
+        <StyleGoals>
+          {sortedData.leftPlayer.goalCount} vs{' '}
+          {sortedData.rightPlayer.goalCount}
+        </StyleGoals>
         <StyleRightPlayer>
           <StyleBestPlayer>
-            <ImageWithFallback fallbackSrc={''} src={''} />
-            <div>이름</div>
+            <ImageWithFallback
+              fallbackSrc={''}
+              width={50}
+              height={50}
+              src={`https://fo4.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${sortedData.rightPlayer.bestPlayer.dto.spId}.png`}
+            />
+            <div>
+              {
+                getSoccerPlayerNameBySpId(
+                  sortedData.rightPlayer.bestPlayer.dto.spId,
+                )?.result
+              }
+            </div>
           </StyleBestPlayer>
-          <StyleBestPlayerStatus>113/112/111</StyleBestPlayerStatus>
+          <StyleBestPlayerStatus>
+            능력치를 제공해주는 API는 존재하지 않는 것 같다.
+          </StyleBestPlayerStatus>
         </StyleRightPlayer>
         <StyleDetail></StyleDetail>
       </StyleCenter>
       <StyleBottom>
-        <PercentBar />
-        <PercentBar />
+        <PercentBar value={sortedData.leftPlayer.nickName} />
+        <PercentBar value={sortedData.rightPlayer.nickName} />
       </StyleBottom>
     </StyleContainer>
   );
+  // 점유율
 };
 
 const StyleContainer = styled.div`
@@ -89,6 +191,8 @@ const StyleContainer = styled.div`
   width: 100%;
   height: 100%;
   border: 1px solid green;
+  color: white;
+  background-color: black;
 `;
 
 const StyleTop = styled.div`
