@@ -4,7 +4,7 @@ import { dehydrate, QueryClient, useQuery } from 'react-query';
 import { Layout } from 'src/components/Layout';
 import { MatchResultBox } from 'src/components/player/MatchResultBox';
 import { UserProfileContainer } from 'src/components/player/UserProfileBox';
-import { getBestPlayerNicknameBySpId } from 'src/pages/player/useCases/matchRecordCase';
+// import { getBestPlayerNicknameBySpId } from 'src/pages/player/useCases/matchRecordCase';
 import styled from 'styled-components';
 import {
   useCustomInfiniteQuery,
@@ -44,7 +44,7 @@ const Page = ({ nickName }: PagePropsType) => {
             />
           </div>
           <StyledUl>
-            {matchListInfiniteQuery?.data?.pages.map((page, index) =>
+            {matchListInfiniteQuery?.data?.pages.map((page) =>
               page.currentPageData.map((data) => (
                 <MatchResultBox
                   key={data.matchId}
@@ -54,44 +54,26 @@ const Page = ({ nickName }: PagePropsType) => {
               )),
             )}
           </StyledUl>
-          <button onClick={fetchNextPageOnClick}>더 불러오기</button>
+          <StyleBottomWrap>
+            <StyledButton onClick={fetchNextPageOnClick}>
+              더 불러오기
+            </StyledButton>
+          </StyleBottomWrap>
         </StyledScetion>
       </Layout>
     );
   }
-  // const router = useRouter();
-  // const { nickName } = router.query as IParams;
-  // const { data: nickNameData } = useGetUserAccessId(nickName);
-  // const {
-  //   userMatchQuery: { data: matchData, status: matchStatus },
-  // } = useGetUserRecord(nickNameData?.accessId);
-
-  // if (matchStatus === 'loading') return <div>Loading...</div>;
-  // if (matchStatus === 'error')
-  // return <div>존재하지 않는 감독이거나 전적이 없습니다.</div>;
-  // if (matchStatus === 'success') {
-  //   return (
-  //     <Layout>
-  //       <StyledScetion>
-  //         {matchData?.map((matchId) => (
-  //           <TestMatchResultBox matchId={matchId} nickName={nickName} />
-  //         ))}
-  //       </StyledScetion>
-  //     </Layout>
-  //   );
-  // }
-
   return <Layout />;
 };
 
-interface IProps {
-  nickName: string;
-}
+// interface IProps {
+//   nickName: string;
+// }
 interface IParams extends ParsedUrlQuery {
   nickName: string;
 }
 
-export const getServerSideProps: GetServerSideProps<IProps> = async (
+export const getServerSideProps: GetServerSideProps<IParams> = async (
   context,
 ) => {
   const { nickName } = context.query as IParams;
@@ -107,13 +89,15 @@ export const getServerSideProps: GetServerSideProps<IProps> = async (
     nickName,
   ]) as IUserProfile;
 
-  if (!userProfileData)
+  if (!userProfileData) {
     return {
       redirect: {
         permanent: false,
         destination: '/player',
       },
     };
+  }
+
   await useCustomPrefetchInfiniteQuery(userProfileData.accessId, queryClient);
   await queryClient.prefetchQuery(
     metaQueryKey.soccerPlayersMeta,
@@ -126,6 +110,7 @@ export const getServerSideProps: GetServerSideProps<IProps> = async (
     },
   };
 };
+
 const StyledScetion = styled.section`
   width: 80%;
   margin: 0 auto;
@@ -133,7 +118,28 @@ const StyledScetion = styled.section`
 
 const StyledUl = styled.ul`
   display: grid;
-  grid-row-gap: 3rem;
+  padding: 0;
+  grid-row-gap: 1rem;
+`;
+
+const StyleBottomWrap = styled.div`
+  width: 100%;
+  text-align: center;
+  margin: 5rem 0;
+`;
+
+const StyledButton = styled.button`
+  width: 10rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  background-color: black;
+  color: white;
+
+  :hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
 `;
 
 export default Page;
