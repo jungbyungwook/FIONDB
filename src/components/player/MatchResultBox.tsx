@@ -13,6 +13,7 @@ import { metaQueryKey } from 'src/pages/api/hooks/useGetMetaQuery';
 import { changeServerDataIntoRenderData } from 'src/pages/player/useCases/changeServerDataIntoRenderData';
 import type { IMetaSpId } from 'src/pages/api/player/type';
 import type { IMatchDetailData } from 'types/DetailObject';
+import { BestPlayerBadge } from './badge/BestPlayerBadge';
 
 interface Props {
   matchDetailData: IMatchDetailData;
@@ -67,20 +68,23 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
             <StyleBestPlayer>
               <ImageWithFallback
                 fallbackSrc={soccerImageDefaultSrc}
-                width={50}
-                height={50}
+                width={70}
+                height={70}
+                objectFit="contain"
                 placeholder="blur"
                 blurDataURL={soccerImageDefaultSrc}
                 loading="lazy"
                 src={`https://fo4.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${sortedData.leftPlayer.bestPlayer.spId}.png`}
               />
-              <div>
+
+              <StyleBestPlayerName>
+                <BestPlayerBadge type={sortedData.matchResult} />
                 {
                   getSoccerPlayerNameBySpId(
                     sortedData.leftPlayer.bestPlayer.spId,
                   )?.result
                 }
-              </div>
+              </StyleBestPlayerName>
             </StyleBestPlayer>
             <StyleBestPlayerStatus>
               {/* 능력치를 제공해주는 API는 존재하지 않는 것 같다. */}
@@ -99,20 +103,30 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
               <ImageWithFallback
                 fallbackSrc={soccerImageDefaultSrc}
                 alt="sdf"
-                width={50}
-                height={50}
+                width={70}
+                height={70}
+                objectFit="contain"
                 placeholder="blur"
                 blurDataURL={soccerImageDefaultSrc}
                 loading="lazy"
                 src={`https://fo4.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${sortedData?.rightPlayer?.bestPlayer?.spId}.png`}
               />
-              <div>
+
+              <StyleBestPlayerName>
+                <BestPlayerBadge
+                  type={
+                    sortedData.matchResult === '승' ||
+                    sortedData.matchResult === '무'
+                      ? '패'
+                      : '승'
+                  }
+                />
                 {
                   getSoccerPlayerNameBySpId(
                     sortedData.rightPlayer.bestPlayer.spId,
                   )?.result
                 }
-              </div>
+              </StyleBestPlayerName>
             </StyleBestPlayer>
             <StyleBestPlayerStatus>
               {/* 능력치를 제공해주는 API는 존재하지 않는 것 같다. */}
@@ -155,7 +169,8 @@ const renderDownIntoUp = keyframes`
 
 const StyleContainer = styled.div<{ backgroundColor: string | undefined }>`
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
+  height: 13rem;
   border-radius: 0.5rem;
   overflow: hidden;
   display: flex;
@@ -167,8 +182,11 @@ const StyleContainer = styled.div<{ backgroundColor: string | undefined }>`
 const StyleTop = styled.div`
   display: flex;
   justify-content: center;
+  height: 85%;
 `;
-const StyleBottom = styled.div``;
+const StyleBottom = styled.div`
+  height: 15%;
+`;
 const StyleCenter = styled.div`
   display: flex;
   flex: 1;
@@ -231,6 +249,15 @@ const StyleDetail = styled.div`
   }
 `;
 const StyleBestPlayer = styled.div`
+  display: grid;
+  grid-row-gap: 1rem;
   text-align: center;
+`;
+
+const StyleBestPlayerName = styled.div`
+  display: flex;
+  gap: 1rem;
+  font-size: 1.2rem;
+  font-weight: 400;
 `;
 const StyleBestPlayerStatus = styled.div``;

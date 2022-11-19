@@ -19,9 +19,11 @@ const StyledInlineBlock = styled.span<{
   backgroundColor?: string;
 }>`
   display: inline-block;
-  padding-left: 1rem;
+  padding-left: 2rem;
   width: ${({ width }) => (width ? Number(width) + '%' : '5%')};
-  height: 1.3rem;
+  height: 100%;
+  font-size: 1.1rem;
+  line-height: 170%;
   background-color: ${({ backgroundColor }) =>
     backgroundColor ? backgroundColor : null};
 `;
