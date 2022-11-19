@@ -1,11 +1,6 @@
-import { IMatchDetailData } from 'types/DetailObject';
+import type { IMatchDetailData } from 'types/DetailObject';
 import { changeDateUtil } from 'util/chageDate';
 import { getMatchPossession, pickBestPlayer } from './matchRecordCase';
-
-interface Props {
-  matchDetailData: IMatchDetailData;
-  nickName: string;
-}
 
 interface IRenderPlayerDto {
   nickName: string;
@@ -66,6 +61,8 @@ export const changeServerDataIntoRenderData = (
   // left: 검색한 본인
 
   // 기권패인 경우에는 관련 값들이 빈상태로 오는 경우도 존재한다.
+  // 몰수패는 어떻게 보여줄꺼야....
+
   if (userNickName === matchDetailData.matchInfo[1].nickname) {
     const sercherData = matchDetailData.matchInfo[1];
     const opponentData = matchDetailData.matchInfo[0];

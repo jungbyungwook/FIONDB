@@ -1,8 +1,8 @@
-import { apiInstance } from 'src/pages/api/instance';
+// import { apiInstance } from 'src/pages/api/instance';
 
-interface Params {
-  nickName: string;
-}
+// interface Params {
+//   nickName: string;
+// }
 
 export interface UserProfile {
   accessId: string; //	유저 고유 식별자
@@ -10,12 +10,12 @@ export interface UserProfile {
   level: number; //	유저 레벨
 }
 
-export const getUserAccessId = async (
-  nickName: string,
-): Promise<UserProfile> => {
-  const API_URL = 'users?';
-  const params: Params = { nickName: nickName };
-  const { data } = await apiInstance(API_URL, { params });
+// export const getUserAccessId = async (
+//   nickName: string,
+// ): Promise<UserProfile> => {
+//   const API_URL = 'users?';
+//   const params: Params = { nickName: nickName };
+//   const { data } = await apiInstance(API_URL, { params });
 
-  return data;
-};
+//   return data;
+// };

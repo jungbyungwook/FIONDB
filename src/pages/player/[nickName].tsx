@@ -1,17 +1,19 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { ParsedUrlQuery } from 'querystring';
-import { dehydrate, QueryClient, useQuery } from 'react-query';
+import { dehydrate, QueryClient } from 'react-query';
 import { Layout } from 'src/components/Layout';
 import { MatchResultBox } from 'src/components/player/MatchResultBox';
 import { UserProfileContainer } from 'src/components/player/UserProfileBox';
-// import { getBestPlayerNicknameBySpId } from 'src/pages/player/useCases/matchRecordCase';
 import styled from 'styled-components';
 import {
   useCustomInfiniteQuery,
   useCustomPrefetchInfiniteQuery,
 } from '../api/hooks/query/useCustomInfiniteQuery';
 import { useGetTopTierQuery } from '../api/hooks/query/useGetTopTierQuery';
-import { useGetUserProfileQuery } from '../api/hooks/query/useGetUserProfileQuery';
+import {
+  useGetUserProfilePrefetchQuery,
+  useGetUserProfileQuery,
+} from '../api/hooks/query/useGetUserProfileQuery';
 import { IUserProfile } from '../api/hooks/query/useGetUserProfileQuery';
 import {
   metaQueryFunction,
@@ -64,9 +66,6 @@ const Page = ({ nickName }: PagePropsType) => {
   return <Layout />;
 };
 
-// interface IProps {
-//   nickName: string;
-// }
 interface IParams extends ParsedUrlQuery {
   nickName: string;
 }
@@ -76,7 +75,7 @@ export const getServerSideProps: GetServerSideProps<IParams> = async (
 ) => {
   const { nickName } = context.query as IParams;
   const queryClient = new QueryClient();
-  const prefetchUserProfileQuery = useGetUserProfileQuery(
+  const prefetchUserProfileQuery = useGetUserProfilePrefetchQuery(
     nickName,
     queryClient,
   );
@@ -101,6 +100,7 @@ export const getServerSideProps: GetServerSideProps<IParams> = async (
     metaQueryKey.soccerPlayersMeta,
     () => metaQueryFunction.soccerPlayersMeta,
   );
+
   return {
     props: {
       nickName: nickName,

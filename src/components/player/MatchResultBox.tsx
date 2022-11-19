@@ -4,13 +4,13 @@ import {
   getMatchPossession,
   getMatchStringByMatchId,
   soccerImageDefaultSrc,
-} from 'src/pages/player/useCases/matchRecordCase';
+} from 'src/useCases/matchRecordCase';
 import styled, { keyframes } from 'styled-components';
 import { binarySearch } from 'util/search';
 import { PercentBar } from 'src/components/ui/bar/PercentBar';
 import { ImageWithFallback } from 'src/components/ui/Image/ImageWithFallback';
 import { metaQueryKey } from 'src/pages/api/hooks/useGetMetaQuery';
-import { changeServerDataIntoRenderData } from 'src/pages/player/useCases/changeServerDataIntoRenderData';
+import { changeServerDataIntoRenderData } from 'src/useCases/changeServerDataIntoRenderData';
 import type { IMetaSpId } from 'src/pages/api/player/type';
 import type { IMatchDetailData } from 'types/DetailObject';
 import { BestPlayerBadge } from './badge/BestPlayerBadge';

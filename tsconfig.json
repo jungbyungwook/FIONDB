@@ -20,6 +20,12 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "*.ts", "src/components/Footer.jsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "*.ts",
+    "src/components/Footer.jsx"
+  ],
   "exclude": ["node_modules"]
 }
