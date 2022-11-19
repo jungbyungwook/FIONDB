@@ -1,6 +1,5 @@
 import { QueryClient, useQuery, UseQueryResult } from 'react-query';
 import { userAPI } from 'src/pages/api/player';
-// import { UserProfile } from '../../player/getUserAccessId';
 
 interface IDefaultProps {
   nickName: string;

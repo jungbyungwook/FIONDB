@@ -20,7 +20,6 @@ export const binarySearch = (
   let middle = 0;
   let count = 0;
 
-  // console.log(data[middle]);
   while (left <= right || count < 1000) {
     count++;
     middle = Math.floor((left + right) / 2);

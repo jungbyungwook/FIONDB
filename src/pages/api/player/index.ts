@@ -1,38 +1,51 @@
+import { AxiosResponse } from 'axios';
 import { api } from 'src/pages/api';
 import { IMatchDetailData } from 'types/DetailObject';
 import { IUserProfile } from '../hooks/query/useGetUserProfileQuery';
-
-export type AccessId = string;
-export type MatchId = string;
-export type NickName = string;
-export interface IMaxDivision {
-  matchType: number;
-  division: number;
-  achievementDate: string;
-}
+import type {
+  AccessId,
+  IMaxDivision,
+  IMetaDivision,
+  IMetaMatchType,
+  IMetaSpId,
+  MatchId,
+  NickName,
+} from './type';
 
 const baseURL = {
-  getUserProfile: () => 'users?',
-  getUserTopTier: (accessId: AccessId) => `users/${accessId}/maxdivision`,
-  getMatchDetail: (matchId: MatchId) => `matches/${matchId}`,
-  getMatchList: (accessId: AccessId) => `users/${accessId}/matches?`,
+  user: {
+    getUserProfile: () => 'users?',
+    getUserTopTier: (accessId: AccessId) => `users/${accessId}/maxdivision`,
+  },
+  match: {
+    getMatchDetail: (matchId: MatchId) => `matches/${matchId}`,
+    getMatchList: (accessId: AccessId) => `users/${accessId}/matches?`,
+  },
+  meta: {
+    getMetaSpId: () =>
+      'https://static.api.nexon.co.kr/fifaonline4/latest/spid.json',
+    getMetaMatchType: () =>
+      'https://static.api.nexon.co.kr/fifaonline4/latest/matchtype.json',
+    getMetaDivision: () =>
+      'https://static.api.nexon.co.kr/fifaonline4/latest/division.json',
+  },
 };
 
 const userAPI = {
   getUserProfile: async (nickName: NickName): Promise<IUserProfile> => {
     const params: { nickname: string } = { nickname: nickName };
-    const response = await api.get(baseURL.getUserProfile(), { params });
+    const response = await api.get(baseURL.user.getUserProfile(), { params });
     return response.data;
   },
   getUserTopTier: async (accessId: AccessId): Promise<IMaxDivision[]> => {
-    const { data } = await api.get(baseURL.getUserTopTier(accessId));
+    const { data } = await api.get(baseURL.user.getUserTopTier(accessId));
     return data;
   },
 };
 
 const matchAPI = {
   getMatchDetail: async (matchId: MatchId): Promise<IMatchDetailData> => {
-    const { data } = await api.get(baseURL.getMatchDetail(matchId));
+    const { data } = await api.get(baseURL.match.getMatchDetail(matchId));
     return data;
   },
   getMatchList: async (
@@ -44,7 +57,7 @@ const matchAPI = {
       offset: offset,
       limit: 20,
     };
-    const { data } = await api.get(baseURL.getMatchList(accessId), {
+    const { data } = await api.get(baseURL.match.getMatchList(accessId), {
       params: defaultParams,
     });
     return data;
@@ -52,8 +65,15 @@ const matchAPI = {
 };
 
 const metaAPI = {
-  getSoccerPlayerMeta: async () =>
-    api.get('https://static.api.nexon.co.kr/fifaonline4/latest/spid.json'),
+  getSoccerPlayerMeta: async (): Promise<AxiosResponse<IMetaSpId[]>> => {
+    const response = await api.get(baseURL.meta.getMetaSpId());
+    return response.data;
+  },
+
+  getMatchTypeMeta: async (): Promise<AxiosResponse<IMetaMatchType[]>> =>
+    await api.get(baseURL.meta.getMetaMatchType()),
+  getMatchDivisionMeta: async (): Promise<AxiosResponse<IMetaDivision[]>> =>
+    await api.get(baseURL.meta.getMetaDivision()),
 };
 
 export { userAPI, matchAPI, metaAPI };

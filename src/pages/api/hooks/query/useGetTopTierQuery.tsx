@@ -1,10 +1,11 @@
 import { QueryClient, useQuery, UseQueryResult } from 'react-query';
-import { AccessId, IMaxDivision, userAPI } from '../../player';
+import { userAPI } from 'src/pages/api/player';
+import type { AccessId, IMaxDivision } from 'src/pages/api/player/type';
 
 interface IGetQueryResponse {
   <T, Q>(accessId: T, queryClient?: Q): Q extends QueryClient
     ? () => Promise<void>
-    : UseQueryResult<IMaxDivision, unknown>;
+    : UseQueryResult<IMaxDivision[], unknown>;
 }
 
 export const useGetTopTierQuery: IGetQueryResponse = (

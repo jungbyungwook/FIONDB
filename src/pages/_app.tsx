@@ -39,7 +39,7 @@ export default MyApp;
 
 const BackgroundWrapper = styled.div`
   width: 100%;
-  background-image: url('/images/background.png');
+  background-color: gray;
 `;
 
 const GlobalStyles = createGlobalStyle`

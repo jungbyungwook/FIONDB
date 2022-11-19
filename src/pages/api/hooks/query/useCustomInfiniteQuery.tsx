@@ -1,5 +1,6 @@
 import { QueryClient, useInfiniteQuery } from 'react-query';
-import { AccessId, matchAPI } from '../../player';
+import { matchAPI } from 'src/pages/api/player';
+import type { AccessId } from 'src/pages/api/player/type';
 
 export const useCustomInfiniteQuery = (accessId: AccessId | undefined) => {
   if (!accessId) return;
@@ -10,7 +11,6 @@ export const useCustomInfiniteQuery = (accessId: AccessId | undefined) => {
     );
 
     const currentPageData = await Promise.all(responseWithMatchDetails);
-    console.log(currentPageData);
     return {
       currentPageData,
       currentPageParam: pageParam,
