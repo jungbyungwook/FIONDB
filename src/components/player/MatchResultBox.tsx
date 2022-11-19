@@ -1,10 +1,11 @@
 import { useQueryClient } from 'react-query';
 import {
   getDateByDateString,
+  getMatchPossession,
   getMatchStringByMatchId,
   soccerImageDefaultSrc,
 } from 'src/pages/player/useCases/matchRecordCase';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { binarySearch } from 'util/search';
 import { PercentBar } from 'src/components/ui/bar/PercentBar';
 import { ImageWithFallback } from 'src/components/ui/Image/ImageWithFallback';
@@ -32,6 +33,8 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
     return binarySearch(data, spId, 0, data.length);
   };
 
+  console.log(sortedData);
+  console.log(getMatchPossession(matchDetailData.matchInfo));
   return (
     <StyleContainer
       backgroundColor={sortedData.matchResult === '패' ? '#392321' : undefined}
@@ -112,14 +115,14 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
         <PercentBar
           value={sortedData.leftPlayer.nickName}
           style={{
-            width: '50',
+            width: sortedData.leftPlayer.possession,
             backgroundColor: '#584A1D',
           }}
         />
         <PercentBar
           value={sortedData.rightPlayer.nickName}
           style={{
-            width: '50',
+            width: sortedData.rightPlayer.possession,
             backgroundColor: '#3B205C',
           }}
         />
@@ -128,6 +131,17 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
   );
   // 점유율
 };
+
+const renderDownIntoUp = keyframes`
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 30%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateZ(0)
+  }
+`;
 
 const StyleContainer = styled.div<{ backgroundColor: string | undefined }>`
   width: 100%;
@@ -138,6 +152,7 @@ const StyleContainer = styled.div<{ backgroundColor: string | undefined }>`
   flex-direction: column;
   color: white;
   background-color: ${(props) => props.backgroundColor || '#273042'};
+  animation: ${renderDownIntoUp} 0.5s;
 `;
 const StyleTop = styled.div`
   display: flex;

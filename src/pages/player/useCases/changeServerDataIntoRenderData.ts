@@ -1,36 +1,30 @@
 import { IMatchDetailData } from 'types/DetailObject';
 import { changeDateUtil } from 'util/chageDate';
-import { pickBestPlayer } from './matchRecordCase';
+import { getMatchPossession, pickBestPlayer } from './matchRecordCase';
 
 interface Props {
   matchDetailData: IMatchDetailData;
   nickName: string;
 }
 
+interface IRenderPlayerDto {
+  nickName: string;
+  goalCount: number;
+  possession: number;
+  bestPlayer: {
+    id: number;
+    name: string;
+    position: string;
+    spId: number;
+  };
+}
+
 interface IViewData {
   matchType: string;
   matchResult: string;
   matchDate: string;
-  leftPlayer: {
-    nickName: string;
-    goalCount: number;
-    bestPlayer: {
-      id: number;
-      name: string;
-      position: string;
-      spId: number;
-    };
-  };
-  rightPlayer: {
-    nickName: string;
-    goalCount: number;
-    bestPlayer: {
-      id: number;
-      name: string;
-      position: string;
-      spId: number;
-    };
-  };
+  leftPlayer: IRenderPlayerDto;
+  rightPlayer: IRenderPlayerDto;
   matchDetail: {};
 }
 
@@ -45,6 +39,7 @@ export const changeServerDataIntoRenderData = (
     leftPlayer: {
       nickName: '',
       goalCount: 0,
+      possession: 0,
       bestPlayer: {
         id: 0,
         name: '',
@@ -55,6 +50,7 @@ export const changeServerDataIntoRenderData = (
     rightPlayer: {
       nickName: '',
       goalCount: 0,
+      possession: 0,
       bestPlayer: {
         id: 0,
         name: '',
@@ -73,31 +69,49 @@ export const changeServerDataIntoRenderData = (
   if (userNickName === matchDetailData.matchInfo[1].nickname) {
     const sercherData = matchDetailData.matchInfo[1];
     const opponentData = matchDetailData.matchInfo[0];
+    // goalCount
     newState.leftPlayer.goalCount = sercherData.shoot.goalTotal;
     newState.rightPlayer.goalCount = opponentData.shoot.goalTotal;
+    // nickName
     newState.leftPlayer.nickName = sercherData.nickname;
     newState.rightPlayer.nickName = opponentData.nickname;
+    //matchResult
     newState.matchResult = sercherData.matchDetail.matchResult;
-
-    // 몰수패나 몰수승이 존재하는 경우
+    // possession
+    newState.leftPlayer.possession = getMatchPossession([
+      sercherData,
+      opponentData,
+    ])[0];
+    newState.rightPlayer.possession = getMatchPossession([
+      sercherData,
+      opponentData,
+    ])[1];
+    // spId
     newState.leftPlayer.bestPlayer.spId = pickBestPlayer(sercherData).spId;
     newState.rightPlayer.bestPlayer.spId = pickBestPlayer(opponentData).spId;
   } else {
     const sercherData = matchDetailData.matchInfo[0];
     const opponentData = matchDetailData.matchInfo[1];
+    // goalCount
     newState.leftPlayer.goalCount = sercherData.shoot.goalTotal;
     newState.rightPlayer.goalCount = opponentData.shoot.goalTotal;
+    // nickName
     newState.leftPlayer.nickName = sercherData.nickname;
     newState.rightPlayer.nickName = opponentData.nickname;
+    // matchResult
     newState.matchResult = sercherData.matchDetail.matchResult;
-
+    // possession
+    newState.leftPlayer.possession = getMatchPossession([
+      sercherData,
+      opponentData,
+    ])[0];
+    newState.rightPlayer.possession = getMatchPossession([
+      sercherData,
+      opponentData,
+    ])[1];
+    // spId
     newState.leftPlayer.bestPlayer.spId = pickBestPlayer(opponentData).spId;
     newState.rightPlayer.bestPlayer.spId = pickBestPlayer(sercherData).spId;
-
-    // newState.leftPlayer.bestPlayer.id =
-    // newState.leftPlayer.bestPlayer.dto.spId;
-    // newState.rightPlayer.bestPlayer.id =
-    // newState.rightPlayer.bestPlayer.dto.spId;
   }
   return newState;
 };
