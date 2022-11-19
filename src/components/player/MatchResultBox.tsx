@@ -37,13 +37,23 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
   console.log(getMatchPossession(matchDetailData.matchInfo));
   return (
     <StyleContainer
-      backgroundColor={sortedData.matchResult === '패' ? '#392321' : undefined}
+      backgroundColor={
+        sortedData.matchResult === '패'
+          ? '#392321'
+          : sortedData.matchResult === '무'
+          ? '#1D4346'
+          : undefined
+      }
     >
       <StyleTop>
         <StyleLeft>
           <StyleResultBar
             backgroundColor={
-              sortedData.matchResult === '패' ? '#8A2E1A' : undefined
+              sortedData.matchResult === '패'
+                ? '#8A2E1A'
+                : sortedData.matchResult === '무'
+                ? '#00BBA3'
+                : undefined
             }
           />
           <StyleResult>

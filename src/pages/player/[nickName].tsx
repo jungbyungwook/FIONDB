@@ -46,11 +46,9 @@ const Page = ({ nickName }: PagePropsType) => {
           <StyledUl>
             {matchListInfiniteQuery?.data?.pages.map((page) =>
               page.currentPageData.map((data) => (
-                <MatchResultBox
-                  key={data.matchId}
-                  matchDetailData={data}
-                  nickName={nickName}
-                />
+                <li key={data.matchId}>
+                  <MatchResultBox matchDetailData={data} nickName={nickName} />
+                </li>
               )),
             )}
           </StyledUl>
@@ -120,6 +118,7 @@ const StyledUl = styled.ul`
   display: grid;
   padding: 0;
   grid-row-gap: 1rem;
+  list-style: none;
 `;
 
 const StyleBottomWrap = styled.div`
