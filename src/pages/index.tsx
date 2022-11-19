@@ -1,9 +1,8 @@
 import { ChangeEvent, useState } from 'react';
 import type { NextPage } from 'next';
 import Image from 'next/image';
-// import Head from 'next/head';
 
-import { Input } from 'src/components/UI/Input/Input';
+import { Input } from 'src/components/ui/Input/Input';
 import { useRouterByEnter } from 'hooks/useRouterByEnter';
 import styled from 'styled-components';
 import { Layout } from 'src/components/Layout';
