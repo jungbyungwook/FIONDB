@@ -1,12 +1,9 @@
-// import { useGetUserAccessId } from 'hooks/useGetUserAccessId';
-// import useGetUserRecord from 'hooks/useGetUserRecord';
-// import { useRouter } from 'next/router';
-// import TestMatchResultBox from 'src/components/player/TestMatchResultBox';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 import { Layout } from 'src/components/Layout';
 import { MatchResultBox } from 'src/components/player/MatchResultBox';
+import { UserProfileContainer } from 'src/components/player/UserProfileBox';
 import { getBestPlayerNicknameBySpId } from 'src/pages/player/useCases/matchRecordCase';
 import styled from 'styled-components';
 import {
@@ -16,6 +13,11 @@ import {
 import { useGetTopTierQuery } from '../api/hooks/query/useGetTopTierQuery';
 import { useGetUserProfileQuery } from '../api/hooks/query/useGetUserProfileQuery';
 import { IUserProfile } from '../api/hooks/query/useGetUserProfileQuery';
+import {
+  metaQueryFunction,
+  metaQueryKey,
+  useGetSoccerPlayersMeta,
+} from '../api/hooks/useGetMetaQuery';
 
 type PagePropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 const Page = ({ nickName }: PagePropsType) => {
@@ -24,30 +26,39 @@ const Page = ({ nickName }: PagePropsType) => {
   const matchListInfiniteQuery = useCustomInfiniteQuery(
     userProfileQuery.data?.accessId,
   );
-  const soccerPlayerMetaQuery = useQuery(['soccerPlayerMeta'], () =>
-    getBestPlayerNicknameBySpId(),
-  );
-
+  const soccerPlayerMetaQuery = useGetSoccerPlayersMeta();
   const fetchNextPageOnClick = () => matchListInfiniteQuery?.fetchNextPage();
 
-  return (
-    <Layout>
-      <StyledScetion>
-        <StyledUl>
-          {matchListInfiniteQuery?.data?.pages.map((page, index) =>
-            page.currentPageData.map((data) => (
-              <MatchResultBox
-                key={data.matchId}
-                matchDetailData={data}
-                nickName={nickName}
-              />
-            )),
-          )}
-        </StyledUl>
-        <button onClick={fetchNextPageOnClick}>더 불러오기</button>
-      </StyledScetion>
-    </Layout>
-  );
+  if (userProfileQuery.status === 'loading') return <div>loading...</div>;
+  if (
+    userProfileQuery.status === 'success' &&
+    soccerPlayerMetaQuery.status === 'success'
+  ) {
+    return (
+      <Layout>
+        <StyledScetion>
+          <div>
+            <UserProfileContainer
+              accessId={userProfileQuery.data?.accessId}
+              nickName={nickName}
+            />
+          </div>
+          <StyledUl>
+            {matchListInfiniteQuery?.data?.pages.map((page, index) =>
+              page.currentPageData.map((data) => (
+                <MatchResultBox
+                  key={data.matchId}
+                  matchDetailData={data}
+                  nickName={nickName}
+                />
+              )),
+            )}
+          </StyledUl>
+          <button onClick={fetchNextPageOnClick}>더 불러오기</button>
+        </StyledScetion>
+      </Layout>
+    );
+  }
   // const router = useRouter();
   // const { nickName } = router.query as IParams;
   // const { data: nickNameData } = useGetUserAccessId(nickName);
@@ -89,14 +100,25 @@ export const getServerSideProps: GetServerSideProps<IProps> = async (
     nickName,
     queryClient,
   );
-  await prefetchUserProfileQuery();
 
-  const { accessId } = queryClient.getQueryData([
+  await prefetchUserProfileQuery();
+  const userProfileData = queryClient.getQueryData([
     'userProfile',
     nickName,
   ]) as IUserProfile;
-  await useCustomPrefetchInfiniteQuery(accessId, queryClient);
 
+  if (!userProfileData)
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/player',
+      },
+    };
+  await useCustomPrefetchInfiniteQuery(userProfileData.accessId, queryClient);
+  await queryClient.prefetchQuery(
+    metaQueryKey.soccerPlayersMeta,
+    () => metaQueryFunction.soccerPlayersMeta,
+  );
   return {
     props: {
       nickName: nickName,
