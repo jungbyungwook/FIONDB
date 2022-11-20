@@ -4,8 +4,9 @@ const nextConfig = {
   swcMinify: true,
   images: {
     loader: 'akamai',
-    path: '/',
+    path: '',
   },
+  assetPrefix: './',
 };
 
 module.exports = nextConfig;
