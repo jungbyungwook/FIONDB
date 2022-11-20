@@ -7,8 +7,21 @@ const queryClient = new QueryClient();
 import { Header, Footer } from '@components';
 import background from '/images/background.png';
 import Image from 'next/image';
+import type { DehydratedState } from '@tanstack/react-query';
+import type { NextPageContext } from 'next';
 
-function MyApp({ Component, pageProps }: AppProps) {
+type PageProps = {
+  dehydratedState?: DehydratedState;
+};
+
+type ExtendedAppProps<P = {}> = {
+  err?: NextPageContext['err'];
+} & AppProps<P>;
+
+function MyApp({
+  Component,
+  pageProps,
+}: AppProps<{ dehydratedState: DehydratedState }>) {
   return (
     <>
       <QueryClientProvider client={queryClient}>

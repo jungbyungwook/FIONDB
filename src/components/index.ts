@@ -1,5 +1,5 @@
 import Title from './Title';
-import SearchInput from './SeachInput';
+import SearchInput from './SearchInput';
 import Header from './Header';
 import Footer from './Footer';
 
