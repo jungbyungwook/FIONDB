@@ -2,7 +2,7 @@
   "name": "fiondb",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://fiondb.github.io/",
+  "homepage": "http://jungbyungwook.github.io/fiondb",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
