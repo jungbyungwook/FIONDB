@@ -7,7 +7,7 @@ const Ranking: NextPage = () => {
   return (
     <>
       <RankingWrapper>
-        <h1>ranking</h1>
+        <h1>ranking 작업중</h1>
       </RankingWrapper>
     </>
   );
