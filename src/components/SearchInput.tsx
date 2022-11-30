@@ -1,10 +1,15 @@
-import Image from 'next/image';
 import React from 'react';
 import type { FC } from 'react';
 import styled from 'styled-components';
 
-const SearchInput: FC = (props) => {
-  // const { text } = props;
+// const SearchInput: FC = (props) => {
+//   // const { text } = props;
+interface Props {
+  text: string;
+}
+
+const SearchInput: FC<Props> = (props) => {
+  const { text } = props;
   return (
     <SearchInputWrapper>
       {/* <StyledInput placeholder={text} /> */}
