@@ -1,4 +1,3 @@
-// import { useQueryClient } from 'react-query';
 import { useRefetchMatchList } from 'src/pages/api/hooks/query/useRefetchQuery';
 import styled from 'styled-components';
 
@@ -9,13 +8,6 @@ export const MatchRefetchButton = ({
   accessId: string;
   text: string;
 }) => {
-  // const queryClient = useQueryClient();
-  // const onClick = () => queryClient.invalidateQueries(['matchList', accessId]);
-  // const isLoading = queryClient.getQueryState([
-  //   'matchList',
-  //   accessId,
-  // ])?.isFetching;
-
   const { refetchQuery, queryState } = useRefetchMatchList(accessId);
   return (
     <S.Button onClick={refetchQuery}>
