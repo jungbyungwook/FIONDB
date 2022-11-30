@@ -14,6 +14,7 @@ import { changeServerDataIntoRenderData } from 'src/useCases/changeServerDataInt
 import type { IMetaSpId } from 'src/pages/api/player/type';
 import type { IMatchDetailData } from 'types/DetailObject';
 import { BestPlayerBadge } from './badge/BestPlayerBadge';
+import DownArrowIcon from 'src/assets/svg/down_arrow.svg';
 
 interface Props {
   matchDetailData: IMatchDetailData;
@@ -132,7 +133,9 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
               {/* 능력치를 제공해주는 API는 존재하지 않는 것 같다. */}
             </StyleBestPlayerStatus>
           </StyleRightPlayer>
-          <StyleDetail></StyleDetail>
+          <StyleDetail>
+            <DownArrowIcon />
+          </StyleDetail>
         </StyleRight>
       </StyleTop>
       <StyleBottom>
