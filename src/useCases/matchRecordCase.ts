@@ -1,6 +1,25 @@
 import { metaAPI } from 'src/pages/api/player';
 import { changeDateUtil } from 'util/chageDate';
-import { MatchInfo } from '../../../../types/DetailObject';
+import { MatchInfo } from '../../types/DetailObject';
+
+// 몰수패인 경우 패자의 possession이 0으로 나온는 문제를 해결
+// default값을 20으로 두어
+
+const getMatchPossession = (data: MatchInfo[]) => {
+  const leftMatchDetail = data[0].matchDetail;
+  const rightMatchDetail = data[1].matchDetail;
+  const defaultPossessions = {
+    leftWin: [80, 20],
+    rightWin: [20, 80],
+  };
+
+  // 몰수승인 경우
+  if (leftMatchDetail.matchEndType === 1) return defaultPossessions.leftWin;
+  // 몰수패인 경우
+  if (rightMatchDetail.matchEndType === 1) return defaultPossessions.rightWin;
+  // end type normal
+  return [leftMatchDetail.possession, rightMatchDetail.possession];
+};
 
 const pickBestPlayer = (data: MatchInfo) => {
   const { player } = data;
@@ -37,6 +56,7 @@ const getDateByDateString = (matchData: string) => {
 
 export {
   pickBestPlayer,
+  getMatchPossession,
   getMatchStringByMatchId,
   getDateByDateString,
   getBestPlayerNicknameBySpId,

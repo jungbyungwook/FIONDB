@@ -43,13 +43,12 @@ export default MyApp;
 
 const BackgroundWrapper = styled.div`
   width: 100%;
-  /* <<<<<<< HEAD */
   background-color: gray;
-  height: 100vh;
+  /* height: 100vh;
   background-image: url('/images/background.png');
   background-repeat: no-repeat;
   background-position: top center;
-  background-size: cover;
+  background-size: cover; */
 `;
 const GlobalStyles = createGlobalStyle`
 html,

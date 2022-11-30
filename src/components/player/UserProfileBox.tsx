@@ -4,7 +4,7 @@ import { IUserProfile } from 'src/pages/api/hooks/query/useGetUserProfileQuery';
 import styled from 'styled-components';
 import type { ParsedUrlQuery } from 'querystring';
 import { ImageWithFallback } from '../ui/Image/ImageWithFallback';
-import { soccerImageDefaultSrc } from 'src/pages/player/useCases/matchRecordCase';
+import { soccerImageDefaultSrc } from 'src/useCases/matchRecordCase';
 import {
   useGetMatchDivisionMeta,
   useGetMatchTypeMeta,
@@ -39,23 +39,36 @@ const UserProfileBox = () => {
     <StyleUserProfileBox>
       <StyleImageWrap>
         <ImageWithFallback
+          alt="user_profile_img"
           fallbackSrc={soccerImageDefaultSrc}
           src={soccerImageDefaultSrc}
-          width={70}
-          height={70}
+          width={120}
+          height={120}
         />
       </StyleImageWrap>
       <StyleUserProfileDataWrap>
         <StyleNickName>{userProfileData.nickname}</StyleNickName>
-        {/* <div>{userProfileQuery.data?.accessId}</div> */}
         <StyleLevel>레벨 {userProfileData.level}</StyleLevel>
       </StyleUserProfileDataWrap>
     </StyleUserProfileBox>
   );
 };
 
+const StyleSection = styled.section`
+  display: flex;
+  width: 100%;
+  height: 14rem;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: #31313c;
+`;
+
 const StyleUserProfileBox = styled.div`
   display: flex;
+  /* align-items: flex-end; */
+  align-items: center;
   height: 100%;
 `;
 const StyleImageWrap = styled.div``;
@@ -68,10 +81,12 @@ const StyleUserProfileDataWrap = styled.div`
 `;
 
 const StyleNickName = styled.div`
-  font-size: 2rem;
+  font-size: 3rem;
 `;
 
-const StyleLevel = styled.div``;
+const StyleLevel = styled.div`
+  font-size: 1.5rem;
+`;
 
 const UserTopTierBox = () => {
   const router = useRouter();
@@ -122,8 +137,8 @@ const UserTopTierBox = () => {
             <div>공식모드</div>
             <ImageWithFallback
               alt="공식모드티어아이콘"
-              width={50}
-              height={50}
+              width={70}
+              height={70}
               fallbackSrc={`https://ssl.nexon.com/s2/game/fo4/obt/rank/large/update_2009/ico_rank0.png`}
               src={`https://ssl.nexon.com/s2/game/fo4/obt/rank/large/update_2009/ico_rank${newState[0]}.png`}
             />
@@ -132,8 +147,8 @@ const UserTopTierBox = () => {
             <div>감독모드</div>
             <ImageWithFallback
               alt="감독모드티어아이콘"
-              width={50}
-              height={50}
+              width={70}
+              height={70}
               fallbackSrc={`https://ssl.nexon.com/s2/game/fo4/obt/rank/large/update_2009/ico_rank1.png`}
               src={`https://ssl.nexon.com/s2/game/fo4/obt/rank/large/update_2009/ico_rank${newState[1]}.png`}
             />
@@ -143,34 +158,7 @@ const UserTopTierBox = () => {
     );
   }
 
-  return (
-    <div>
-      {/* <StyleTopTierWrap>최고등급</StyleTopTierWrap>
-      <StyleFlex>
-        <div>
-          <div>공식모드</div>
-          <ImageWithFallback
-            alt="공식모드티어아이콘"
-            width={50}
-            height={50}
-            fallbackSrc={''}
-            src={`https://ssl.nexon.com/s2/game/fo4/obt/rank/large/update_2009/ico_rank${tierImageUrls[0]}.png`}
-          />
-        </div>
-        <div>
-          <div>감독모드</div>
-          <ImageWithFallback
-            alt="감독모드티어아이콘"
-            width={50}
-            height={50}
-            fallbackSrc={''}
-            src={`https://ssl.nexon.com/s2/game/fo4/obt/rank/large/update_2009/ico_rank${tierImageUrls[1]}.png`}
-          />
-        </div>
-      </StyleFlex> */}
-      loading...
-    </div>
-  );
+  return <div>loading...</div>;
   // 티어 data를 가져와서 이미지를 보여줘야한다.
 };
 
@@ -181,20 +169,14 @@ const StyleTopTierWrap = styled.div`
 `;
 
 const StyleTopTierTitle = styled.div`
+  height: 30%;
+  font-size: 2rem;
   /* height: 100%;/ */
   /* margin: auto 0; */
 `;
 
-const StyleSection = styled.section`
-  display: flex;
-
-  width: 100%;
-  height: 10rem;
-  align-items: center;
-  justify-content: center;
-  color: white;
-`;
-
 const StyleFlex = styled.div`
+  font-size: 1.5rem;
+  height: 70%;
   display: flex;
 `;

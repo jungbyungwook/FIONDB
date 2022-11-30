@@ -1,118 +1,28 @@
 import { useQueryClient } from 'react-query';
 import {
   getDateByDateString,
+  getMatchPossession,
   getMatchStringByMatchId,
-  pickBestPlayer,
   soccerImageDefaultSrc,
-} from 'src/pages/player/useCases/matchRecordCase';
-import styled from 'styled-components';
-import { IMatchDetailData } from 'types/DetailObject';
-import { changeDateUtil } from 'util/chageDate';
+} from 'src/useCases/matchRecordCase';
+import styled, { keyframes } from 'styled-components';
 import { binarySearch } from 'util/search';
 import { PercentBar } from 'src/components/ui/bar/PercentBar';
-import { ImageWithFallback } from '../ui/Image/ImageWithFallback';
+import { ImageWithFallback } from 'src/components/ui/Image/ImageWithFallback';
 import { metaQueryKey } from 'src/pages/api/hooks/useGetMetaQuery';
-import { IMetaSpId } from 'src/pages/api/player/type';
+import { changeServerDataIntoRenderData } from 'src/useCases/changeServerDataIntoRenderData';
+import type { IMetaSpId } from 'src/pages/api/player/type';
+import type { IMatchDetailData } from 'types/DetailObject';
+import { BestPlayerBadge } from './badge/BestPlayerBadge';
+import DownArrowIcon from 'src/assets/svg/down_arrow.svg';
 
 interface Props {
   matchDetailData: IMatchDetailData;
   nickName: string;
 }
 
-interface IViewData {
-  matchType: string;
-  matchResult: string;
-  matchDate: string;
-  leftPlayer: {
-    nickName: string;
-    goalCount: number;
-    bestPlayer: {
-      id: number;
-      name: string;
-      position: string;
-      spId: number;
-    };
-  };
-  rightPlayer: {
-    nickName: string;
-    goalCount: number;
-    bestPlayer: {
-      id: number;
-      name: string;
-      position: string;
-      spId: number;
-    };
-  };
-  matchDetail: {};
-}
-
 export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
   // useCases에 분리할 예정
-  const changeServerDataIntoRenderData = (data: any, userNickName: string) => {
-    const newState: IViewData = {
-      matchType: '',
-      matchResult: '',
-      matchDate: '',
-      leftPlayer: {
-        nickName: '',
-        goalCount: 0,
-        bestPlayer: {
-          id: 0,
-          name: '',
-          position: '',
-          spId: 0,
-        },
-      },
-      rightPlayer: {
-        nickName: '',
-        goalCount: 0,
-        bestPlayer: {
-          id: 0,
-          name: '',
-          position: '',
-          spId: 0,
-        },
-      },
-      matchDetail: {},
-    };
-    // 시간변환
-    newState.matchDate = changeDateUtil(data.matchData);
-    // leftPlyaer, rightPlaery
-    // left: 검색한 본인
-
-    // 기권패인 경우에는 관련 값들이 빈상태로 오는 경우도 존재한다.
-    if (userNickName === matchDetailData.matchInfo[1].nickname) {
-      const sercherData = matchDetailData.matchInfo[1];
-      const opponentData = matchDetailData.matchInfo[0];
-      newState.leftPlayer.goalCount = sercherData.shoot.goalTotal;
-      newState.rightPlayer.goalCount = opponentData.shoot.goalTotal;
-      newState.leftPlayer.nickName = sercherData.nickname;
-      newState.rightPlayer.nickName = opponentData.nickname;
-      newState.matchResult = sercherData.matchDetail.matchResult;
-
-      // 몰수패나 몰수승이 존재하는 경우
-      newState.leftPlayer.bestPlayer.spId = pickBestPlayer(sercherData).spId;
-      newState.rightPlayer.bestPlayer.spId = pickBestPlayer(opponentData).spId;
-    } else {
-      const sercherData = matchDetailData.matchInfo[0];
-      const opponentData = matchDetailData.matchInfo[1];
-      newState.leftPlayer.goalCount = sercherData.shoot.goalTotal;
-      newState.rightPlayer.goalCount = opponentData.shoot.goalTotal;
-      newState.leftPlayer.nickName = sercherData.nickname;
-      newState.rightPlayer.nickName = opponentData.nickname;
-      newState.matchResult = sercherData.matchDetail.matchResult;
-
-      newState.leftPlayer.bestPlayer.spId = pickBestPlayer(opponentData).spId;
-      newState.rightPlayer.bestPlayer.spId = pickBestPlayer(sercherData).spId;
-
-      // newState.leftPlayer.bestPlayer.id =
-      // newState.leftPlayer.bestPlayer.dto.spId;
-      // newState.rightPlayer.bestPlayer.id =
-      // newState.rightPlayer.bestPlayer.dto.spId;
-    }
-    return newState;
-  };
-
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData(
     metaQueryKey.soccerPlayersMeta,
@@ -125,15 +35,27 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
     return binarySearch(data, spId, 0, data.length);
   };
 
+  console.log(sortedData);
+  console.log(getMatchPossession(matchDetailData.matchInfo));
   return (
     <StyleContainer
-      backgroundColor={sortedData.matchResult === '패' ? '#392321' : undefined}
+      backgroundColor={
+        sortedData.matchResult === '패'
+          ? '#392321'
+          : sortedData.matchResult === '무'
+          ? '#1D4346'
+          : undefined
+      }
     >
       <StyleTop>
         <StyleLeft>
           <StyleResultBar
             backgroundColor={
-              sortedData.matchResult === '패' ? '#8A2E1A' : undefined
+              sortedData.matchResult === '패'
+                ? '#8A2E1A'
+                : sortedData.matchResult === '무'
+                ? '#00BBA3'
+                : undefined
             }
           />
           <StyleResult>
@@ -147,20 +69,23 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
             <StyleBestPlayer>
               <ImageWithFallback
                 fallbackSrc={soccerImageDefaultSrc}
-                width={50}
-                height={50}
+                width={70}
+                height={70}
+                objectFit="contain"
                 placeholder="blur"
                 blurDataURL={soccerImageDefaultSrc}
                 loading="lazy"
                 src={`https://fo4.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${sortedData.leftPlayer.bestPlayer.spId}.png`}
               />
-              <div>
+
+              <StyleBestPlayerName>
+                <BestPlayerBadge type={sortedData.matchResult} />
                 {
                   getSoccerPlayerNameBySpId(
                     sortedData.leftPlayer.bestPlayer.spId,
                   )?.result
                 }
-              </div>
+              </StyleBestPlayerName>
             </StyleBestPlayer>
             <StyleBestPlayerStatus>
               {/* 능력치를 제공해주는 API는 존재하지 않는 것 같다. */}
@@ -179,40 +104,52 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
               <ImageWithFallback
                 fallbackSrc={soccerImageDefaultSrc}
                 alt="sdf"
-                width={50}
-                height={50}
+                width={70}
+                height={70}
+                objectFit="contain"
                 placeholder="blur"
                 blurDataURL={soccerImageDefaultSrc}
                 loading="lazy"
                 src={`https://fo4.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${sortedData?.rightPlayer?.bestPlayer?.spId}.png`}
               />
-              <div>
+
+              <StyleBestPlayerName>
+                <BestPlayerBadge
+                  type={
+                    sortedData.matchResult === '승' ||
+                    sortedData.matchResult === '무'
+                      ? '패'
+                      : '승'
+                  }
+                />
                 {
                   getSoccerPlayerNameBySpId(
                     sortedData.rightPlayer.bestPlayer.spId,
                   )?.result
                 }
-              </div>
+              </StyleBestPlayerName>
             </StyleBestPlayer>
             <StyleBestPlayerStatus>
               {/* 능력치를 제공해주는 API는 존재하지 않는 것 같다. */}
             </StyleBestPlayerStatus>
           </StyleRightPlayer>
-          <StyleDetail></StyleDetail>
+          <StyleDetail>
+            <DownArrowIcon />
+          </StyleDetail>
         </StyleRight>
       </StyleTop>
       <StyleBottom>
         <PercentBar
           value={sortedData.leftPlayer.nickName}
           style={{
-            width: '50',
+            width: sortedData.leftPlayer.possession,
             backgroundColor: '#584A1D',
           }}
         />
         <PercentBar
           value={sortedData.rightPlayer.nickName}
           style={{
-            width: '50',
+            width: sortedData.rightPlayer.possession,
             backgroundColor: '#3B205C',
           }}
         />
@@ -222,21 +159,37 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
   // 점유율
 };
 
+const renderDownIntoUp = keyframes`
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 30%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateZ(0)
+  }
+`;
+
 const StyleContainer = styled.div<{ backgroundColor: string | undefined }>`
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
+  height: 13rem;
   border-radius: 0.5rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   color: white;
   background-color: ${(props) => props.backgroundColor || '#273042'};
+  animation: ${renderDownIntoUp} 0.5s;
 `;
 const StyleTop = styled.div`
   display: flex;
   justify-content: center;
+  height: 85%;
 `;
-const StyleBottom = styled.div``;
+const StyleBottom = styled.div`
+  height: 15%;
+`;
 const StyleCenter = styled.div`
   display: flex;
   flex: 1;
@@ -299,6 +252,15 @@ const StyleDetail = styled.div`
   }
 `;
 const StyleBestPlayer = styled.div`
+  display: grid;
+  grid-row-gap: 1rem;
   text-align: center;
+`;
+
+const StyleBestPlayerName = styled.div`
+  display: flex;
+  gap: 1rem;
+  font-size: 1.2rem;
+  font-weight: 400;
 `;
 const StyleBestPlayerStatus = styled.div``;
