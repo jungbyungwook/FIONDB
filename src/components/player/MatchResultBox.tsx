@@ -35,8 +35,6 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
     return binarySearch(data, spId, 0, data.length);
   };
 
-  console.log(sortedData);
-  console.log(getMatchPossession(matchDetailData.matchInfo));
   return (
     <StyleContainer
       backgroundColor={
@@ -103,7 +101,7 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
             <StyleBestPlayer>
               <ImageWithFallback
                 fallbackSrc={soccerImageDefaultSrc}
-                alt="sdf"
+                alt="soccer_image"
                 width={70}
                 height={70}
                 objectFit="contain"
@@ -134,7 +132,7 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
             </StyleBestPlayerStatus>
           </StyleRightPlayer>
           <StyleDetail>
-            <DownArrowIcon />
+            <DownArrowIcon width={'1rem'} height={'2rem'} fill="white" />
           </StyleDetail>
         </StyleRight>
       </StyleTop>
@@ -242,10 +240,13 @@ const StyleRightPlayer = styled.div`
   flex: 1;
 `;
 const StyleDetail = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 100%;
   flex-basis: 2rem;
   background-color: gray;
-  opacity: 0.4;
+  opacity: 0.8;
   :hover {
     opacity: 0.6;
     cursor: pointer;
