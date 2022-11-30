@@ -1,4 +1,4 @@
-import { apiInstance } from 'src/pages/api/instance';
+import { api } from 'src/pages/api/index';
 
 interface Params {
   nickName: string;
@@ -15,7 +15,7 @@ export const getUserAccessId = async (
 ): Promise<UserProfile> => {
   const API_URL = 'users?';
   const params: Params = { nickName: nickName };
-  const { data } = await apiInstance(API_URL, { params });
+  const { data } = await api(API_URL, { params });
 
   return data;
 };
