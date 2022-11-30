@@ -20,17 +20,20 @@ import {
   metaQueryKey,
   useGetSoccerPlayersMeta,
 } from '../api/hooks/useGetMetaQuery';
+import { useIntersectionObserver } from '../api/hooks/useIntersectionObserver';
 
 type PagePropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 const Page = ({ nickName }: PagePropsType) => {
   const userProfileQuery = useGetUserProfileQuery(nickName);
+  // 여기서 useQuery를 이용해서 fetch 함수를 호출하고 내부 Component에서는 queryClient에 접근해서 getData만을 수행한다.
   const topTierQuery = useGetTopTierQuery(userProfileQuery.data?.accessId);
+  const soccerPlayerMetaQuery = useGetSoccerPlayersMeta();
   const matchListInfiniteQuery = useCustomInfiniteQuery(
     userProfileQuery.data?.accessId,
   );
-  const soccerPlayerMetaQuery = useGetSoccerPlayersMeta();
-  const fetchNextPageOnClick = () => matchListInfiniteQuery?.fetchNextPage();
-
+  const triggerRef = useIntersectionObserver(() =>
+    matchListInfiniteQuery?.fetchNextPage(),
+  );
   if (userProfileQuery.status === 'loading') return <div>loading...</div>;
   if (
     userProfileQuery.status === 'success' &&
@@ -55,9 +58,12 @@ const Page = ({ nickName }: PagePropsType) => {
             )}
           </StyledUl>
           <StyleBottomWrap>
-            <StyledButton onClick={fetchNextPageOnClick}>
+            <div ref={triggerRef}>
+              {matchListInfiniteQuery?.isFetching ? 'loading' : ''}
+            </div>
+            {/* <StyledButton onClick={fetchNextPageOnClick}>
               더 불러오기
-            </StyledButton>
+            </StyledButton> */}
           </StyleBottomWrap>
         </StyledScetion>
       </Layout>
@@ -127,18 +133,18 @@ const StyleBottomWrap = styled.div`
   margin: 5rem 0;
 `;
 
-const StyledButton = styled.button`
-  width: 10rem;
-  font-size: 1.5rem;
-  font-weight: 600;
-  border-radius: 0.5rem;
-  background-color: black;
-  color: white;
+// const StyledButton = styled.button`
+//   width: 10rem;
+//   font-size: 1.5rem;
+//   font-weight: 600;
+//   border-radius: 0.5rem;
+//   background-color: black;
+//   color: white;
 
-  :hover {
-    cursor: pointer;
-    opacity: 0.8;
-  }
-`;
+//   :hover {
+//     cursor: pointer;
+//     opacity: 0.8;
+//   }
+// `;
 
 export default Page;
