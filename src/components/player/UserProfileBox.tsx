@@ -10,6 +10,7 @@ import {
   useGetMatchTypeMeta,
 } from 'src/pages/api/hooks/useGetMetaQuery';
 import { IMaxDivision } from 'src/pages/api/player/type';
+import { MatchRefetchButton } from './MatchRefetchButton';
 interface IProps {
   accessId: string;
   nickName: string;
@@ -26,67 +27,6 @@ export const UserProfileContainer = ({ accessId, nickName }: IProps) => {
 interface IParams extends ParsedUrlQuery {
   nickName: string;
 }
-
-const UserProfileBox = () => {
-  const router = useRouter();
-  const { nickName } = router.query as IParams;
-  const queryClient = useQueryClient();
-  const userProfileData = queryClient.getQueryData([
-    'userProfile',
-    nickName,
-  ]) as IUserProfile;
-  return (
-    <StyleUserProfileBox>
-      <StyleImageWrap>
-        <ImageWithFallback
-          alt="user_profile_img"
-          fallbackSrc={soccerImageDefaultSrc}
-          src={soccerImageDefaultSrc}
-          width={120}
-          height={120}
-        />
-      </StyleImageWrap>
-      <StyleUserProfileDataWrap>
-        <StyleNickName>{userProfileData.nickname}</StyleNickName>
-        <StyleLevel>레벨 {userProfileData.level}</StyleLevel>
-      </StyleUserProfileDataWrap>
-    </StyleUserProfileBox>
-  );
-};
-
-const StyleSection = styled.section`
-  display: flex;
-  width: 100%;
-  height: 14rem;
-  gap: 2rem;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  background-color: #31313c;
-`;
-
-const StyleUserProfileBox = styled.div`
-  display: flex;
-  /* align-items: flex-end; */
-  align-items: center;
-  height: 100%;
-`;
-const StyleImageWrap = styled.div``;
-
-const StyleUserProfileDataWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-const StyleNickName = styled.div`
-  font-size: 3rem;
-`;
-
-const StyleLevel = styled.div`
-  font-size: 1.5rem;
-`;
 
 const UserTopTierBox = () => {
   const router = useRouter();
@@ -129,6 +69,7 @@ const UserTopTierBox = () => {
 
     const newState = choiceOfficialAndCoachGameImageIndex();
 
+    // ToDo: fallbackSrc를 결정해주어야 함
     return (
       <StyleTopTierWrap>
         <StyleTopTierTitle>최고등급</StyleTopTierTitle>
@@ -165,18 +106,88 @@ const UserTopTierBox = () => {
 const StyleTopTierWrap = styled.div`
   height: 100%;
   text-align: center;
-  /* margin-bottom: auto 0; */
 `;
 
 const StyleTopTierTitle = styled.div`
   height: 30%;
   font-size: 2rem;
-  /* height: 100%;/ */
-  /* margin: auto 0; */
 `;
 
 const StyleFlex = styled.div`
   font-size: 1.5rem;
   height: 70%;
   display: flex;
+`;
+
+const UserProfileBox = () => {
+  const router = useRouter();
+  const { nickName } = router.query as IParams;
+  const queryClient = useQueryClient();
+  const userProfileData = queryClient.getQueryData([
+    'userProfile',
+    nickName,
+  ]) as IUserProfile;
+  return (
+    <StyleUserProfileBox>
+      <StyleImageWrap>
+        <ImageWithFallback
+          alt="user_profile_img"
+          fallbackSrc={soccerImageDefaultSrc}
+          src={soccerImageDefaultSrc}
+          width={120}
+          height={120}
+        />
+      </StyleImageWrap>
+      <StyleUserProfileDataWrap>
+        <StyleNickName>{userProfileData.nickname}</StyleNickName>
+        <StyleLevel>레벨 {userProfileData.level}</StyleLevel>
+        <StyleRefetchButton>
+          <MatchRefetchButton
+            accessId={userProfileData.accessId}
+            text="전적 갱신"
+          />
+        </StyleRefetchButton>
+      </StyleUserProfileDataWrap>
+    </StyleUserProfileBox>
+  );
+};
+
+const StyleSection = styled.section`
+  display: flex;
+  width: 100%;
+  /* height: 14rem; */
+  gap: 2rem;
+  padding: 1rem;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: #31313c;
+`;
+
+const StyleUserProfileBox = styled.div`
+  display: flex;
+  /* align-items: flex-end; */
+  align-items: center;
+  height: 100%;
+  gap: 1rem;
+`;
+const StyleImageWrap = styled.div``;
+
+const StyleUserProfileDataWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StyleNickName = styled.div`
+  font-size: 3rem;
+`;
+
+const StyleLevel = styled.div`
+  font-size: 1.5rem;
+`;
+
+const StyleRefetchButton = styled.div`
+  margin-top: 1rem;
 `;

@@ -35,8 +35,8 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
     return binarySearch(data, spId, 0, data.length);
   };
 
-  console.log(sortedData);
-  console.log(getMatchPossession(matchDetailData.matchInfo));
+  // console.log(sortedData);
+  // console.log(getMatchPossession(matchDetailData.matchInfo));
   return (
     <StyleContainer
       backgroundColor={
