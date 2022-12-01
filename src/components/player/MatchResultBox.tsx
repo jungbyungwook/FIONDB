@@ -34,7 +34,6 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
     if (spId === 0) return { result: '몰수패 선수', count: 0 };
     return binarySearch(data, spId, 0, data.length);
   };
-
   return (
     <StyleContainer
       backgroundColor={

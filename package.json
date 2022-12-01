@@ -23,6 +23,7 @@
     "styled-reset": "^4.4.2"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^13.0.5",
     "@svgr/webpack": "^6.5.1",
     "@types/node": "18.7.18",
     "@types/react": "18.0.20",
