@@ -5,6 +5,11 @@ on:
   pull_request:
     branches: [develop]
 jobs:
+- name: Create .env file
+        run: |
+          touch .env
+          echo NEXT_PUBLIC_API_KEY=${{ secrets.API_KEY }} >> .env
+          cat .env
   deploy:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
