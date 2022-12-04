@@ -12,6 +12,6 @@ const Title: FC<Props> = (props) => {
   return <TitleWrapper>{text}</TitleWrapper>;
 };
 
-export default Title;
+// export default Title;
 
 const TitleWrapper = styled.h1``;

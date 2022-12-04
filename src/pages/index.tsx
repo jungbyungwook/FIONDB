@@ -1,12 +1,21 @@
+import { useState } from 'react';
 import type { NextPage } from 'next';
-import Head from 'next/head';
 import Image from 'next/image';
-import { Title, SearchInput } from '@components';
+import { Input } from 'src/components/ui/Input/Input';
+import { useRouterByEnter } from 'hooks/useRouterByEnter';
 import styled from 'styled-components';
+import { Layout } from 'src/components/Layout';
+import type { ChangeEvent } from 'react';
 
 const Home: NextPage = () => {
+  const [nickName, setNickName] = useState('');
+  const { routerPushOnKeyDown } = useRouterByEnter('player', [nickName]);
+
+  const onChangeWithNickName = (e: ChangeEvent<HTMLInputElement>) =>
+    setNickName(e.target.value);
+
   return (
-    <>
+    <Layout>
       <HomeWrapper>
         <MainBanner>
           <Image
@@ -17,9 +26,16 @@ const Home: NextPage = () => {
             objectPosition="center"
           />
         </MainBanner>
-        <SearchInput text={'유저명을 입력하세요.'} />
+        <InputWrapper>
+          <Input
+            placeholder="닉네임을 입력해주세요"
+            isFocus={true}
+            onChange={onChangeWithNickName}
+            onKeyDown={routerPushOnKeyDown}
+          />
+        </InputWrapper>
       </HomeWrapper>
-    </>
+    </Layout>
   );
 };
 
@@ -32,11 +48,14 @@ const HomeWrapper = styled.div`
   align-items: center;
   height: 744px;
 `;
-
 const MainBanner = styled.div`
   position: relative;
   width: 48.5rem;
   height: 25.4rem;
   margin-top: 15rem;
   margin-bottom: 5rem;
+`;
+const InputWrapper = styled.div`
+  width: 35rem;
+  height: 4.5rem;
 `;

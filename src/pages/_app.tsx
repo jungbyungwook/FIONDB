@@ -3,27 +3,27 @@ import type { AppProps } from 'next/app';
 import styled, { createGlobalStyle } from 'styled-components';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-const queryClient = new QueryClient();
+import { RecoilRoot } from 'recoil';
 import { Header, Footer } from '@components';
-import background from '/images/background.png';
-import Image from 'next/image';
+import { useState } from 'react';
 import type { DehydratedState } from '@tanstack/react-query';
 import type { NextPageContext } from 'next';
 
-type PageProps = {
-  dehydratedState?: DehydratedState;
-};
+// type PageProps = {
+//   dehydratedState?: DehydratedState;
+// };
 
-type ExtendedAppProps<P = {}> = {
-  err?: NextPageContext['err'];
-} & AppProps<P>;
+// type ExtendedAppProps<P = {}> = {
+//   err?: NextPageContext['err'];
+// } & AppProps<P>;
 
 function MyApp({
   Component,
   pageProps,
 }: AppProps<{ dehydratedState: DehydratedState }>) {
+  const [queryClient] = useState(() => new QueryClient());
   return (
-    <>
+    <RecoilRoot>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <BackgroundWrapper>
@@ -35,7 +35,7 @@ function MyApp({
         </Hydrate>
         <ReactQueryDevtools />
       </QueryClientProvider>
-    </>
+    </RecoilRoot>
   );
 }
 
@@ -43,13 +43,13 @@ export default MyApp;
 
 const BackgroundWrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  background-color: gray;
+  /* height: 100vh;
   background-image: url('/images/background.png');
   background-repeat: no-repeat;
   background-position: top center;
-  background-size: cover;
+  background-size: cover; */
 `;
-
 const GlobalStyles = createGlobalStyle`
 html,
 body {
