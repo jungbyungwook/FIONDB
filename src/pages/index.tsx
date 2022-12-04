@@ -15,38 +15,47 @@ const Home: NextPage = () => {
     setNickName(e.target.value);
 
   return (
-    <Layout>
-      <HomeWrapper>
-        <MainBanner>
-          <Image
-            src="/images/main-banner.png"
-            alt="메인 배너 이미지"
-            layout="fill"
-            objectFit="cover"
-            objectPosition="center"
-          />
-        </MainBanner>
-        <InputWrapper>
-          <Input
-            placeholder="닉네임을 입력해주세요"
-            isFocus={true}
-            onChange={onChangeWithNickName}
-            onKeyDown={routerPushOnKeyDown}
-          />
-        </InputWrapper>
-      </HomeWrapper>
-    </Layout>
+    <BackgroundWrapper>
+      <Layout>
+        <HomeWrapper>
+          <MainBanner>
+            <Image
+              src="/images/main-banner.png"
+              alt="메인 배너 이미지"
+              layout="fill"
+              objectFit="cover"
+              objectPosition="center"
+            />
+          </MainBanner>
+          <InputWrapper>
+            <Input
+              placeholder="닉네임을 입력해주세요"
+              isFocus={true}
+              onChange={onChangeWithNickName}
+              onKeyDown={routerPushOnKeyDown}
+            />
+          </InputWrapper>
+        </HomeWrapper>
+      </Layout>
+    </BackgroundWrapper>
   );
 };
 
 export default Home;
+
+const BackgroundWrapper = styled.div`
+  background-image: url('/images/background.png');
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+`;
 
 const HomeWrapper = styled.div`
   display: flex;
   color: white;
   flex-direction: column;
   align-items: center;
-  height: 744px;
+  height: 1024px;
 `;
 const MainBanner = styled.div`
   position: relative;
