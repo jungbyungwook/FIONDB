@@ -9,6 +9,11 @@ const webpack = (config) => {
   return config;
 };
 
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+module.exports = withBundleAnalyzer({});
+
 const nextConfig = {
   reactStrictMode: true,
   // swcMinify: true,
@@ -19,8 +24,3 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
-
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-});
-module.exports = withBundleAnalyzer({});

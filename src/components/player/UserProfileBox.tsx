@@ -155,7 +155,6 @@ const UserProfileBox = () => {
 const StyleSection = styled.section`
   display: flex;
   width: 100%;
-  /* height: 14rem; */
   gap: 2rem;
   padding: 1rem;
   align-items: center;
