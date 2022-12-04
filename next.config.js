@@ -1,5 +1,18 @@
 /** @type {import('next').NextConfig} */
 
+// const withBundleAnalyzer = require('@next/bundle-analyzer')({
+//   enabled: process.env.ANALYZE === 'true',
+// });
+
+// const withBundleAnalyzer = require('@next/bundle-analyzer')({
+//   enabled: process.env.ANALYZE === 'true',
+// });
+// module.exports = withBundleAnalyzer({
+//   webpack(config, options) {
+//     return config;
+//   },
+// });
+
 const webpack = (config) => {
   config.module.rules.push({
     test: /\.svg$/,
@@ -18,9 +31,5 @@ const nextConfig = {
   webpack,
 };
 
+// module.exports = withBundleAnalyzer({});
 module.exports = nextConfig;
-
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-});
-module.exports = withBundleAnalyzer({});
