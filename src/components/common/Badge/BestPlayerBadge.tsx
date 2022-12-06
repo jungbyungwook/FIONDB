@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-// type WinOrlose = '승' | '패'
-
 interface IBestPlayerBadgeProps {
   type: string;
 }

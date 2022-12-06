@@ -2,19 +2,21 @@ import type { IMatchDetailData } from 'types/DetailObject';
 import { changeDateUtil } from 'util/chageDate';
 import { getMatchPossession, pickBestPlayer } from './matchRecordCase';
 
-interface IRenderPlayerDto {
+export interface IRenderPlayerDto {
   nickName: string;
   goalCount: number;
   possession: number;
-  bestPlayer: {
-    id: number;
-    name: string;
-    position: string;
-    spId: number;
-  };
+  bestPlayer: IRenderBestPlayerDto;
 }
 
-interface IViewData {
+export interface IRenderBestPlayerDto {
+  id: number;
+  name: string;
+  position: string;
+  spId: number;
+}
+
+export interface IViewData {
   matchType: string;
   matchResult: string;
   matchDate: string;

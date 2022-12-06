@@ -1,10 +1,10 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import styled from 'styled-components';
 import { ParsedUrlQuery } from 'querystring';
 import { dehydrate, QueryClient } from 'react-query';
 import { Layout } from 'src/components/Layout';
 import { MatchResultBox } from 'src/components/player/MatchResultBox';
-import { UserProfileContainer } from 'src/components/player/UserProfileBox';
-import styled from 'styled-components';
+import { UserProfileContainer } from 'src/components/player/UserProfile';
 import {
   useCustomInfiniteQuery,
   useCustomPrefetchInfiniteQuery,
@@ -22,6 +22,8 @@ import {
 } from '../api/hooks/useGetMetaQuery';
 import { useIntersectionObserver } from '../api/hooks/useIntersectionObserver';
 
+// import * as S from './style';
+
 type PagePropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 const Page = ({ nickName }: PagePropsType) => {
   const userProfileQuery = useGetUserProfileQuery(nickName);
@@ -34,6 +36,7 @@ const Page = ({ nickName }: PagePropsType) => {
   const triggerRef = useIntersectionObserver(() =>
     matchListInfiniteQuery?.fetchNextPage(),
   );
+
   if (userProfileQuery.status === 'loading') return <div>loading...</div>;
   if (
     userProfileQuery.status === 'success' &&
@@ -41,14 +44,14 @@ const Page = ({ nickName }: PagePropsType) => {
   ) {
     return (
       <Layout>
-        <StyledScetion>
+        <StyleScetion>
           <div>
             <UserProfileContainer
               accessId={userProfileQuery.data?.accessId}
               nickName={nickName}
             />
           </div>
-          <StyledUl>
+          <StyleUl>
             {matchListInfiniteQuery?.data?.pages.map((page) =>
               page.currentPageData.map((data) => (
                 <li key={data.matchId}>
@@ -56,19 +59,17 @@ const Page = ({ nickName }: PagePropsType) => {
                 </li>
               )),
             )}
-          </StyledUl>
+          </StyleUl>
           <StyleBottomWrap>
             <div ref={triggerRef}>
               {matchListInfiniteQuery?.isFetching ? 'loading' : ''}
             </div>
-            {/* <StyledButton onClick={fetchNextPageOnClick}>
-              더 불러오기
-            </StyledButton> */}
           </StyleBottomWrap>
-        </StyledScetion>
+        </StyleScetion>
       </Layout>
     );
   }
+
   return <Layout />;
 };
 
@@ -115,36 +116,22 @@ export const getServerSideProps: GetServerSideProps<IParams> = async (
   };
 };
 
-const StyledScetion = styled.section`
+export const StyleScetion = styled.section`
   width: 80%;
   margin: 0 auto;
 `;
 
-const StyledUl = styled.ul`
+export const StyleUl = styled.ul`
   display: grid;
   padding: 0;
   grid-row-gap: 1rem;
   list-style: none;
 `;
 
-const StyleBottomWrap = styled.div`
+export const StyleBottomWrap = styled.div`
   width: 100%;
   text-align: center;
   margin: 5rem 0;
 `;
-
-// const StyledButton = styled.button`
-//   width: 10rem;
-//   font-size: 1.5rem;
-//   font-weight: 600;
-//   border-radius: 0.5rem;
-//   background-color: black;
-//   color: white;
-
-//   :hover {
-//     cursor: pointer;
-//     opacity: 0.8;
-//   }
-// `;
 
 export default Page;
