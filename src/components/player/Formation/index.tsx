@@ -98,6 +98,10 @@ const GridContainer = styled.div<{ type: 'column' | 'row'; rotate?: number }>`
 `;
 
 const GridItem = styled.div<{ columnNum: number; rowNum: number }>`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   grid-column: ${(props) => props.columnNum};
   grid-row: ${(props) => props.rowNum};
   text-align: center;
