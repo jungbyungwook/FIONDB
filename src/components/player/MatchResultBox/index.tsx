@@ -85,7 +85,9 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
             </SoccerPlayer>
           </S.StyleRightPlayer>
           <S.StyleDetail onClick={toggle}>
-            <DownArrowIcon width={'1rem'} height={'2rem'} fill="white" />
+            <S.StyleRotateWrap isClick={isOpenFormation}>
+              <DownArrowIcon width={'1rem'} height={'2rem'} fill="white" />
+            </S.StyleRotateWrap>
           </S.StyleDetail>
         </S.StyleRight>
       </S.StyleTop>

@@ -99,3 +99,10 @@ export const StyleDetail = styled.div`
     cursor: pointer;
   }
 `;
+export const StyleRotateWrap = styled.div<{ isClick: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s;
+  transform: ${({ isClick }) => (isClick ? 'rotate(0)' : 'rotate(-90deg)')};
+`;
