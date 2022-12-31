@@ -1,4 +1,4 @@
-import type { IMatchDetailData } from 'types/DetailObject';
+import type { IMatchDetailData, MatchInfo } from 'types/DetailObject';
 import { changeDateUtil } from 'util/chageDate';
 import { getMatchPossession, pickBestPlayer } from './matchRecordCase';
 
@@ -22,7 +22,7 @@ export interface IViewData {
   matchDate: string;
   leftPlayer: IRenderPlayerDto;
   rightPlayer: IRenderPlayerDto;
-  matchDetail: {};
+  matchDetails: MatchInfo[];
 }
 
 export const changeServerDataIntoRenderData = (
@@ -55,7 +55,7 @@ export const changeServerDataIntoRenderData = (
         spId: 0,
       },
     },
-    matchDetail: {},
+    matchDetails: [{}, {}] as MatchInfo[],
   };
   // 시간변환
   newState.matchDate = changeDateUtil(matchDetailData.matchDate);
@@ -68,6 +68,9 @@ export const changeServerDataIntoRenderData = (
   if (userNickName === matchDetailData.matchInfo[1].nickname) {
     const sercherData = matchDetailData.matchInfo[1];
     const opponentData = matchDetailData.matchInfo[0];
+
+    newState.matchDetails[0] = sercherData;
+    newState.matchDetails[1] = opponentData;
     // goalCount
     newState.leftPlayer.goalCount = sercherData.shoot.goalTotal;
     newState.rightPlayer.goalCount = opponentData.shoot.goalTotal;
@@ -91,6 +94,9 @@ export const changeServerDataIntoRenderData = (
   } else {
     const sercherData = matchDetailData.matchInfo[0];
     const opponentData = matchDetailData.matchInfo[1];
+    //
+    newState.matchDetails[0] = sercherData;
+    newState.matchDetails[1] = opponentData;
     // goalCount
     newState.leftPlayer.goalCount = sercherData.shoot.goalTotal;
     newState.rightPlayer.goalCount = opponentData.shoot.goalTotal;

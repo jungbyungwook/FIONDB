@@ -69,7 +69,6 @@ const metaAPI = {
     const response = await api.get(baseURL.meta.getMetaSpId());
     return response.data;
   },
-
   getMatchTypeMeta: async (): Promise<AxiosResponse<IMetaMatchType[]>> =>
     await api.get(baseURL.meta.getMetaMatchType()),
   getMatchDivisionMeta: async (): Promise<AxiosResponse<IMetaDivision[]>> =>

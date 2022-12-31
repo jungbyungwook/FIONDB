@@ -15,7 +15,7 @@ export const StyleContainer = styled.div<{
   backgroundColor: string | undefined;
 }>`
   width: 100%;
-  height: 13rem;
+  /* height: 13rem; */
   border-radius: 0.5rem;
   overflow: hidden;
   display: flex;

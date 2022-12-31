@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import {
   getDateByDateString,
   getMatchStringByMatchId,
@@ -8,8 +10,8 @@ import DownArrowIcon from 'src/assets/svg/down_arrow.svg';
 import type { IMatchDetailData } from 'types/DetailObject';
 import { SoccerPlayer } from 'src/components/player/SoccerPlayer';
 import { BestPlayerBadge } from 'src/components/common/Badge/BestPlayerBadge';
-
 import * as S from './style';
+import { FormationContainer } from '../Formation';
 
 interface Props {
   matchDetailData: IMatchDetailData;
@@ -18,6 +20,10 @@ interface Props {
 
 export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
   const sortedData = changeServerDataIntoRenderData(matchDetailData, nickName);
+  const [isOpenFormation, setIsOpenFormation] = useState(false);
+
+  const toggle = () => setIsOpenFormation((pre) => !pre);
+
   return (
     <S.StyleContainer
       backgroundColor={
@@ -78,7 +84,7 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
               />
             </SoccerPlayer>
           </S.StyleRightPlayer>
-          <S.StyleDetail>
+          <S.StyleDetail onClick={toggle}>
             <DownArrowIcon width={'1rem'} height={'2rem'} fill="white" />
           </S.StyleDetail>
         </S.StyleRight>
@@ -99,6 +105,9 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
           }}
         />
       </S.StyleBottom>
+      {isOpenFormation && (
+        <FormationContainer matchDetailData={sortedData.matchDetails} />
+      )}
     </S.StyleContainer>
   );
   // 점유율
