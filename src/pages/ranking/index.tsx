@@ -4,6 +4,7 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useIntersectionObserver } from '../api/hooks/useIntersectionObserver';
 
 const dummyData = [
   {
@@ -58,22 +59,13 @@ const UserRankingBox = (props: any) => {
 
 const Ranking: NextPage = () => {
   const [data, setData] = useState('');
+  const ranking = axios.get('/api/ranking');
 
-  useEffect(() => {
-    const rankingApi = async () => {
-      try {
-        const res = await axios.get('/api/ranking');
-        // console.log(res.data);
-        setData(res.data);
-      } catch {
-        // 오류 발생시 실행
-      }
-    };
-    rankingApi();
-  });
+  ranking.then((res) => setData(res.data));
 
-  console.log(data);
+  const triggerRef = useIntersectionObserver(() => console.log('12312321312'));
 
+  // console.log(data);
   return (
     <>
       <RankingWrapper>
@@ -101,12 +93,13 @@ const Ranking: NextPage = () => {
               ranking={i.rank_no}
               // profileImg={i.profileImg}
               nickname={i.nickname}
-              // record={i.record}
-              // Odds={i.Odds}
+              record={i.rank_before}
+              Odds={i.rank_rate}
               // rating={i.rating}
             />
           ))}
         ;
+        <div ref={triggerRef} />
       </RankingWrapper>
     </>
   );
