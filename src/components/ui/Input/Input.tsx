@@ -24,7 +24,6 @@ export const Input = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    console.log(isFocus);
     if (!isFocus || !inputRef.current) return;
     inputRef.current.focus();
   }, []);

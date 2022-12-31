@@ -115,8 +115,8 @@ export const changeServerDataIntoRenderData = (
       opponentData,
     ])[1];
     // spId
-    newState.leftPlayer.bestPlayer.spId = pickBestPlayer(opponentData).spId;
-    newState.rightPlayer.bestPlayer.spId = pickBestPlayer(sercherData).spId;
+    newState.leftPlayer.bestPlayer.spId = pickBestPlayer(sercherData).spId;
+    newState.rightPlayer.bestPlayer.spId = pickBestPlayer(opponentData).spId;
   }
   return newState;
 };

@@ -13,15 +13,12 @@ export const FormationContainer = ({
   matchDetailData,
 }: FormationContainerProps) => {
   const getPlayers = (idx: 0 | 1) => {
-    const result = matchDetailData[idx].player.map((player) => ({
+    return matchDetailData[idx].player.map((player) => ({
       ...player,
       ...{ spPosition: POSITION_TABLE[player.spPosition] },
     }));
-
-    return result;
   };
-
-  const getSpId = (idx: 0 | 1) => {
+  const getSpId = (idx: 0 | 1): { [key: string]: number } => {
     return getPlayers(idx).reduce(
       (acc, cur) => ({ ...acc, ...{ [cur.spPosition]: cur.spId } }),
       {},
