@@ -2,6 +2,8 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import styled from 'styled-components';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const dummyData = [
   {
@@ -31,7 +33,14 @@ const dummyData = [
 ];
 
 const UserRankingBox = (props: any) => {
-  const { ranking, profileImg, nickname, record, Odds, rating } = props;
+  const {
+    ranking = '',
+    profileImg = '',
+    nickname = '',
+    record = '',
+    Odds = '',
+    rating = '',
+  } = props;
 
   return (
     <UserRankingBoxWrapper>
@@ -48,6 +57,23 @@ const UserRankingBox = (props: any) => {
 };
 
 const Ranking: NextPage = () => {
+  const [data, setData] = useState('');
+
+  useEffect(() => {
+    const rankingApi = async () => {
+      try {
+        const res = await axios.get('/api/ranking');
+        // console.log(res.data);
+        setData(res.data);
+      } catch {
+        // 오류 발생시 실행
+      }
+    };
+    rankingApi();
+  });
+
+  console.log(data);
+
   return (
     <>
       <RankingWrapper>
@@ -59,7 +85,7 @@ const Ranking: NextPage = () => {
           <li>승률</li>
           <li>최고등급1</li>
         </ul>
-        {dummyData.map((i) => (
+        {/* {dummyData.map((i) => (
           <UserRankingBox
             ranking={i.ranking}
             profileImg={i.profileImg}
@@ -68,7 +94,18 @@ const Ranking: NextPage = () => {
             Odds={i.Odds}
             rating={i.rating}
           />
-        ))}
+        ))} */}
+        {data &&
+          data.map((i) => (
+            <UserRankingBox
+              ranking={i.rank_no}
+              // profileImg={i.profileImg}
+              nickname={i.nickname}
+              // record={i.record}
+              // Odds={i.Odds}
+              // rating={i.rating}
+            />
+          ))}
         ;
       </RankingWrapper>
     </>
