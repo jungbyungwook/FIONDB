@@ -32,6 +32,9 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          {/* <meta property="og:type" content="website" />
+          <meta property="og:title" content="FionDB: 피파온라인4 전적검색" />
+          <meta property="og:description" content="피파온라인4 전적검색" /> */}
           <style />
         </Head>
         <body>
