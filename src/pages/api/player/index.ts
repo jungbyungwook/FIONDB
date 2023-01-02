@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { api } from 'src/pages/api';
-import { IMatchDetailData } from 'types/DetailObject';
+import { IMatchDetailData } from 'src/types/DetailObject';
 import { IUserProfile } from '../hooks/query/useGetUserProfileQuery';
 import type {
   AccessId,

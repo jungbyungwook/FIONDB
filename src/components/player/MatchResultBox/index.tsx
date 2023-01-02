@@ -7,7 +7,7 @@ import {
 import { PercentBar } from 'src/components/ui/bar/PercentBar';
 import { changeServerDataIntoRenderData } from 'src/useCases/changeServerDataIntoRenderData';
 import DownArrowIcon from 'src/assets/svg/down_arrow.svg';
-import type { IMatchDetailData } from 'types/DetailObject';
+import type { IMatchDetailData } from 'src/types/DetailObject';
 import { SoccerPlayer } from 'src/components/player/SoccerPlayer';
 import { BestPlayerBadge } from 'src/components/common/Badge/BestPlayerBadge';
 import * as S from './style';

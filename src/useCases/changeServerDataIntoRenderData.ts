@@ -1,4 +1,4 @@
-import type { IMatchDetailData, MatchInfo } from 'types/DetailObject';
+import type { IMatchDetailData, MatchInfo } from 'src/types/DetailObject';
 import { changeDateUtil } from 'util/chageDate';
 import { getMatchPossession, pickBestPlayer } from './matchRecordCase';
 
