@@ -2,7 +2,7 @@ import { QueryClient, useInfiniteQuery } from 'react-query';
 import { matchAPI } from 'src/pages/api/player';
 import type { AccessId } from 'src/pages/api/player/type';
 
-export const useCustomInfiniteQuery = (accessId: AccessId | undefined) => {
+export const useMatchInfiniteQuery = (accessId: AccessId | undefined) => {
   if (!accessId) return;
   const fetchMatches = async ({ pageParam = 0 }) => {
     const matchListData = await matchAPI.getMatchList(accessId, pageParam);
@@ -31,7 +31,7 @@ export const useCustomInfiniteQuery = (accessId: AccessId | undefined) => {
   return matchListInfiniteQuery;
 };
 
-export const useCustomPrefetchInfiniteQuery = async (
+export const usePrefetchMatchInfiniteQuery = async (
   accessId: AccessId | undefined,
   queryClient: QueryClient,
 ) => {
