@@ -106,3 +106,16 @@ export const StyleRotateWrap = styled.div<{ isClick: boolean }>`
   transition: 0.2s;
   transform: ${({ isClick }) => (isClick ? 'rotate(0)' : 'rotate(-90deg)')};
 `;
+
+// import styled from 'styled-components';
+
+export const MatchResultText = styled.div<{ resultType: '승리' | '패배' }>`
+  font-size: ${({ theme }) => theme.fontSizes.subTitle.large};
+  font-weight: bold;
+  color: ${({ theme, resultType }) =>
+    resultType === '승리'
+      ? theme.colors.green.fionGreen
+      : theme.colors.gray[100]};
+`;
+
+export const MatchGoalText = styled.h1``;
