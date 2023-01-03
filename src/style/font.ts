@@ -1,5 +1,7 @@
 // 반응형 디자인을 위한 픽셀 컨버팅 함수
-const pixelToRem = (size: number) => `${size / 10}rem`;
+
+import { pixelToRem } from './util';
+
 // font size를 객체로 반환해주자.
 export const fontSizes = {
   title: {
@@ -10,13 +12,13 @@ export const fontSizes = {
     5: pixelToRem(28),
   },
   subTitle: {
-    large: pixelToRem(24),
-    middle: pixelToRem(20),
-    small: pixelToRem(18),
+    24: pixelToRem(24),
+    20: pixelToRem(20),
+    18: pixelToRem(18),
   },
   content: {
-    large: pixelToRem(16),
-    middle: pixelToRem(14),
-    small: pixelToRem(12),
+    16: pixelToRem(16),
+    14: pixelToRem(14),
+    12: pixelToRem(12),
   },
 };

@@ -49,7 +49,7 @@ a {
     box-sizing: border-box;
     font-family: NEXON Lv1 Gothic OTF;
     color: ${({ theme }) => theme.colors.gray[100]};
-    font-size: ${({ theme }) => theme.fontSizes.content.small};
+    font-size: ${({ theme }) => theme.fontSizes.content[12]};
 }
 input, button {
   background-color: transparent;

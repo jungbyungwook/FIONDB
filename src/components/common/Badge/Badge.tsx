@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
+import { pixelToRem } from 'src/style/util';
+
 interface Props {
   center: ReactNode;
   left?: ReactNode;
@@ -34,8 +36,6 @@ export const Badge = ({
   );
 };
 
-const getSizeRem = (size: number) => `${size}rem`;
-
 const StyledBadge = styled.div<{
   width?: number;
   height?: number;
@@ -45,8 +45,8 @@ const StyledBadge = styled.div<{
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: ${({ width }) => (width ? getSizeRem(width) : getSizeRem(3.9))};
-  height: ${({ height }) => (height ? getSizeRem(height) : getSizeRem(2.5))};
+  width: ${({ width }) => (width ? pixelToRem(width) : pixelToRem(39))};
+  height: ${({ height }) => (height ? pixelToRem(height) : pixelToRem(25))};
   padding: 0.4rem 0.8rem;
   border-radius: 0.4rem;
   background-color: ${({ theme, backgroundColor }) => backgroundColor};

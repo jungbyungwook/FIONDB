@@ -110,7 +110,7 @@ export const StyleRotateWrap = styled.div<{ isClick: boolean }>`
 // import styled from 'styled-components';
 
 export const MatchResultText = styled.div<{ resultType: '승리' | '패배' }>`
-  font-size: ${({ theme }) => theme.fontSizes.subTitle.large};
+  font-size: ${({ theme }) => theme.fontSizes.subTitle[24]};
   font-weight: bold;
   color: ${({ theme, resultType }) =>
     resultType === '승리'

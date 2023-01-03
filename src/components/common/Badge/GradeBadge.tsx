@@ -12,8 +12,8 @@ export const GradeBadge = ({ spGrade }: Props) => {
       center={spGrade}
       color={color.gray[100]}
       backgroundColor={color.gray[900]}
-      width={2.2}
-      height={2.2}
+      width={22}
+      height={22}
     />
   );
 };
