@@ -1,12 +1,27 @@
+import { ImageWithFallback } from 'src/components/ui/Image/ImageWithFallback';
 import theme from 'src/style/theme';
 import { Badge } from './Badge';
 
 interface Props {
-  spGrade: number;
+  seasonImageSrc?: string;
+  spGrade?: number;
 }
 
-export const GradeBadge = ({ spGrade }: Props) => {
+export const GradeBadge = ({ seasonImageSrc, spGrade }: Props) => {
   const color = theme.colors;
+
+  console.log(seasonImageSrc);
+  if (seasonImageSrc) {
+    return (
+      <ImageWithFallback
+        src={seasonImageSrc}
+        // fallbackSrc
+        width={22}
+        height={22}
+      />
+    );
+  }
+
   return (
     <Badge
       center={spGrade}

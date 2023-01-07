@@ -75,7 +75,7 @@ const metaAPI = {
     api.get(baseURL.meta.getMetaMatchType),
   getMatchDivisionMeta: (): Promise<AxiosResponse<IMetaDivision[]>> =>
     api.get(baseURL.meta.getMetaDivision),
-  getSeasonIdMeta: (): Promise<AxiosResponse<IMetaSeasonId[]>> =>
+  getSeasonIdMeta: (): Promise<IMetaSeasonId[]> =>
     api.get(baseURL.meta.getMetaSeasonId).then((response) => response.data),
 };
 

@@ -6,6 +6,7 @@ import { IRenderBestPlayerDto } from 'src/useCases/changeServerDataIntoRenderDat
 import { SoccerPlayerName } from 'src/components/common/SoccerPlayerName';
 import { GradeBadge } from 'src/components/common/Badge/GradeBadge';
 import { MvpBadge } from 'src/components/common/Badge/MvpBadge';
+import { useGetSeasonIdMeta } from 'src/hooks/useGetMetaQuery';
 
 export interface SoccerPlayerProps {
   playerDto: IRenderBestPlayerDto;
@@ -16,14 +17,19 @@ export const SoccerPlayer = ({ playerDto }: SoccerPlayerProps) => {
   const getSrc = (spId: number) => {
     return `https://fo4.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${spId}.png`;
   };
+  const { data, isLoading } = useGetSeasonIdMeta();
+
+  const targetSeasonId = Number(playerDto.spId.toString().slice(0, 3));
+  const seasonDto = data?.find(({ seasonId }) => seasonId === targetSeasonId);
+  // seasonId를 통해서 시즌에 대한 정보를 Get해온다.
 
   return (
     <S.Container>
       <SoccerPlayerImage
         src={getSrc(playerDto.spId)}
         top={<MvpBadge />}
-        bottomLeft={<GradeBadge spGrade={0} />}
-        bottomRight={<GradeBadge spGrade={21} />}
+        bottomLeft={<GradeBadge seasonImageSrc={seasonDto?.seasonImg} />}
+        bottomRight={<GradeBadge spGrade={0} />}
       />
       <S.Content>
         <div>포지션</div>
