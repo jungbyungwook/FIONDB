@@ -1,4 +1,5 @@
 import { AxiosResponse } from 'axios';
+
 import { api } from 'src/pages/api';
 import { IMatchDetailData } from 'src/types/DetailObject';
 import { IUserProfile } from '../hooks/query/useGetUserProfileQuery';
@@ -7,6 +8,7 @@ import type {
   IMaxDivision,
   IMetaDivision,
   IMetaMatchType,
+  IMetaSeasonId,
   IMetaSpId,
   MatchId,
   NickName,
@@ -22,12 +24,13 @@ const baseURL = {
     getMatchList: (accessId: AccessId) => `users/${accessId}/matches?`,
   },
   meta: {
-    getMetaSpId: () =>
-      'https://static.api.nexon.co.kr/fifaonline4/latest/spid.json',
-    getMetaMatchType: () =>
+    getMetaSpId: 'https://static.api.nexon.co.kr/fifaonline4/latest/spid.json',
+    getMetaMatchType:
       'https://static.api.nexon.co.kr/fifaonline4/latest/matchtype.json',
-    getMetaDivision: () =>
+    getMetaDivision:
       'https://static.api.nexon.co.kr/fifaonline4/latest/division.json',
+    getMetaSeasonId:
+      'https://static.api.nexon.co.kr/fifaonline4/latest/seasonid.json',
   },
 };
 
@@ -65,14 +68,15 @@ const matchAPI = {
 };
 
 const metaAPI = {
-  getSoccerPlayerMeta: async (): Promise<AxiosResponse<IMetaSpId[]>> => {
-    const response = await api.get(baseURL.meta.getMetaSpId());
-    return response.data;
+  getSoccerPlayerMeta: (): Promise<AxiosResponse<IMetaSpId[]>> => {
+    return api.get(baseURL.meta.getMetaSpId).then((response) => response.data);
   },
-  getMatchTypeMeta: async (): Promise<AxiosResponse<IMetaMatchType[]>> =>
-    await api.get(baseURL.meta.getMetaMatchType()),
-  getMatchDivisionMeta: async (): Promise<AxiosResponse<IMetaDivision[]>> =>
-    await api.get(baseURL.meta.getMetaDivision()),
+  getMatchTypeMeta: (): Promise<AxiosResponse<IMetaMatchType[]>> =>
+    api.get(baseURL.meta.getMetaMatchType),
+  getMatchDivisionMeta: (): Promise<AxiosResponse<IMetaDivision[]>> =>
+    api.get(baseURL.meta.getMetaDivision),
+  getSeasonIdMeta: (): Promise<AxiosResponse<IMetaSeasonId[]>> =>
+    api.get(baseURL.meta.getMetaSeasonId).then((response) => response.data),
 };
 
 export { userAPI, matchAPI, metaAPI };

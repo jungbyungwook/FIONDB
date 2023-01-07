@@ -5,6 +5,7 @@ export const metaQueryKey = {
   matchTypeMeta: ['matchTypeMeta'],
   matchDivisionMeta: ['matchDivisionMeta'],
   soccerPlayersMeta: ['soccerPlayerMeta'],
+  seasonIdMeta: ['seasonIdMeta'],
 };
 
 export const metaQueryFunction = {
@@ -14,22 +15,21 @@ export const metaQueryFunction = {
 };
 
 export const useGetMatchTypeMeta = () => {
-  return useQuery(
-    metaQueryKey.matchTypeMeta,
-    () => metaQueryFunction.matchTypeMeta,
-  );
+  return useQuery(metaQueryKey.matchTypeMeta, () => metaAPI.getMatchTypeMeta());
 };
 
 export const useGetMatchDivisionMeta = () => {
-  return useQuery(
-    metaQueryKey.matchDivisionMeta,
-    () => metaQueryFunction.matchDivisionMeta,
+  return useQuery(metaQueryKey.matchDivisionMeta, () =>
+    metaAPI.getMatchDivisionMeta(),
   );
 };
 
 export const useGetSoccerPlayersMeta = () => {
-  return useQuery(
-    metaQueryKey.soccerPlayersMeta,
-    () => metaQueryFunction.soccerPlayersMeta,
+  return useQuery(metaQueryKey.soccerPlayersMeta, () =>
+    metaAPI.getSoccerPlayerMeta(),
   );
+};
+
+export const useGetSeasonIdMeta = () => {
+  return useQuery(metaQueryKey.seasonIdMeta, () => metaAPI.getSeasonIdMeta());
 };
