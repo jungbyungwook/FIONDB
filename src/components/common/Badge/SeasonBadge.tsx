@@ -17,8 +17,8 @@ export const SeasonBadge = ({ seasonImageSrc }: Props) => {
         <ImageWithFallback
           src={seasonImageSrc}
           fallbackSrc={seasonImageSrc}
-          width={22}
-          height={22}
+          width={25}
+          height={20}
         />
       </StyleImageWrap>
     );
