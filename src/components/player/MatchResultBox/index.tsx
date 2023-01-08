@@ -4,14 +4,14 @@ import {
   getDateByDateString,
   getMatchStringByMatchId,
 } from 'src/useCases/matchRecordCase';
-import { PercentBar } from 'src/components/ui/bar/PercentBar';
 import { changeServerDataIntoRenderData } from 'src/useCases/changeServerDataIntoRenderData';
 import DownArrowIcon from 'src/assets/svg/down_arrow.svg';
 import type { IMatchDetailData } from 'src/types/DetailObject';
 import { SoccerPlayer } from 'src/components/player/SoccerPlayer';
 import { BestPlayerBadge } from 'src/components/common/Badge/BestPlayerBadge';
-import * as S from './style';
+import { BallPossessionBar } from 'src/components/common/Bar/BallPossessionBar';
 import { FormationContainer } from '../Formation';
+import * as S from './style';
 
 interface Props {
   matchDetailData: IMatchDetailData;
@@ -80,19 +80,13 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
             </S.StyleRight>
           </S.StyleTop>
           <S.StyleBottom>
-            <PercentBar
-              value={sortedData.leftPlayer.nickName}
-              style={{
-                width: sortedData.leftPlayer.possession,
-                backgroundColor: '#584A1D',
-              }}
+            <BallPossessionBar
+              playerDto={sortedData.leftPlayer}
+              isMine={true}
             />
-            <PercentBar
-              value={sortedData.rightPlayer.nickName}
-              style={{
-                width: sortedData.rightPlayer.possession,
-                backgroundColor: '#3B205C',
-              }}
+            <BallPossessionBar
+              playerDto={sortedData.rightPlayer}
+              isMine={false}
             />
           </S.StyleBottom>
         </S.StyleContainer>

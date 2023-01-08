@@ -1,7 +1,8 @@
+import styled from 'styled-components';
+
 import { ImageWithFallback } from 'src/components/ui/Image/ImageWithFallback';
 import theme from 'src/style/theme';
 import { Badge } from './Badge';
-// import { Badge } from './Badge';
 
 interface Props {
   seasonImageSrc?: string;
@@ -12,12 +13,14 @@ export const SeasonBadge = ({ seasonImageSrc }: Props) => {
 
   if (seasonImageSrc) {
     return (
-      <ImageWithFallback
-        src={seasonImageSrc}
-        fallbackSrc={seasonImageSrc}
-        width={22}
-        height={22}
-      />
+      <StyleImageWrap>
+        <ImageWithFallback
+          src={seasonImageSrc}
+          fallbackSrc={seasonImageSrc}
+          width={22}
+          height={22}
+        />
+      </StyleImageWrap>
     );
   }
 
@@ -31,3 +34,8 @@ export const SeasonBadge = ({ seasonImageSrc }: Props) => {
     />
   );
 };
+
+const StyleImageWrap = styled.div`
+  border-radius: 0.3rem;
+  overflow: hidden;
+`;
