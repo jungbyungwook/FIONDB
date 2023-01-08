@@ -61,10 +61,11 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
               </S.StyleLeftPlayer>
             </S.StyleLeft>
             <S.StyleCenter>
-              <S.StyleGoals>
-                {sortedData.leftPlayer.goalCount + ' '}vs
-                {' ' + sortedData.rightPlayer.goalCount}
-              </S.StyleGoals>
+              <S.StyleGoalsWrap>
+                <S.StyleGoals>{sortedData.leftPlayer.goalCount}</S.StyleGoals>
+                <S.StyleVS>vs</S.StyleVS>
+                <S.StyleGoals>{sortedData.rightPlayer.goalCount}</S.StyleGoals>
+              </S.StyleGoalsWrap>
             </S.StyleCenter>
             <S.StyleRight>
               <S.StyleRightPlayer>

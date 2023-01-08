@@ -111,9 +111,18 @@ export const StyleMatchDate = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.content[14]};
 `;
 
-export const StyleGoals = styled.div`
-  font-size: 1.5rem;
+export const StyleGoalsWrap = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 `;
+
+export const StyleGoals = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.title[5]};
+`;
+
+export const StyleVS = styled.div``;
+
 export const StyleLeftPlayer = styled.div`
   display: flex;
   justify-content: center;
