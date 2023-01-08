@@ -36,22 +36,27 @@ const HeaderWrapper = styled.div`
   z-index: 1;
   position: fixed;
   width: 100%;
+  height: 80px;
 
   img {
     width: 85px;
     height: 20px;
   }
-  background-color: black;
+  background-color: #212121;
   display: flex;
+
   ul {
     list-style: none;
     color: white;
-    font-size: 20px;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 37px;
+    color: #abee02;
   }
   li {
     float: left;
   }
   li + li {
-    margin-left: 5rem;
+    margin-left: 48px;
   }
 `;
