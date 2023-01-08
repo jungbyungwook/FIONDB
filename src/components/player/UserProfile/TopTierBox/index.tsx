@@ -61,8 +61,8 @@ export const UserTopTierBox = () => {
             <S.TopTierTitle>최고등급</S.TopTierTitle>
             <ImageWithFallback
               alt="공식모드티어아이콘"
-              width={70}
-              height={70}
+              width={95}
+              height={95}
               fallbackSrc={`https://ssl.nexon.com/s2/game/fo4/obt/rank/large/update_2009/ico_rank0.png`}
               src={`https://ssl.nexon.com/s2/game/fo4/obt/rank/large/update_2009/ico_rank${newState[0]}.png`}
             />
