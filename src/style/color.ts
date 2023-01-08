@@ -27,5 +27,11 @@ export const colors = {
     800: '#424242',
     900: '#212121',
   },
+  grade: {
+    common: '#607D8B',
+    bronze: '#BC7350',
+    silver: '#CBCED5',
+    gold: '#FFFB34',
+  },
   err: '#F83D38',
 };

@@ -103,6 +103,7 @@ export const StyleMatchType = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.content[14]};
   margin-bottom: 0.6rem;
 `;
+
 export const StyleMatchResult = styled.div<{ isWin: boolean }>`
   color: ${({ theme, isWin }) => isWin && theme.colors.green.fionGreen};
   font-size: ${({ theme }) => theme.fontSizes.subTitle[20]};
@@ -111,9 +112,18 @@ export const StyleMatchDate = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.content[14]};
 `;
 
-export const StyleGoals = styled.div`
-  font-size: 1.5rem;
+export const StyleGoalsWrap = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 `;
+
+export const StyleGoals = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.title[5]};
+`;
+
+export const StyleVS = styled.div``;
+
 export const StyleLeftPlayer = styled.div`
   display: flex;
   justify-content: center;

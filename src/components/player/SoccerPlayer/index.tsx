@@ -10,11 +10,12 @@ import { useGetSeasonIdMeta } from 'src/hooks/useGetMetaQuery';
 import { SeasonBadge } from 'src/components/common/Badge/SeasonBadge';
 
 export interface SoccerPlayerProps {
+  isMine: boolean;
   playerDto: IRenderBestPlayerDto;
   children: ReactNode;
 }
 
-export const SoccerPlayer = ({ playerDto }: SoccerPlayerProps) => {
+export const SoccerPlayer = ({ isMine, playerDto }: SoccerPlayerProps) => {
   const getSrc = (spId: number) => {
     return `https://fo4.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${spId}.png`;
   };
@@ -28,9 +29,9 @@ export const SoccerPlayer = ({ playerDto }: SoccerPlayerProps) => {
     <S.Container>
       <SoccerPlayerImage
         src={getSrc(playerDto.spId)}
-        top={<MvpBadge />}
+        top={<MvpBadge isMine={isMine} />}
         bottomLeft={<SeasonBadge seasonImageSrc={seasonDto?.seasonImg} />}
-        bottomRight={<GradeBadge spGrade={playerDto.spGrade} />}
+        bottomRight={<GradeBadge spGrade={playerDto?.spGrade} />}
       />
       <S.Content>
         <div>포지션</div>
