@@ -115,8 +115,11 @@ export const getServerSideProps: GetServerSideProps<IParams> = async (
 };
 
 export const StyleScetion = styled.section`
-  width: 80%;
+  width: 120rem;
   margin: 0 auto;
+
+  @media screen {
+  }
 `;
 
 export const StyleUl = styled.ul`

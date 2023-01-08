@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-
 export const Section = styled.section`
   display: flex;
   width: 100%;
   gap: 2rem;
-  padding: 1rem;
+  padding: 3rem;
   align-items: center;
   justify-content: center;
   color: white;
@@ -13,22 +12,34 @@ export const Section = styled.section`
 
 export const UserProfileBox = styled.div`
   display: flex;
-  /* align-items: flex-end; */
   align-items: center;
-  height: 100%;
-  gap: 1rem;
+  width: 60rem;
+  gap: 2rem;
 `;
-export const ImageWrap = styled.div``;
+
+export const ImageWrap = styled.div`
+  position: relative;
+`;
+
+export const BackgroundImageWrap = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+`;
 
 export const UserProfileDataWrap = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: start;
+  gap: 1rem;
+  text-align: left;
 `;
 
-export const NickName = styled.div`
-  font-size: 3rem;
+export const NickName = styled.h4`
+  margin: 0;
 `;
 
 export const Level = styled.div`

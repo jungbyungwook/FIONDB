@@ -10,12 +10,11 @@ interface Props {
 export const GradeBadge = ({ seasonImageSrc, spGrade }: Props) => {
   const color = theme.colors;
 
-  console.log(seasonImageSrc);
   if (seasonImageSrc) {
     return (
       <ImageWithFallback
         src={seasonImageSrc}
-        // fallbackSrc
+        fallbackSrc={seasonImageSrc}
         width={22}
         height={22}
       />

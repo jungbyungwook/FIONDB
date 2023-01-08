@@ -16,19 +16,21 @@ interface IProps {
 export const UserProfileContainer = ({ accessId, nickName }: IProps) => {
   return (
     <StyleSection>
-      <UserTopTierBox />
       <UserProfileBox />
+      <UserTopTierBox />
     </StyleSection>
   );
 };
 
 const StyleSection = styled.section`
   display: flex;
-  width: 100%;
-  gap: 2rem;
-  padding: 1rem;
-  align-items: center;
   justify-content: center;
+  gap: 2rem;
+
+  height: 28rem;
+  padding: 4rem;
+  border-radius: 1.6rem;
+
   color: white;
-  background-color: #31313c;
+  background-color: ${({ theme }) => theme.colors.gray[900]};
 `;
