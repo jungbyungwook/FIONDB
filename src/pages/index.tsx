@@ -6,6 +6,7 @@ import { useRouterByEnter } from 'hooks/useRouterByEnter';
 import styled from 'styled-components';
 import { Layout } from 'src/components/Layout';
 import type { ChangeEvent } from 'react';
+import { useRef } from 'react';
 
 const Home: NextPage = () => {
   const [nickName, setNickName] = useState('');
@@ -13,6 +14,8 @@ const Home: NextPage = () => {
 
   const onChangeWithNickName = (e: ChangeEvent<HTMLInputElement>) =>
     setNickName(e.target.value);
+
+  const inputRef = useRef(null);
 
   return (
     <BackgroundWrapper>
@@ -34,7 +37,9 @@ const Home: NextPage = () => {
               style={{ paddingLeft: 24, fontSize: 18 }}
             />
 
-            <SearchBtn>전적 보기</SearchBtn>
+            <SearchBtn onClick={() => console.log('전적 보기')}>
+              전적 보기
+            </SearchBtn>
           </InputWrapper>
         </HomeWrapper>
       </Layout>
