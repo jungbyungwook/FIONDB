@@ -22,10 +22,10 @@ const Header = () => {
           <Link href="/">
             {router.route === '/' ? (
               <LinkWrapper>
-                <a>전적 검색</a>
+                <a style={{ fontSize: 32 }}>전적 검색</a>
               </LinkWrapper>
             ) : (
-              <a>전적 검색</a>
+              <a style={{ fontSize: 32 }}>전적 검색</a>
             )}
           </Link>
         </li>
@@ -33,10 +33,10 @@ const Header = () => {
           <Link href="/ranking">
             {router.route === '/ranking' ? (
               <LinkWrapper>
-                <a>랭킹</a>
+                <a style={{ fontSize: 32 }}>랭킹</a>
               </LinkWrapper>
             ) : (
-              <a>랭킹</a>
+              <a style={{ fontSize: 32 }}>랭킹</a>
             )}
           </Link>
         </li>
