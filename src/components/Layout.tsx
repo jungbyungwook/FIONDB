@@ -6,5 +6,5 @@ export const Layout = ({ children }: { children?: ReactNode }) => {
 };
 
 const StyleLayout = styled.div`
-  padding-top: 8rem;
+  padding-top: 10rem;
 `;
