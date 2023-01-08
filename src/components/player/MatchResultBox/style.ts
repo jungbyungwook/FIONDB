@@ -11,28 +11,58 @@ export const renderDownIntoUp = keyframes`
   }
 `;
 
-export const StyleContainer = styled.div<{
-  backgroundColor: string | undefined;
-}>`
-  width: 100%;
-  /* height: 13rem; */
-  border-radius: 0.5rem;
-  overflow: hidden;
+export const renderBubble = keyframes`
+
+`;
+
+export const StyleSection = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 1rem;
+`;
+
+export const StyleWrap = styled.div`
+  display: flex;
+  overflow: hidden;
+  border-radius: 0.5rem;
+`;
+export const StyleContainer = styled.div<{
+  backgroundColor?: string;
+}>`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  width: 100%;
+  height: 18rem;
+
   color: white;
-  background-color: ${(props) => props.backgroundColor || '#273042'};
+  background-color: ${({ theme, backgroundColor }) =>
+    backgroundColor ? backgroundColor : theme.colors.gray[900]};
   animation: ${renderDownIntoUp} 0.5s;
+`;
+
+export const StyleResultBar = styled.div<{
+  isWin: boolean;
+}>`
+  width: 0.8rem;
+  background-color: ${({ theme, isWin }) =>
+    isWin ? theme.colors.green.fionGreen : theme.colors.gray[600]};
 `;
 
 export const StyleTop = styled.div`
   display: flex;
   justify-content: center;
   height: 85%;
+
+  padding-left: 2rem;
 `;
+
 export const StyleBottom = styled.div`
   height: 15%;
 `;
+
 export const StyleCenter = styled.div`
   display: flex;
   flex: 1;
@@ -54,13 +84,7 @@ export const StyleRight = styled.div`
   align-items: center;
   gap: 2rem;
 `;
-export const StyleResultBar = styled.div<{
-  backgroundColor: string | undefined;
-}>`
-  height: 100%;
-  width: 0.4rem;
-  background-color: ${(props) => props.backgroundColor || '#3351A0'};
-`;
+
 export const StyleResult = styled.div`
   display: flex;
   flex-direction: column;
