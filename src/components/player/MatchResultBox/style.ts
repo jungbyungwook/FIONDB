@@ -11,28 +11,57 @@ export const renderDownIntoUp = keyframes`
   }
 `;
 
-export const StyleContainer = styled.div<{
-  backgroundColor: string | undefined;
-}>`
-  width: 100%;
-  /* height: 13rem; */
-  border-radius: 0.5rem;
-  overflow: hidden;
+export const renderBubble = keyframes`
+`;
+
+export const StyleSection = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 1rem;
+`;
+
+export const StyleWrap = styled.div`
+  display: flex;
+  overflow: hidden;
+  border-radius: 0.5rem;
+`;
+export const StyleContainer = styled.div<{
+  backgroundColor?: string;
+}>`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  width: 100%;
+  height: 18rem;
+
   color: white;
-  background-color: ${(props) => props.backgroundColor || '#273042'};
+  background-color: ${({ theme, backgroundColor }) =>
+    backgroundColor ? backgroundColor : theme.colors.gray[900]};
   animation: ${renderDownIntoUp} 0.5s;
+`;
+
+export const StyleResultBar = styled.div<{
+  isWin: boolean;
+}>`
+  width: 0.8rem;
+  background-color: ${({ theme, isWin }) =>
+    isWin ? theme.colors.green.fionGreen : theme.colors.gray[600]};
 `;
 
 export const StyleTop = styled.div`
   display: flex;
   justify-content: center;
   height: 85%;
+
+  padding-left: 2rem;
 `;
+
 export const StyleBottom = styled.div`
   height: 15%;
 `;
+
 export const StyleCenter = styled.div`
   display: flex;
   flex: 1;
@@ -54,18 +83,14 @@ export const StyleRight = styled.div`
   align-items: center;
   gap: 2rem;
 `;
-export const StyleResultBar = styled.div<{
-  backgroundColor: string | undefined;
-}>`
-  height: 100%;
-  width: 0.4rem;
-  background-color: ${(props) => props.backgroundColor || '#3351A0'};
-`;
-export const StyleResult = styled.div`
+
+export const StyleResultWrap = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  /* justify-content: space-around; */
+  justify-content: center;
   align-items: center;
+  gap: 1.2rem;
   height: 100%;
 `;
 
@@ -73,6 +98,19 @@ export const StyleResultTitle = styled.div`
   text-align: center;
   font-size: 1.2rem;
 `;
+
+export const StyleMatchType = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.content[14]};
+  margin-bottom: 0.6rem;
+`;
+export const StyleMatchResult = styled.div<{ isWin: boolean }>`
+  color: ${({ theme, isWin }) => isWin && theme.colors.green.fionGreen};
+  font-size: ${({ theme }) => theme.fontSizes.subTitle[20]};
+`;
+export const StyleMatchDate = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.content[14]};
+`;
+
 export const StyleGoals = styled.div`
   font-size: 1.5rem;
 `;
@@ -106,3 +144,16 @@ export const StyleRotateWrap = styled.div<{ isClick: boolean }>`
   transition: 0.2s;
   transform: ${({ isClick }) => (isClick ? 'rotate(0)' : 'rotate(-90deg)')};
 `;
+
+// import styled from 'styled-components';
+
+export const MatchResultText = styled.div<{ resultType: '승리' | '패배' }>`
+  font-size: ${({ theme }) => theme.fontSizes.subTitle[24]};
+  font-weight: bold;
+  color: ${({ theme, resultType }) =>
+    resultType === '승리'
+      ? theme.colors.green.fionGreen
+      : theme.colors.gray[100]};
+`;
+
+export const MatchGoalText = styled.h1``;

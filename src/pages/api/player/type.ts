@@ -6,7 +6,6 @@ export interface IMaxDivision {
   division: number;
   achievementDate: string;
 }
-
 export interface IMetaDivision {
   divisionId: number;
   divisionName: string;
@@ -18,4 +17,9 @@ export interface IMetaMatchType {
 export interface IMetaSpId {
   id: number;
   name: string;
+}
+export interface IMetaSeasonId {
+  seasonId: number;
+  className: string;
+  seasonImg: string;
 }

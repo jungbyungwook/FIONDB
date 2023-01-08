@@ -1,6 +1,6 @@
 import { metaAPI } from 'src/pages/api/player';
 import { changeDateUtil } from 'util/chageDate';
-import { MatchInfo } from '../../types/DetailObject';
+import { MatchInfo } from 'src/types/DetailObject';
 
 // 몰수패인 경우 패자의 possession이 0으로 나온는 문제를 해결
 // default값을 20으로 두어
@@ -23,7 +23,7 @@ const getMatchPossession = (data: MatchInfo[]) => {
 
 const pickBestPlayer = (data: MatchInfo) => {
   const { player } = data;
-  if (!player.length) return { spId: 0 };
+  if (!player.length) return { spId: 0, spGrade: 0 };
 
   // 선수가 담긴 배열을 내림차순으로 정렬하여 가장 높은 선수를 pick
   // 🟠 조금 더 효과적인 방식으로 Refactoring 가능한 부분

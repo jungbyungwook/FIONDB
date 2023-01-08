@@ -16,9 +16,10 @@ interface MatchInfo {
   player: PlayerDTO[];
 }
 
+export type MatchResultType = '승' | '패' | '무';
 interface MatchDetailDTO {
   seasonId: number; //	시즌 ID
-  matchResult: string; //	매치 결과 (“승”, “무”, “패”)
+  matchResult: MatchResultType; //	매치 결과 (“승”, “무”, “패”)
   matchEndType: number; //	매치종료 타입 (0: 정상종료, 1: 몰수승, 2:몰수패)
   systemPause: number; //	게임 일시정지 수
   foul: number; //	파울 수

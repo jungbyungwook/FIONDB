@@ -6,23 +6,21 @@ import { Layout } from 'src/components/Layout';
 import { MatchResultBox } from 'src/components/player/MatchResultBox';
 import { UserProfileContainer } from 'src/components/player/UserProfile';
 import {
-  useCustomInfiniteQuery,
-  useCustomPrefetchInfiniteQuery,
-} from '../api/hooks/query/useCustomInfiniteQuery';
-import { useGetTopTierQuery } from '../api/hooks/query/useGetTopTierQuery';
+  useMatchInfiniteQuery,
+  usePrefetchMatchInfiniteQuery,
+} from 'src/pages/api/hooks/query/useMatchInfiniteQuery';
+import { useGetTopTierQuery } from 'src/pages/api/hooks/query/useGetTopTierQuery';
 import {
   useGetUserProfilePrefetchQuery,
   useGetUserProfileQuery,
-} from '../api/hooks/query/useGetUserProfileQuery';
-import { IUserProfile } from '../api/hooks/query/useGetUserProfileQuery';
+} from 'src/pages/api/hooks/query/useGetUserProfileQuery';
+import { IUserProfile } from 'src/pages/api/hooks/query/useGetUserProfileQuery';
 import {
   metaQueryFunction,
   metaQueryKey,
   useGetSoccerPlayersMeta,
-} from '../api/hooks/useGetMetaQuery';
-import { useIntersectionObserver } from '../api/hooks/useIntersectionObserver';
-
-// import * as S from './style';
+} from 'src/pages/api/hooks/useGetMetaQuery';
+import { useIntersectionObserver } from 'src/pages/api/hooks/useIntersectionObserver';
 
 type PagePropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 const Page = ({ nickName }: PagePropsType) => {
@@ -30,7 +28,7 @@ const Page = ({ nickName }: PagePropsType) => {
   // 여기서 useQuery를 이용해서 fetch 함수를 호출하고 내부 Component에서는 queryClient에 접근해서 getData만을 수행한다.
   const topTierQuery = useGetTopTierQuery(userProfileQuery.data?.accessId);
   const soccerPlayerMetaQuery = useGetSoccerPlayersMeta();
-  const matchListInfiniteQuery = useCustomInfiniteQuery(
+  const matchListInfiniteQuery = useMatchInfiniteQuery(
     userProfileQuery.data?.accessId,
   );
   const triggerRef = useIntersectionObserver(() =>
@@ -102,7 +100,7 @@ export const getServerSideProps: GetServerSideProps<IParams> = async (
     };
   }
 
-  await useCustomPrefetchInfiniteQuery(userProfileData.accessId, queryClient);
+  await usePrefetchMatchInfiniteQuery(userProfileData.accessId, queryClient);
   await queryClient.prefetchQuery(
     metaQueryKey.soccerPlayersMeta,
     () => metaQueryFunction.soccerPlayersMeta,
@@ -117,8 +115,11 @@ export const getServerSideProps: GetServerSideProps<IParams> = async (
 };
 
 export const StyleScetion = styled.section`
-  width: 80%;
+  width: 120rem;
   margin: 0 auto;
+
+  @media screen {
+  }
 `;
 
 export const StyleUl = styled.ul`

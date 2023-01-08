@@ -16,13 +16,14 @@ export const changeDateUtil = (date: string) => {
     (todayDate.getTime() - targetDate.getTime()) / 1000,
   );
 
-  if (elapsedSeconds < minute) return '방금전';
+  if (elapsedSeconds < minute) return '방금 전';
   if (elapsedSeconds < hour)
-    return `${Math.trunc(elapsedSeconds / minute)}분전`;
-  if (elapsedSeconds < day) return `${Math.trunc(elapsedSeconds / hour)}시간전`;
-  if (elapsedSeconds < week) return `${Math.trunc(elapsedSeconds / day)}일전`;
+    return `${Math.trunc(elapsedSeconds / minute)}분 전`;
+  if (elapsedSeconds < day)
+    return `${Math.trunc(elapsedSeconds / hour)}시간 전`;
+  if (elapsedSeconds < week) return `${Math.trunc(elapsedSeconds / day)}일 전`;
   if (elapsedSeconds < week * 4)
-    return `${Math.trunc(elapsedSeconds / week)}주전`;
+    return `${Math.trunc(elapsedSeconds / week)}주 전`;
 
   return dayjs(date).format('YY.MM.DD');
 };

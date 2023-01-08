@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { SoccerPlayerImage } from 'src/components/common/SoccerPlayerImage';
 import { SoccerPlayerName } from 'src/components/common/SoccerPlayerName';
 import { POSITION_LOCATIONS, POSITION_TABLE } from 'src/constants/position';
-import { MatchInfo } from 'types/DetailObject';
+import { MatchInfo } from 'src/types/DetailObject';
 interface FormationContainerProps {
   matchDetailData: MatchInfo[];
 }

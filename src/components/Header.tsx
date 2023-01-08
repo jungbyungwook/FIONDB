@@ -22,10 +22,26 @@ const Header = () => {
           <Link href="/">
             {router.route === '/' ? (
               <LinkWrapper>
-                <a>전적 검색</a>
+                <a
+                  style={{
+                    fontWeight: 400,
+                    fontSize: '32px',
+                    lineHeight: '37px',
+                  }}
+                >
+                  전적 검색
+                </a>
               </LinkWrapper>
             ) : (
-              <a>전적 검색</a>
+              <a
+                style={{
+                  fontWeight: 400,
+                  fontSize: '32px',
+                  lineHeight: '37px',
+                }}
+              >
+                전적 검색
+              </a>
             )}
           </Link>
         </li>
@@ -33,10 +49,26 @@ const Header = () => {
           <Link href="/ranking">
             {router.route === '/ranking' ? (
               <LinkWrapper>
-                <a>랭킹</a>
+                <a
+                  style={{
+                    fontWeight: 400,
+                    fontSize: '32px',
+                    lineHeight: '37px',
+                  }}
+                >
+                  랭킹
+                </a>
               </LinkWrapper>
             ) : (
-              <a>랭킹</a>
+              <a
+                style={{
+                  fontWeight: 400,
+                  fontSize: '32px',
+                  lineHeight: '37px',
+                }}
+              >
+                랭킹
+              </a>
             )}
           </Link>
         </li>
@@ -61,15 +93,16 @@ const HeaderWrapper = styled.div`
   display: flex;
 
   ul {
+    display: flex;
     list-style: none;
     color: white;
     font-weight: 400;
     font-size: 32px;
-    line-height: 37px;
+    /* line-height: 37px; */
     color: #abee02;
   }
   li {
-    float: left;
+    /* float: left; */
   }
   li + li {
     margin-left: 48px;
