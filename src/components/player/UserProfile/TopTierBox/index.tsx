@@ -8,7 +8,7 @@ import {
 import { IUserProfile } from 'src/pages/api/hooks/query/useGetUserProfileQuery';
 import { IMaxDivision } from 'src/pages/api/player/type';
 import { OddsChart } from 'src/components/common/Chart/WinPercentChart';
-import { RefetchButton } from 'src/components/common/RefetchButton';
+import { RefetchButton } from 'src/components/common/Button/RefetchButton';
 import { IParamsNickName } from '..';
 import * as S from './style';
 

@@ -12,7 +12,6 @@ export const renderDownIntoUp = keyframes`
 `;
 
 export const renderBubble = keyframes`
-
 `;
 
 export const StyleSection = styled.div`
@@ -85,11 +84,13 @@ export const StyleRight = styled.div`
   gap: 2rem;
 `;
 
-export const StyleResult = styled.div`
+export const StyleResultWrap = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  /* justify-content: space-around; */
+  justify-content: center;
   align-items: center;
+  gap: 1.2rem;
   height: 100%;
 `;
 
@@ -97,6 +98,19 @@ export const StyleResultTitle = styled.div`
   text-align: center;
   font-size: 1.2rem;
 `;
+
+export const StyleMatchType = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.content[14]};
+  margin-bottom: 0.6rem;
+`;
+export const StyleMatchResult = styled.div<{ isWin: boolean }>`
+  color: ${({ theme, isWin }) => isWin && theme.colors.green.fionGreen};
+  font-size: ${({ theme }) => theme.fontSizes.subTitle[20]};
+`;
+export const StyleMatchDate = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.content[14]};
+`;
+
 export const StyleGoals = styled.div`
   font-size: 1.5rem;
 `;

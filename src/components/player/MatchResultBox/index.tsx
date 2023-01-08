@@ -1,16 +1,17 @@
 import { useState } from 'react';
 
+import type { IMatchDetailData } from 'src/types/DetailObject';
 import {
   getDateByDateString,
   getMatchStringByMatchId,
 } from 'src/useCases/matchRecordCase';
 import { changeServerDataIntoRenderData } from 'src/useCases/changeServerDataIntoRenderData';
 import DownArrowIcon from 'src/assets/svg/down_arrow.svg';
-import type { IMatchDetailData } from 'src/types/DetailObject';
 import { SoccerPlayer } from 'src/components/player/SoccerPlayer';
 import { BestPlayerBadge } from 'src/components/common/Badge/BestPlayerBadge';
 import { BallPossessionBar } from 'src/components/common/Bar/BallPossessionBar';
 import { FormationContainer } from '../Formation';
+import { MATCH_RESULT_TEXT } from 'src/constants/matchResultText';
 import * as S from './style';
 
 interface Props {
@@ -31,15 +32,21 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
         <S.StyleContainer>
           <S.StyleTop>
             <S.StyleLeft>
-              <S.StyleResult>
+              <S.StyleResultWrap>
                 <S.StyleResultTitle>
-                  <div>
+                  <S.StyleMatchType>
                     {getMatchStringByMatchId(matchDetailData.matchType)}
-                  </div>
-                  <div>{sortedData.matchResult}</div>
+                  </S.StyleMatchType>
+                  <S.StyleMatchResult
+                    isWin={MATCH_RESULT_TEXT[sortedData.matchResult] === '승리'}
+                  >
+                    {MATCH_RESULT_TEXT[sortedData.matchResult]}
+                  </S.StyleMatchResult>
                 </S.StyleResultTitle>
-                <div>{getDateByDateString(matchDetailData.matchDate)}</div>
-              </S.StyleResult>
+                <S.StyleMatchDate>
+                  {getDateByDateString(matchDetailData.matchDate)}
+                </S.StyleMatchDate>
+              </S.StyleResultWrap>
               <S.StyleLeftPlayer>
                 <SoccerPlayer playerDto={sortedData.leftPlayer.bestPlayer}>
                   <BestPlayerBadge
