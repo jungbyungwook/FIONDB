@@ -48,7 +48,10 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
                 </S.StyleMatchDate>
               </S.StyleResultWrap>
               <S.StyleLeftPlayer>
-                <SoccerPlayer playerDto={sortedData.leftPlayer.bestPlayer}>
+                <SoccerPlayer
+                  playerDto={sortedData.leftPlayer.bestPlayer}
+                  isMine={true}
+                >
                   <BestPlayerBadge
                     type={
                       sortedData.matchResult === '승' ||
@@ -69,7 +72,10 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
             </S.StyleCenter>
             <S.StyleRight>
               <S.StyleRightPlayer>
-                <SoccerPlayer playerDto={sortedData.rightPlayer.bestPlayer}>
+                <SoccerPlayer
+                  playerDto={sortedData.rightPlayer.bestPlayer}
+                  isMine={false}
+                >
                   <BestPlayerBadge
                     type={
                       sortedData.matchResult === '승' ||
