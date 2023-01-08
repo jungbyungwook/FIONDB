@@ -61,13 +61,19 @@ input {
 
 
 h1{
-  font-size: 3.2rem;
+  font-weight: 700;
+  font-size: 54px;
+  line-height: 62px;
 }
 h2{
-  font-size: 2.4rem;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 55px;
 }
 h3{
-  font-size: 1.9rem;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 46px;
 }
 p{
   font-size: 1.5rem;
