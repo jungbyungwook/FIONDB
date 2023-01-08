@@ -3,6 +3,7 @@ import { Badge } from './Badge';
 
 export const MvpBadge = () => {
   const colors = theme.colors;
+
   return (
     <Badge
       center={'MVP'}

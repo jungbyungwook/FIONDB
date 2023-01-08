@@ -7,6 +7,7 @@ import { SoccerPlayerName } from 'src/components/common/SoccerPlayerName';
 import { GradeBadge } from 'src/components/common/Badge/GradeBadge';
 import { MvpBadge } from 'src/components/common/Badge/MvpBadge';
 import { useGetSeasonIdMeta } from 'src/hooks/useGetMetaQuery';
+import { SeasonBadge } from 'src/components/common/Badge/SeasonBadge';
 
 export interface SoccerPlayerProps {
   playerDto: IRenderBestPlayerDto;
@@ -28,7 +29,7 @@ export const SoccerPlayer = ({ playerDto }: SoccerPlayerProps) => {
       <SoccerPlayerImage
         src={getSrc(playerDto.spId)}
         top={<MvpBadge />}
-        bottomLeft={<GradeBadge seasonImageSrc={seasonDto?.seasonImg} />}
+        bottomLeft={<SeasonBadge seasonImageSrc={seasonDto?.seasonImg} />}
         bottomRight={<GradeBadge spGrade={playerDto.spGrade} />}
       />
       <S.Content>
