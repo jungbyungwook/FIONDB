@@ -10,7 +10,7 @@ interface Props {
   width?: number;
   height?: number;
   color: string;
-  backgroundColor: string;
+  backgroundColor?: string;
 }
 
 export const Badge = ({
@@ -40,7 +40,7 @@ const StyledBadge = styled.div<{
   width?: number;
   height?: number;
   color: string;
-  backgroundColor: string;
+  backgroundColor?: string;
 }>`
   display: flex;
   justify-content: space-around;

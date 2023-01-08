@@ -31,7 +31,7 @@ export const SoccerPlayer = ({ isMine, playerDto }: SoccerPlayerProps) => {
         src={getSrc(playerDto.spId)}
         top={<MvpBadge isMine={isMine} />}
         bottomLeft={<SeasonBadge seasonImageSrc={seasonDto?.seasonImg} />}
-        bottomRight={<GradeBadge spGrade={playerDto.spGrade} />}
+        bottomRight={<GradeBadge spGrade={playerDto?.spGrade} />}
       />
       <S.Content>
         <div>포지션</div>
