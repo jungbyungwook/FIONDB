@@ -1,4 +1,8 @@
-import type { IMatchDetailData, MatchInfo } from 'src/types/DetailObject';
+import type {
+  IMatchDetailData,
+  MatchInfo,
+  MatchResultType,
+} from 'src/types/DetailObject';
 import { changeDateUtil } from 'util/chageDate';
 import { getMatchPossession, pickBestPlayer } from './matchRecordCase';
 
@@ -19,7 +23,7 @@ export interface IRenderBestPlayerDto {
 
 export interface IViewData {
   matchType: string;
-  matchResult: string;
+  matchResult: MatchResultType;
   matchDate: string;
   leftPlayer: IRenderPlayerDto;
   rightPlayer: IRenderPlayerDto;
@@ -33,7 +37,7 @@ export const changeServerDataIntoRenderData = (
   // 여기서 matchDetailData가 예상과 다르게 들어와도 default 상태를 정의해주면 문제없이 동작할 것으로 보인다.
   const newState: IViewData = {
     matchType: '',
-    matchResult: '',
+    matchResult: '승',
     matchDate: '',
     leftPlayer: {
       nickName: '',
