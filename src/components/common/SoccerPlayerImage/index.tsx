@@ -70,7 +70,7 @@ const StyleBorder = styled.div<{ isMine: boolean; type: RadiusType }>`
 const StyleTopAbsolute = styled.div`
   position: absolute;
   left: -30%;
-  z-index: 30;
+  z-index: 2;
 `;
 
 const StyleBottomAbsolute = styled.div`
