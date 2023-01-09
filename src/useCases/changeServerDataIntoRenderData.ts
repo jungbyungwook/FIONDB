@@ -1,3 +1,4 @@
+import { POSITION_TABLE } from 'src/constants/position';
 import type {
   IMatchDetailData,
   MatchInfo,
@@ -16,7 +17,7 @@ export interface IRenderPlayerDto {
 export interface IRenderBestPlayerDto {
   id: number;
   name: string;
-  position: string;
+  spPosition: string;
   spId: number;
   spGrade: number;
 }
@@ -47,7 +48,7 @@ export const changeServerDataIntoRenderData = (
       bestPlayer: {
         id: 0,
         name: '',
-        position: '',
+        spPosition: '',
         spId: 0,
         spGrade: 0,
       },
@@ -61,7 +62,7 @@ export const changeServerDataIntoRenderData = (
       bestPlayer: {
         id: 0,
         name: '',
-        position: '',
+        spPosition: '',
         spId: 0,
         spGrade: 0,
       },
@@ -85,11 +86,21 @@ export const changeServerDataIntoRenderData = (
   // 상대방이 특정 이유(닉네임변경, 계정삭제)로 인해 데이터가 넘어오지 않을 경우 처리
   if (matchDetailData.matchInfo.length === 1) {
     const searcherData = matchDetailData.matchInfo[0];
+    const bestPlayer = pickBestPlayer(searcherData);
 
     newState.matchDetails[0] = searcherData;
-    newState.leftPlayer.bestPlayer.spId = pickBestPlayer(searcherData).spId;
+    // spId
+    newState.leftPlayer.bestPlayer.spId = bestPlayer.spId;
+    // spPosition
+    newState.leftPlayer.bestPlayer.spPosition =
+      POSITION_TABLE[bestPlayer.spPosition];
+    // spGrade
+    newState.leftPlayer.bestPlayer.spGrade = bestPlayer.spGrade;
+
     newState.leftPlayer.goalCount = searcherData.shoot.goalTotal;
+
     newState.leftPlayer.nickName = searcherData.nickname;
+
     newState.matchResult = searcherData.matchDetail.matchResult;
 
     return newState;
@@ -133,5 +144,11 @@ export const changeServerDataIntoRenderData = (
   // spId
   newState.leftPlayer.bestPlayer.spId = leftBestPlayer.spId;
   newState.rightPlayer.bestPlayer.spId = rightBestPlayer.spId;
+  // position
+  newState.leftPlayer.bestPlayer.spPosition =
+    POSITION_TABLE[leftBestPlayer.spPosition];
+  newState.rightPlayer.bestPlayer.spPosition =
+    POSITION_TABLE[rightBestPlayer.spPosition];
+
   return newState;
 };

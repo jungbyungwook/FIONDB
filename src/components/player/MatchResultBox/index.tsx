@@ -7,11 +7,11 @@ import {
 } from 'src/useCases/matchRecordCase';
 import { changeServerDataIntoRenderData } from 'src/useCases/changeServerDataIntoRenderData';
 import { SoccerPlayer } from 'src/components/player/SoccerPlayer';
-import { BestPlayerBadge } from 'src/components/common/Badge/BestPlayerBadge';
 import { BallPossessionBar } from 'src/components/common/Bar/BallPossessionBar';
-import { FormationContainer } from '../Formation';
 import { MATCH_RESULT_TEXT } from 'src/constants/matchResultText';
 import ArrowIcon from 'src/assets/svg/arrow.svg';
+
+import { FormationContainer } from '../Formation';
 import * as S from './style';
 
 interface Props {
@@ -51,16 +51,7 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
                 <SoccerPlayer
                   playerDto={sortedData.leftPlayer.bestPlayer}
                   isMine={true}
-                >
-                  <BestPlayerBadge
-                    type={
-                      sortedData.matchResult === '승' ||
-                      sortedData.matchResult === '무'
-                        ? '승'
-                        : '패'
-                    }
-                  />
-                </SoccerPlayer>
+                />
               </S.StyleLeftPlayer>
             </S.StyleLeft>
             <S.StyleCenter>
@@ -75,16 +66,7 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
                 <SoccerPlayer
                   playerDto={sortedData.rightPlayer.bestPlayer}
                   isMine={false}
-                >
-                  <BestPlayerBadge
-                    type={
-                      sortedData.matchResult === '승' ||
-                      sortedData.matchResult === '무'
-                        ? '패'
-                        : '승'
-                    }
-                  />
-                </SoccerPlayer>
+                />
               </S.StyleRightPlayer>
               <S.StyleDetail onClick={toggle}>
                 <S.StyleRotateWrap isClick={isOpenFormation}>

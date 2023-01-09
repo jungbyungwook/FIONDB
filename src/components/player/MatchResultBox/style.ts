@@ -107,6 +107,8 @@ export const StyleMatchType = styled.div`
 export const StyleMatchResult = styled.div<{ isWin: boolean }>`
   color: ${({ theme, isWin }) => isWin && theme.colors.green.fionGreen};
   font-size: ${({ theme }) => theme.fontSizes.subTitle[20]};
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.gray[600]}`};
+  padding-bottom: 1rem;
 `;
 export const StyleMatchDate = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.content[14]};
