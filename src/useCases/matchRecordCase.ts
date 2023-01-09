@@ -6,17 +6,24 @@ import { MatchInfo } from 'src/types/DetailObject';
 // default값을 20으로 두어
 
 const getMatchPossession = (data: MatchInfo[]) => {
-  const leftMatchDetail = data[0].matchDetail;
-  const rightMatchDetail = data[1].matchDetail;
   const defaultPossessions = {
     leftWin: [80, 20],
     rightWin: [20, 80],
   };
 
-  // 몰수승인 경우
-  if (leftMatchDetail.matchEndType === 1) return defaultPossessions.leftWin;
-  // 몰수패인 경우
-  if (rightMatchDetail.matchEndType === 1) return defaultPossessions.rightWin;
+  if (data.length === 1) return defaultPossessions.leftWin;
+
+  const leftMatchDetail = data[0].matchDetail;
+  const rightMatchDetail = data[1].matchDetail;
+
+  console.log(rightMatchDetail);
+  // 자신이 몰수승 또는 상대방이 몰수패인 경우
+  if (leftMatchDetail.matchEndType === 1 || rightMatchDetail.matchEndType === 2)
+    return defaultPossessions.leftWin;
+  // 자신이 몰수패 또는 상대방이 몰수승인 경우
+  if (leftMatchDetail.matchEndType === 2 || rightMatchDetail.matchEndType === 1)
+    return defaultPossessions.rightWin;
+
   // end type normal
   return [leftMatchDetail.possession, rightMatchDetail.possession];
 };

@@ -103,6 +103,11 @@ export const changeServerDataIntoRenderData = (
 
     newState.matchResult = searcherData.matchDetail.matchResult;
 
+    const possessisons = getMatchPossession([searcherData]);
+    newState.leftPlayer.possession = possessisons[0];
+    newState.rightPlayer.possession;
+    possessisons[1];
+
     return newState;
   }
 
