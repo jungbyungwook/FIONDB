@@ -11,7 +11,8 @@ import { BallPossessionBar } from 'src/components/common/Bar/BallPossessionBar';
 import { MATCH_RESULT_TEXT } from 'src/constants/matchResultText';
 import ArrowIcon from 'src/assets/svg/arrow.svg';
 
-import { FormationContainer } from '../Formation';
+import { FormationBoard } from '../Formation/FormationBoard';
+import { FormationCoat } from '../Formation/FormationCoat';
 import * as S from './style';
 
 interface Props {
@@ -88,7 +89,9 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
         </S.StyleContainer>
       </S.StyleWrap>
       {isOpenFormation && (
-        <FormationContainer matchDetailData={sortedData.matchDetails} />
+        <FormationBoard>
+          <FormationCoat matchDetailData={sortedData.matchDetails} />
+        </FormationBoard>
       )}
     </S.StyleSection>
   );

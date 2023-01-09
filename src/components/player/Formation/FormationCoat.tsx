@@ -11,9 +11,7 @@ interface FormationContainerProps {
 }
 
 // 정렬해서 넘겨주자.
-export const FormationContainer = ({
-  matchDetailData,
-}: FormationContainerProps) => {
+export const FormationCoat = ({ matchDetailData }: FormationContainerProps) => {
   const getPlayers = (idx: 0 | 1) => {
     return matchDetailData[idx].player.map((player) => ({
       ...player,
@@ -122,14 +120,14 @@ const ImageWrap = styled.div<{ rotate: number | undefined }>`
   overflow: hidden;
 `;
 
-const FormationHeader = () => {
-  return <header>header</header>;
-};
+// const FormationHeader = () => {
+//   return <header>header</header>;
+// };
 
-const FormationMain = () => {
-  return <div>main</div>;
-};
+// const FormationMain = () => {
+//   return <div>main</div>;
+// };
 
-const FormationFooter = () => {
-  return <footer>footer</footer>;
-};
+// const FormationFooter = () => {
+//   return <footer>footer</footer>;
+// };
