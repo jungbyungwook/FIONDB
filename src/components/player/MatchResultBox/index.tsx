@@ -6,12 +6,12 @@ import {
   getMatchStringByMatchId,
 } from 'src/useCases/matchRecordCase';
 import { changeServerDataIntoRenderData } from 'src/useCases/changeServerDataIntoRenderData';
-import DownArrowIcon from 'src/assets/svg/down_arrow.svg';
 import { SoccerPlayer } from 'src/components/player/SoccerPlayer';
 import { BestPlayerBadge } from 'src/components/common/Badge/BestPlayerBadge';
 import { BallPossessionBar } from 'src/components/common/Bar/BallPossessionBar';
 import { FormationContainer } from '../Formation';
 import { MATCH_RESULT_TEXT } from 'src/constants/matchResultText';
+import ArrowIcon from 'src/assets/svg/arrow.svg';
 import * as S from './style';
 
 interface Props {
@@ -88,7 +88,7 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
               </S.StyleRightPlayer>
               <S.StyleDetail onClick={toggle}>
                 <S.StyleRotateWrap isClick={isOpenFormation}>
-                  <DownArrowIcon width={'1rem'} height={'2rem'} fill="white" />
+                  <ArrowIcon width={'2rem'} height={'2rem'} fill="white" />
                 </S.StyleRotateWrap>
               </S.StyleDetail>
             </S.StyleRight>

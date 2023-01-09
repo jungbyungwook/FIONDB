@@ -138,9 +138,10 @@ export const StyleDetail = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  flex-basis: 2rem;
-  background-color: gray;
+
+  flex-basis: 4.5rem;
+  height: 80%;
+  border-left: ${({ theme }) => `1px solid ${theme.colors.gray[600]}`};
   opacity: 0.8;
   :hover {
     opacity: 0.6;
@@ -152,7 +153,7 @@ export const StyleRotateWrap = styled.div<{ isClick: boolean }>`
   justify-content: center;
   align-items: center;
   transition: 0.2s;
-  transform: ${({ isClick }) => (isClick ? 'rotate(0)' : 'rotate(-90deg)')};
+  transform: ${({ isClick }) => (isClick ? 'rotate(0)' : 'rotate(180deg)')};
 `;
 
 // import styled from 'styled-components';
