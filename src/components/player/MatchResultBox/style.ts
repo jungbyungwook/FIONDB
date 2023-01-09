@@ -1,18 +1,5 @@
-import styled, { keyframes } from 'styled-components';
-
-export const renderDownIntoUp = keyframes`
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 30%, 0);
-  }
-  100% {
-    opacity: 1;
-    transform: translateZ(0)
-  }
-`;
-
-export const renderBubble = keyframes`
-`;
+import styled from 'styled-components';
+import { renderDownIntoUp } from 'src/style/keyframes';
 
 export const StyleSection = styled.div`
   display: flex;
