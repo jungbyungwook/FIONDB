@@ -1,12 +1,12 @@
 import { useState } from 'react';
+import type { ChangeEvent } from 'react';
 import type { NextPage } from 'next';
 import Image from 'next/image';
-import { Input } from 'src/components/ui/Input/Input';
-import { useRouterByEnter } from 'hooks/useRouterByEnter';
 import styled from 'styled-components';
+
 import { Layout } from 'src/components/Layout';
-import type { ChangeEvent } from 'react';
-import { useRef } from 'react';
+import { Input } from 'src/components/common/Input/Input';
+import { useRouterByEnter } from 'hooks/useRouterByEnter';
 
 const Home: NextPage = () => {
   const [nickName, setNickName] = useState('');
@@ -14,8 +14,6 @@ const Home: NextPage = () => {
 
   const onChangeWithNickName = (e: ChangeEvent<HTMLInputElement>) =>
     setNickName(e.target.value);
-
-  const inputRef = useRef(null);
 
   return (
     <BackgroundWrapper>

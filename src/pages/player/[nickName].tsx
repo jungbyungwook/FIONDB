@@ -2,6 +2,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import styled from 'styled-components';
 import { ParsedUrlQuery } from 'querystring';
 import { dehydrate, QueryClient } from 'react-query';
+
 import { Layout } from 'src/components/Layout';
 import { MatchResultBox } from 'src/components/player/MatchResultBox';
 import { UserProfileContainer } from 'src/components/player/UserProfile';
@@ -125,7 +126,7 @@ export const StyleScetion = styled.section`
 export const StyleUl = styled.ul`
   display: grid;
   padding: 0;
-  grid-row-gap: 1rem;
+  grid-row-gap: 0.8rem;
   list-style: none;
 `;
 

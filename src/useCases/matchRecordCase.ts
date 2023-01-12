@@ -16,7 +16,6 @@ const getMatchPossession = (data: MatchInfo[]) => {
   const leftMatchDetail = data[0].matchDetail;
   const rightMatchDetail = data[1].matchDetail;
 
-  console.log(rightMatchDetail);
   // 자신이 몰수승 또는 상대방이 몰수패인 경우
   if (leftMatchDetail.matchEndType === 1 || rightMatchDetail.matchEndType === 2)
     return defaultPossessions.leftWin;
@@ -38,6 +37,7 @@ const pickBestPlayer = (data: MatchInfo) => {
     (left, right) => right.status.spRating - left.status.spRating,
   );
   const bestPlayer = sortedPlayerList[0];
+
   return bestPlayer;
 };
 

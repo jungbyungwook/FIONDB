@@ -29,7 +29,6 @@ export const SoccerPlayer = ({ isMine, playerDto }: SoccerPlayerProps) => {
   const findPosition = useMemo(
     () =>
       Object.entries(POSITION_CATEGORY).find(([key, positionArray], index) => {
-        console.log('asd');
         const result = positionArray.find(
           (position) => position === playerDto.spPosition,
         );
