@@ -1,22 +1,12 @@
 import type { ReactNode } from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import {
-  Chart,
-  ArcElement,
-  // Tooltip,
-  //Legend
-} from 'chart.js';
-import theme from 'src/style/theme';
+import { Chart, ArcElement } from 'chart.js';
 import styled from 'styled-components';
-Chart.register(ArcElement);
 
-const getOffset = (percent: string) => `${(100 - parseInt(percent)) / 2}%`;
-const getWinPercent = (data: number[]) => {
-  const winCount = data[0];
-  const totalCount = data.reduce((acc, cur) => acc + cur, 0);
-  return Math.ceil((winCount / totalCount) * 100);
-};
-const MATCH_RESULT_LIST = ['승리', '무승부', '패배'];
+import theme from 'src/style/theme';
+import { getOffset, getWinPercent } from './util';
+
+Chart.register(ArcElement);
 
 interface Props {
   data: number[];
@@ -40,14 +30,14 @@ export const OddsChart = (props: Props) => {
         <Doughnut
           options={options}
           data={{
-            labels: MATCH_RESULT_LIST,
+            // labels:,
             datasets: [
               {
                 // label: '',
                 data: props.data,
                 backgroundColor: [
                   theme.colors.green.fionGreen,
-                  theme.colors.gray[900], // 무승부는 보여줄것인가?
+                  theme.colors.gray[600], // 무승부는 보여줄것인가?
                   theme.colors.gray[600],
                 ],
                 borderWidth: 0,

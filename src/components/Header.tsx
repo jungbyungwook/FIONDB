@@ -80,7 +80,7 @@ const Header = () => {
 export default Header;
 
 const HeaderWrapper = styled.div`
-  z-index: 1;
+  z-index: 9000;
   position: fixed;
   width: 100%;
   height: 80px;

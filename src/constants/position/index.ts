@@ -2,12 +2,35 @@ export const POSITION_LOCATIONS = {
   1: ['', '', 'GK', '', ''],
   2: ['', '', 'SW', '', ''],
   3: ['LB', 'LCB', 'CB', 'RCB', 'RB'],
-  4: ['LWB', 'LDM', 'CDM', 'RDM', 'RWB'],
-  5: ['LM', 'LCM', 'CAM', 'RCM', 'RM'],
-  6: ['', 'LAM', 'AM', 'RAM', ''],
-  7: ['LF', 'LCF', 'CF', 'RCF', 'RF'],
-  8: ['LW', 'LS', 'ST', 'RS', 'RW'],
+  4: ['LWB', '', '', '', 'RWB'],
+  5: ['', 'LDM', 'CDM', 'RDM', ''],
+  6: ['LM', 'LCM', 'CAM', 'RCM', 'RM'],
+  7: ['', 'LAM', 'AM', 'RAM', ''],
+  8: ['LF', 'LCF', 'CF', 'RCF', 'RF'],
+  9: ['LW', 'LS', 'ST', 'RS', 'RW'],
 };
+
+export type PositionCategoryKeyType = 'fw' | 'mf' | 'df';
+// 빈 값이 제거된 포지션 카테고리
+export const POSITION_CATEGORY: Record<PositionCategoryKeyType, string[]> = {
+  fw: [...POSITION_LOCATIONS[9], ...POSITION_LOCATIONS[8]].filter(
+    (position) => position,
+  ),
+  mf: [
+    ...POSITION_LOCATIONS[7],
+    ...POSITION_LOCATIONS[6],
+    ...POSITION_LOCATIONS[5],
+  ].filter((position) => position),
+  df: [
+    ...POSITION_LOCATIONS[4],
+    ...POSITION_LOCATIONS[3],
+    ...POSITION_LOCATIONS[2],
+    ...POSITION_LOCATIONS[1],
+  ].filter((position) => position),
+};
+
+// export type PositionCategorType = typeof POSITION_CATEGORY;
+// export type PositionCategoryKeyType = keyof PositionCategorType;
 
 export const POSITION_TABLE: { [key: number]: string } = {
   0: 'GK',

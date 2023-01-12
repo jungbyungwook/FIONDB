@@ -20,8 +20,7 @@ export const useCaseUserProfile = () => {
     return async () => await queryClient.prefetchQuery(queryKeys, callApi);
   };
 
-  const useGetTopTierQuery = (accessId: AccessId | undefined) => {
-    if (!accessId) return;
+  const useGetTopTierQuery = (accessId: AccessId) => {
     const queryKey = ['toptier', accessId];
     const callAPI = () => userAPI.getUserTopTier(accessId);
 

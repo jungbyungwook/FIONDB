@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 
 export const TopTierWrap = styled.div`
-  height: 100%;
   text-align: center;
-  padding: 20px 0;
 `;
 
 export const Flex = styled.div`

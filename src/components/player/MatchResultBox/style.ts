@@ -1,18 +1,5 @@
-import styled, { keyframes } from 'styled-components';
-
-export const renderDownIntoUp = keyframes`
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 30%, 0);
-  }
-  100% {
-    opacity: 1;
-    transform: translateZ(0)
-  }
-`;
-
-export const renderBubble = keyframes`
-`;
+import styled from 'styled-components';
+import { renderDownIntoUp } from 'src/style/keyframes';
 
 export const StyleSection = styled.div`
   display: flex;
@@ -107,6 +94,8 @@ export const StyleMatchType = styled.div`
 export const StyleMatchResult = styled.div<{ isWin: boolean }>`
   color: ${({ theme, isWin }) => isWin && theme.colors.green.fionGreen};
   font-size: ${({ theme }) => theme.fontSizes.subTitle[20]};
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.gray[600]}`};
+  padding-bottom: 1rem;
 `;
 export const StyleMatchDate = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.content[14]};
@@ -138,9 +127,10 @@ export const StyleDetail = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  flex-basis: 2rem;
-  background-color: gray;
+
+  flex-basis: 4.5rem;
+  height: 80%;
+  border-left: ${({ theme }) => `1px solid ${theme.colors.gray[600]}`};
   opacity: 0.8;
   :hover {
     opacity: 0.6;
@@ -152,7 +142,7 @@ export const StyleRotateWrap = styled.div<{ isClick: boolean }>`
   justify-content: center;
   align-items: center;
   transition: 0.2s;
-  transform: ${({ isClick }) => (isClick ? 'rotate(0)' : 'rotate(-90deg)')};
+  transform: ${({ isClick }) => (isClick ? 'rotate(0)' : 'rotate(180deg)')};
 `;
 
 // import styled from 'styled-components';
