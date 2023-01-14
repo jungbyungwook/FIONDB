@@ -14,7 +14,14 @@ const Header = () => {
         <li>
           <Link href="/">
             <a>
-              <img src="/images/FION.DB.png" alt="" />
+              <img
+                style={{
+                  width: '236.95px',
+                  height: '80px',
+                }}
+                src="/images/FION.DB.png"
+                alt=""
+              />
             </a>
           </Link>
         </li>
@@ -25,19 +32,31 @@ const Header = () => {
                 <a
                   style={{
                     fontWeight: 400,
-                    fontSize: '32px',
-                    lineHeight: '37px',
+                    fontSize: '28px',
+                    color: '#ABEE02',
+                    lineHeight: '32px',
+                    position: 'relative',
                   }}
                 >
                   전적 검색
+                  <div
+                    style={{
+                      position: 'absolute',
+                      width: '100%',
+                      height: 6,
+                      backgroundColor: '#abee02',
+                      top: 48,
+                    }}
+                  />
                 </a>
               </LinkWrapper>
             ) : (
               <a
                 style={{
                   fontWeight: 400,
-                  fontSize: '32px',
-                  lineHeight: '37px',
+                  fontSize: '28px',
+                  color: '#ABEE02',
+                  lineHeight: '32px',
                 }}
               >
                 전적 검색
@@ -52,19 +71,31 @@ const Header = () => {
                 <a
                   style={{
                     fontWeight: 400,
-                    fontSize: '32px',
-                    lineHeight: '37px',
+                    fontSize: '28px',
+                    color: '#ABEE02',
+                    lineHeight: '32px',
+                    position: 'relative',
                   }}
                 >
                   랭킹
+                  <div
+                    style={{
+                      position: 'absolute',
+                      width: '100%',
+                      height: 6,
+                      backgroundColor: '#abee02',
+                      top: 48,
+                    }}
+                  />
                 </a>
               </LinkWrapper>
             ) : (
               <a
                 style={{
                   fontWeight: 400,
-                  fontSize: '32px',
-                  lineHeight: '37px',
+                  fontSize: '28px',
+                  color: '#ABEE02',
+                  lineHeight: '32px',
                 }}
               >
                 랭킹
@@ -85,21 +116,17 @@ const HeaderWrapper = styled.div`
   width: 100%;
   height: 80px;
 
-  img {
-    width: 85px;
-    height: 20px;
-  }
   background-color: #212121;
   display: flex;
+
+  align-items: center;
 
   ul {
     display: flex;
     list-style: none;
     color: white;
-    font-weight: 400;
-    font-size: 32px;
-    /* line-height: 37px; */
     color: #abee02;
+    align-items: center;
   }
   li {
     /* float: left; */
@@ -110,7 +137,7 @@ const HeaderWrapper = styled.div`
 `;
 
 const LinkWrapper = styled.div`
-  padding-bottom: 4px;
+  /* padding-bottom: 4px;
   border-bottom: solid #abee02;
-  border-width: 6px;
+  border-width: 6px; */
 `;
