@@ -20,28 +20,33 @@ const Home: NextPage = () => {
   return (
     <BackgroundWrapper>
       <Layout>
-        <HomeWrapper>
-          <MainBanner>
-            <Image
-              src="/images/main-banner.png"
-              alt="메인 배너 이미지"
-              layout="fill"
-            />
-          </MainBanner>
-          <InputWrapper>
-            <Input
-              placeholder="구단주 이름을 입력해주세요."
-              isFocus={true}
-              onChange={onChangeWithNickName}
-              onKeyDown={routerPushOnKeyDown}
-              style={{ paddingLeft: 24, fontSize: 18 }}
-            />
+        <div
+          style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+        >
+          <HomeWrapper>
+            <Title>FION.DB</Title>
+            <MainBanner>
+              <Image
+                src="/images/banner/main-banner.png"
+                alt="메인 배너 이미지"
+                layout="fill"
+              />
+            </MainBanner>
+            <InputWrapper>
+              <Input
+                placeholder="구단주 이름을 입력해주세요."
+                isFocus={true}
+                onChange={onChangeWithNickName}
+                onKeyDown={routerPushOnKeyDown}
+                style={{ paddingLeft: 24, fontSize: 18 }}
+              />
 
-            <SearchBtn onClick={() => console.log('전적 보기')}>
-              전적 보기
-            </SearchBtn>
-          </InputWrapper>
-        </HomeWrapper>
+              <SearchBtn onClick={() => console.log('전적 보기')}>
+                전적 보기
+              </SearchBtn>
+            </InputWrapper>
+          </HomeWrapper>
+        </div>
       </Layout>
     </BackgroundWrapper>
   );
@@ -50,7 +55,7 @@ const Home: NextPage = () => {
 export default Home;
 
 const BackgroundWrapper = styled.div`
-  background-image: url('/images/background.png');
+  background-image: url('/images/background/background.png');
   background-repeat: no-repeat;
   background-position: top center;
   background-size: cover;
@@ -60,18 +65,28 @@ const HomeWrapper = styled.div`
   display: flex;
   color: white;
   flex-direction: column;
-  align-items: center;
   height: 1024px;
+  width: 790px;
+`;
+
+const Title = styled.h1`
+  font-family: 'Chakra-Petch';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 62px;
+  line-height: 81px;
+  color: #a1db00;
+  margin: 0;
+  margin-top: 100px;
 `;
 const MainBanner = styled.div`
   position: relative;
-  width: 772px;
+  width: 790px;
   height: 373px;
-  margin-top: 195px;
   margin-bottom: 80px;
 `;
 const InputWrapper = styled.div`
-  width: 772px;
+  width: 790px;
   height: 73px;
   display: flex;
 `;
@@ -89,4 +104,8 @@ const SearchBtn = styled.div`
   font-weight: 700;
   font-size: 24px;
   line-height: 33px;
+`;
+
+const SubLogo = styled.div`
+  position: relative;
 `;
