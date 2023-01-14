@@ -10,7 +10,10 @@ import { useRef } from 'react';
 
 const Home: NextPage = () => {
   const [nickName, setNickName] = useState('');
-  const { routerPushOnKeyDown } = useRouterByEnter('player', [nickName]);
+  const { routerPushOnKeyDown, routerClinkOnButton } = useRouterByEnter(
+    'player',
+    [nickName],
+  );
 
   const onChangeWithNickName = (e: ChangeEvent<HTMLInputElement>) =>
     setNickName(e.target.value);
@@ -41,9 +44,7 @@ const Home: NextPage = () => {
                 style={{ paddingLeft: 24, fontSize: 18 }}
               />
 
-              <SearchBtn onClick={() => console.log('전적 보기')}>
-                전적 보기
-              </SearchBtn>
+              <SearchBtn onClick={routerClinkOnButton}>전적 보기</SearchBtn>
             </InputWrapper>
           </HomeWrapper>
         </div>
@@ -104,6 +105,10 @@ const SearchBtn = styled.div`
   font-weight: 700;
   font-size: 24px;
   line-height: 33px;
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const SubLogo = styled.div`
