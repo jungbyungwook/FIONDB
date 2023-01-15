@@ -47,7 +47,7 @@ export const UserTopTierBox = () => {
       <S.TopTierWrap>
         <S.Flex>
           <S.FlexItem>
-            <S.TopTierTitle>최고등급</S.TopTierTitle>
+            <S.TopTierTitle>공식모드</S.TopTierTitle>
             {rankIds.map((rankId, index) => (
               <ImageWithFallback
                 key={`${rankId}${index}`}
@@ -60,7 +60,7 @@ export const UserTopTierBox = () => {
                 placeholder="blur"
               />
             ))}
-            <S.TopTierMode>공식모드</S.TopTierMode>
+            <S.TopTierMode>최고등급</S.TopTierMode>
           </S.FlexItem>
         </S.Flex>
       </S.TopTierWrap>

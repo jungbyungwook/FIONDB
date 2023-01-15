@@ -16,12 +16,12 @@ export const FlexItem = styled.div<{ alignSelf?: 'start' | 'center' | 'end' }>`
 `;
 
 export const TopTierTitle = styled.div`
-  height: 30%;
-  font-size: ${({ theme }) => theme.fontSizes.subTitle[24]};
   margin-bottom: 1.2rem;
+  font-size: ${({ theme }) => theme.fontSizes.content[16]};
 `;
 
 export const TopTierMode = styled.div`
-  font-size: ${({ theme }) => theme.fontSizes.content[16]};
+  height: 30%;
   margin-top: 1.2rem;
+  font-size: ${({ theme }) => theme.fontSizes.subTitle[20]};
 `;
