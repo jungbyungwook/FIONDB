@@ -14,11 +14,13 @@ export const UserProfileBox = styled.div`
   display: flex;
   align-items: center;
   width: 60rem;
+
   gap: 2rem;
 `;
 
 export const ImageWrap = styled.div`
   position: relative;
+  overflow: auto;
 `;
 
 export const BackgroundImageWrap = styled.div`
