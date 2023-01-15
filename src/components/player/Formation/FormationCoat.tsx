@@ -4,14 +4,14 @@ import { SoccerPlayerImage } from 'src/components/common/SoccerPlayerImage';
 import { SoccerPlayerName } from 'src/components/common/SoccerPlayerName';
 import { POSITION_LOCATIONS, POSITION_TABLE } from 'src/constants/position';
 import { MatchInfo } from 'src/types/DetailObject';
+import soccerCoatUrl from 'src/assets/png/soccer_coat.png';
+import { renderUpIntoDown } from 'src/style/keyframes';
 interface FormationContainerProps {
   matchDetailData: MatchInfo[];
 }
 
 // 정렬해서 넘겨주자.
-export const FormationContainer = ({
-  matchDetailData,
-}: FormationContainerProps) => {
+export const FormationCoat = ({ matchDetailData }: FormationContainerProps) => {
   const getPlayers = (idx: 0 | 1) => {
     return matchDetailData[idx].player.map((player) => ({
       ...player,
@@ -38,6 +38,10 @@ export const FormationContainer = ({
 
 const FlexWrap = styled.div`
   display: flex;
+  height: 60rem;
+  background-image: url(${soccerCoatUrl.src});
+  background-size: 100% 100%;
+  animation: ${renderUpIntoDown} 1s;
 `;
 
 interface ForMationBoxProps {
@@ -83,7 +87,6 @@ const Formation = ({ spIds, rotate }: ForMationBoxProps) => {
 const FormationWrap = styled.div`
   width: 50%;
   padding: 5rem 1rem;
-  border: 1px solid green;
 `;
 
 const GridContainer = styled.div<{ type: 'column' | 'row'; rotate?: number }>`
@@ -117,14 +120,14 @@ const ImageWrap = styled.div<{ rotate: number | undefined }>`
   overflow: hidden;
 `;
 
-const FormationHeader = () => {
-  return <header>header</header>;
-};
+// const FormationHeader = () => {
+//   return <header>header</header>;
+// };
 
-const FormationMain = () => {
-  return <div>main</div>;
-};
+// const FormationMain = () => {
+//   return <div>main</div>;
+// };
 
-const FormationFooter = () => {
-  return <footer>footer</footer>;
-};
+// const FormationFooter = () => {
+//   return <footer>footer</footer>;
+// };

@@ -34,4 +34,4 @@ export const colors = {
     gold: '#FFFB34',
   },
   err: '#F83D38',
-};
+} as const;
