@@ -1,0 +1,21 @@
+<svg width="320" height="185" viewBox="0 0 320 185" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="-23" y="74.083" width="359.499" height="6.27252" transform="rotate(-10.1281 -23 74.083)" fill="#ABEE02"/>
+<rect x="-23" y="85.6533" width="359.499" height="6.27252" transform="rotate(-10.1281 -23 85.6533)" fill="#ABEE02"/>
+<rect x="-23" y="97.2236" width="359.499" height="6.27252" transform="rotate(-10.1281 -23 97.2236)" fill="#ABEE02"/>
+<rect x="-23" y="108.794" width="359.499" height="6.27252" transform="rotate(-10.1281 -23 108.794)" fill="#ABEE02"/>
+<rect x="-23" y="120.364" width="359.499" height="6.27252" transform="rotate(-10.1281 -23 120.364)" fill="#ABEE02"/>
+<rect x="-23" y="131.935" width="359.499" height="6.27252" transform="rotate(-10.1281 -23 131.935)" fill="#ABEE02"/>
+<rect x="-23" y="143.505" width="359.499" height="6.27252" transform="rotate(-10.1281 -23 143.505)" fill="#ABEE02"/>
+<rect x="-23" y="155.075" width="359.499" height="6.27252" transform="rotate(-10.1281 -23 155.075)" fill="#ABEE02"/>
+<rect x="-23" y="166.646" width="359.499" height="6.27252" transform="rotate(-10.1281 -23 166.646)" fill="#ABEE02"/>
+<rect x="-23" y="178.216" width="359.499" height="6.27252" transform="rotate(-10.1281 -23 178.216)" fill="#ABEE02"/>
+<g style="mix-blend-mode:hue">
+<rect x="-2" y="0.870483" width="322" height="183" fill="url(#paint0_linear_440_1698)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_440_1698" x1="-64" y1="124.87" x2="431.5" y2="13.8705" gradientUnits="userSpaceOnUse">
+<stop stop-color="#D9D9D9" stop-opacity="0"/>
+<stop offset="0.909375" stop-color="white"/>
+</linearGradient>
+</defs>
+</svg>

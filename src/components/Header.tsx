@@ -3,26 +3,104 @@ import React from 'react';
 import type { FC } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const Header = () => {
+  const router = useRouter();
+
   return (
     <HeaderWrapper>
       <ul>
         <li>
           <Link href="/">
             <a>
-              <img src="/images/FION.DB.png" alt="" />
+              <img
+                style={{
+                  width: '236.95px',
+                  height: '80px',
+                }}
+                src="/images/logo/FION.DB.png"
+                alt=""
+              />
             </a>
           </Link>
         </li>
         <li>
           <Link href="/">
-            <a>전적검색</a>
+            {router.route === '/' ? (
+              <LinkWrapper>
+                <a
+                  style={{
+                    fontWeight: 400,
+                    fontSize: '28px',
+                    color: '#ABEE02',
+                    lineHeight: '32px',
+                    position: 'relative',
+                  }}
+                >
+                  전적 검색
+                  <div
+                    style={{
+                      position: 'absolute',
+                      width: '100%',
+                      height: 6,
+                      backgroundColor: '#abee02',
+                      top: 48,
+                    }}
+                  />
+                </a>
+              </LinkWrapper>
+            ) : (
+              <a
+                style={{
+                  fontWeight: 400,
+                  fontSize: '28px',
+                  color: '#ABEE02',
+                  lineHeight: '32px',
+                }}
+              >
+                전적 검색
+              </a>
+            )}
           </Link>
         </li>
         <li>
           <Link href="/ranking">
-            <a>랭킹</a>
+            {router.route === '/ranking' ? (
+              <LinkWrapper>
+                <a
+                  style={{
+                    fontWeight: 400,
+                    fontSize: '28px',
+                    color: '#ABEE02',
+                    lineHeight: '32px',
+                    position: 'relative',
+                  }}
+                >
+                  랭킹
+                  <div
+                    style={{
+                      position: 'absolute',
+                      width: '100%',
+                      height: 6,
+                      backgroundColor: '#abee02',
+                      top: 48,
+                    }}
+                  />
+                </a>
+              </LinkWrapper>
+            ) : (
+              <a
+                style={{
+                  fontWeight: 400,
+                  fontSize: '28px',
+                  color: '#ABEE02',
+                  lineHeight: '32px',
+                }}
+              >
+                랭킹
+              </a>
+            )}
           </Link>
         </li>
       </ul>
@@ -33,25 +111,33 @@ const Header = () => {
 export default Header;
 
 const HeaderWrapper = styled.div`
-  z-index: 1;
+  z-index: 9000;
   position: fixed;
   width: 100%;
+  height: 80px;
 
-  img {
-    width: 85px;
-    height: 20px;
-  }
-  background-color: black;
+  background-color: #212121;
   display: flex;
+
+  align-items: center;
+
   ul {
+    display: flex;
     list-style: none;
     color: white;
-    font-size: 20px;
+    color: #abee02;
+    align-items: center;
   }
   li {
-    float: left;
+    /* float: left; */
   }
   li + li {
-    margin-left: 5rem;
+    margin-left: 48px;
   }
+`;
+
+const LinkWrapper = styled.div`
+  /* padding-bottom: 4px;
+  border-bottom: solid #abee02;
+  border-width: 6px; */
 `;
