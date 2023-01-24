@@ -12,7 +12,7 @@ import { MATCH_RESULT_TEXT } from 'src/constants/matchResultText';
 import ArrowIcon from 'src/assets/svg/arrow.svg';
 
 import { FormationBoard } from '../Formation/FormationBoard';
-import { FormationCoat } from '../Formation/FormationCoat';
+import { FormationFullCoat } from '../Formation/FormationFullCoat';
 import * as S from './style';
 
 interface Props {
@@ -90,7 +90,7 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
       </S.StyleWrap>
       {isOpenFormation && (
         <FormationBoard>
-          <FormationCoat matchDetailData={sortedData.matchDetails} />
+          <FormationFullCoat matchDetailData={sortedData.matchDetails} />
         </FormationBoard>
       )}
     </S.StyleSection>

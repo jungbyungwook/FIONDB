@@ -9,9 +9,11 @@ export const FormationBoard = ({ children }: Props) => {
   return (
     <StyleFormationBoard>
       <StyleBoardTitle>스쿼드 정보</StyleBoardTitle>
-      <StyleBoardTable></StyleBoardTable>
+      <StyleBoardTable>선수가치 총합등이 들어갈 부분</StyleBoardTable>
       {children}
-      <StyleBoardFooter></StyleBoardFooter>
+      <StyleBoardFooter>
+        <StyleBoardFooterTitle>교체선수</StyleBoardFooterTitle>
+      </StyleBoardFooter>
     </StyleFormationBoard>
   );
 };
@@ -38,4 +40,10 @@ const StyleBoardTable = styled.div`
 
 const StyleBoardFooter = styled.div`
   height: 20rem;
+`;
+
+const StyleBoardFooterTitle = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.subTitle[20]};
+  text-align: center;
+  margin-top: 2.4rem;
 `;
