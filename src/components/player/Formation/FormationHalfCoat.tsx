@@ -1,22 +1,14 @@
-import { SoccerPlayerImage } from 'src/components/common/SoccerPlayerImage';
-import { SoccerPlayerName } from 'src/components/common/SoccerPlayerName';
 import { SoccerPlayer } from 'src/components/player/SoccerPlayer';
 import { POSITION_LOCATIONS } from 'src/constants/position';
 import { PlayerDTO } from 'src/types/DetailObject';
-import { IRenderBestPlayerDto } from 'src/useCases/changeServerDataIntoRenderData';
 import styled from 'styled-components';
 
 interface ForMationBoxProps {
-  // playerDto: PlayerDTO[];
-  spIds: { [key: string]: number };
+  playerDto: { [key: string]: PlayerDTO };
   rotate?: number;
 }
 
-export const FormationHalfCoat = ({
-  // playerDto,
-  spIds,
-  rotate,
-}: ForMationBoxProps) => {
+export const FormationHalfCoat = ({ playerDto, rotate }: ForMationBoxProps) => {
   const positionsEntries = Object.entries(POSITION_LOCATIONS);
   const positionsList = rotate
     ? [...positionsEntries].reverse()
@@ -28,7 +20,7 @@ export const FormationHalfCoat = ({
         {positionsList.map(([key, positions], columnIndex) =>
           positions.map((position, rowIndex) => {
             return (
-              spIds?.[position] && (
+              playerDto?.[position] && (
                 <S.GridItem
                   key={position}
                   className={position}
@@ -36,12 +28,11 @@ export const FormationHalfCoat = ({
                   rowNum={Number(rowIndex) + 1}
                 >
                   <S.ImageWrap rotate={rotate}>
-                    {/* <SoccerPlayer playerDto={playerDto} isMine={false} /> */}
-                    <SoccerPlayerImage
-                      src={`https://fo4.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${spIds?.[position]}.png`}
+                    <SoccerPlayer
+                      playerDto={playerDto[position]}
+                      isMine={false}
                     />
                   </S.ImageWrap>
-                  <SoccerPlayerName spId={spIds?.[position]} />
                 </S.GridItem>
               )
             );

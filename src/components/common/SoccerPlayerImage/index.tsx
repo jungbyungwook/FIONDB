@@ -11,6 +11,8 @@ type RadiusType = 'circle' | 'square';
 export interface SoccerPlayerImageProps
   extends Omit<ImageWithFallbackProps, 'fallbackSrc'> {
   top?: ReactNode;
+  left?: ReactNode;
+  right?: ReactNode;
   bottomLeft?: ReactNode;
   bottomRight?: ReactNode;
   isMine?: boolean;
@@ -20,6 +22,8 @@ export interface SoccerPlayerImageProps
 // 축구선수와 묶은 Component 오로지 축구선수의 이미지만 보여주며 src는 props에 의존한다.
 export const SoccerPlayerImage = ({
   top,
+  left,
+  right,
   bottomLeft,
   bottomRight,
   isMine = false,
@@ -29,9 +33,9 @@ export const SoccerPlayerImage = ({
   height = 70,
 }: SoccerPlayerImageProps) => {
   return (
-    <StyleContainer>
-      <StyleTopAbsolute>{top}</StyleTopAbsolute>
-      <StyleBorder isMine={isMine} type={type}>
+    <S.Container>
+      <S.TopAbsolute>{top}</S.TopAbsolute>
+      <S.Border isMine={isMine} type={type}>
         <ImageWithFallback
           src={src}
           fallbackSrc={soccerImageDefaultSrc}
@@ -43,40 +47,52 @@ export const SoccerPlayerImage = ({
           blurDataURL={soccerImageDefaultSrc}
           loading="lazy"
         />
-      </StyleBorder>
-      <StyleBottomAbsolute>
+      </S.Border>
+      <S.CenterAbsolute>
+        {left}
+        {right}
+      </S.CenterAbsolute>
+      <S.BottomAbsolute>
         {bottomLeft}
         {bottomRight}
-      </StyleBottomAbsolute>
-    </StyleContainer>
+      </S.BottomAbsolute>
+    </S.Container>
   );
 };
 
-const StyleContainer = styled.div`
-  position: relative;
-`;
-
-const StyleBorder = styled.div<{ isMine: boolean; type: RadiusType }>`
-  position: relative;
-  width: fit-content;
-  border: ${({ theme, isMine }) =>
-    isMine
-      ? `1px solid ${theme.colors.green[600]}`
-      : `1px solid ${theme.colors.gray[600]}`};
-  border-radius: ${({ type }) => (type === 'circle' ? '50%' : null)};
-  overflow: hidden;
-`;
-
-const StyleTopAbsolute = styled.div`
-  position: absolute;
-  left: -30%;
-  z-index: 2;
-`;
-
-const StyleBottomAbsolute = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  position: absolute;
-  top: 85%;
-`;
+const S = {
+  Container: styled.div`
+    position: relative;
+  `,
+  Border: styled.div<{ isMine: boolean; type: RadiusType }>`
+    position: relative;
+    width: fit-content;
+    border: ${({ theme, isMine }) =>
+      isMine
+        ? `1px solid ${theme.colors.green[600]}`
+        : `1px solid ${theme.colors.gray[600]}`};
+    border-radius: ${({ type }) => (type === 'circle' ? '50%' : null)};
+    overflow: hidden;
+  `,
+  TopAbsolute: styled.div`
+    position: absolute;
+    left: -30%;
+    z-index: 2;
+  `,
+  CenterAbsolute: styled.div`
+    position: absolute;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    position: absolute;
+    top: 43%;
+    z-index: 2;
+  `,
+  BottomAbsolute: styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    position: absolute;
+    top: 85%;
+  `,
+};

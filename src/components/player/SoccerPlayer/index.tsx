@@ -12,10 +12,11 @@ import {
   POSITION_CATEGORY,
 } from 'src/constants/position';
 import * as S from './style';
+import { PlayerDTO } from 'src/types/DetailObject';
 
 export interface SoccerPlayerProps {
   isMine: boolean;
-  playerDto: IRenderBestPlayerDto;
+  playerDto: IRenderBestPlayerDto | PlayerDTO;
 }
 
 export const SoccerPlayer = ({ isMine, playerDto }: SoccerPlayerProps) => {

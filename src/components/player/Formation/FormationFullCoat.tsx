@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { POSITION_TABLE } from 'src/constants/position';
-import { MatchInfo } from 'src/types/DetailObject';
+import { MatchInfo, PlayerDTO } from 'src/types/DetailObject';
 import soccerCoatUrl from 'src/assets/png/soccer_coat.png';
 import { renderUpIntoDown } from 'src/style/keyframes';
 import { FormationHalfCoat } from 'src/components/player/Formation/FormationHalfCoat';
@@ -20,20 +20,21 @@ export const FormationFullCoat = ({
       ...{ spPosition: POSITION_TABLE[player.spPosition] },
     }));
   };
-  const getSpId = (idx: 0 | 1): { [key: string]: number } => {
+
+  const getPlayersBySpPositon = (idx: 0 | 1): { [key: string]: PlayerDTO } => {
     return getPlayers(idx).reduce(
-      (acc, cur) => ({ ...acc, ...{ [cur.spPosition]: cur.spId } }),
+      (acc, cur) => ({ ...acc, ...{ [cur.spPosition]: cur } }),
       {},
     );
   };
 
-  const searcherSpId = getSpId(0);
-  const opponentSpId = getSpId(1);
+  const searcherPlayers = getPlayersBySpPositon(0);
+  const opponentPlayers = getPlayersBySpPositon(1);
 
   return (
     <S.FlexWrap>
-      <FormationHalfCoat spIds={searcherSpId} />
-      <FormationHalfCoat spIds={opponentSpId} rotate={180} />
+      <FormationHalfCoat playerDto={searcherPlayers} />
+      <FormationHalfCoat rotate={180} playerDto={opponentPlayers} />
     </S.FlexWrap>
   );
 };
