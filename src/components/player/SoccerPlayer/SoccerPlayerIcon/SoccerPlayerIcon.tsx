@@ -1,7 +1,7 @@
 import {
   ImageWithFallback,
   ImageWithFallbackProps,
-} from 'src/components/ui/Image/ImageWithFallback';
+} from 'src/components/common/Image/ImageWithFallback';
 
 interface SoccerPlayerIconProps extends ImageWithFallbackProps {}
 

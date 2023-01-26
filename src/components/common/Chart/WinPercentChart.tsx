@@ -23,10 +23,12 @@ export const OddsChart = (props: Props) => {
   const odds = `${getWinPercent(props.data)}%`;
 
   return (
-    <StyleLayout>
+    <S.Layout>
       {props.top}
-      <DoughnutContainer>
-        <Absolute cutoutPercent={getOffset(options.cutout)}>{odds}</Absolute>
+      <S.DoughnutContainer>
+        <S.Absolute cutoutPercent={getOffset(options.cutout)}>
+          {odds}
+        </S.Absolute>
         <Doughnut
           options={options}
           data={{
@@ -45,35 +47,35 @@ export const OddsChart = (props: Props) => {
             ],
           }}
         />
-      </DoughnutContainer>
+      </S.DoughnutContainer>
       {props.bottom}
-    </StyleLayout>
+    </S.Layout>
   );
 };
 
-const StyleLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  text-align: center;
-`;
-
-const DoughnutContainer = styled.div`
-  position: relative;
-  width: 15rem;
-  height: 15rem;
-`;
-
-const Absolute = styled.div<{ cutoutPercent: string }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  overflow: hidden;
-  top: ${({ cutoutPercent }) => cutoutPercent};
-  right: ${({ cutoutPercent }) => cutoutPercent};
-  bottom: ${({ cutoutPercent }) => cutoutPercent};
-  left: ${({ cutoutPercent }) => cutoutPercent};
-  border-radius: 100%;
-  font-size: ${({ theme }) => theme.fontSizes.subTitle[24]};
-`;
+const S = {
+  Layout: styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  `,
+  DoughnutContainer: styled.div`
+    position: relative;
+    width: 15rem;
+    height: 15rem;
+  `,
+  Absolute: styled.div<{ cutoutPercent: string }>`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    overflow: hidden;
+    top: ${({ cutoutPercent }) => cutoutPercent};
+    right: ${({ cutoutPercent }) => cutoutPercent};
+    bottom: ${({ cutoutPercent }) => cutoutPercent};
+    left: ${({ cutoutPercent }) => cutoutPercent};
+    border-radius: 100%;
+    font-size: ${({ theme }) => theme.fontSizes.subTitle[24]};
+  `,
+};

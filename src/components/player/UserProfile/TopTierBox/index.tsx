@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
 import { useGetMatchDivisionMeta } from 'src/pages/api/hooks/useGetMetaQuery';
-import { ImageWithFallback } from 'src/components/ui/Image/ImageWithFallback';
+import { ImageWithFallback } from 'src/components/common/Image/ImageWithFallback';
 import { useCaseUserProfile } from 'src/useCases/useCaseUserProfile';
 
 import { IParamsNickName } from '..';

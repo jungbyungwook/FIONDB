@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { ImageWithFallback } from 'src/components/ui/Image/ImageWithFallback';
+import { ImageWithFallback } from 'src/components/common/Image/ImageWithFallback';
 import theme from 'src/style/theme';
 import { Badge } from './Badge';
 

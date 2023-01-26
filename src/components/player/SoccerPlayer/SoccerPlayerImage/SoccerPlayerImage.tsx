@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import {
   ImageWithFallback,
   ImageWithFallbackProps,
-} from 'src/components/ui/Image/ImageWithFallback';
+} from 'src/components/common/Image/ImageWithFallback';
 import { soccerImageDefaultSrc } from 'src/useCases/matchRecordCase';
 
 type RadiusType = 'circle' | 'square';

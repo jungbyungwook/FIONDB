@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import { ImageWithFallback } from 'src/components/ui/Image/ImageWithFallback';
+import { ImageWithFallback } from 'src/components/common/Image/ImageWithFallback';
 import { soccerImageDefaultSrc } from 'src/useCases/matchRecordCase';
 import ProfileBackground from 'src/assets/svg/profile_background.svg';
 import { useStatisticsMatch } from 'src/hooks/useStatisticsMatch';

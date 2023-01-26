@@ -1,4 +1,4 @@
-import { SoccerPlayer } from 'src/components/player/SoccerPlayer';
+import { SoccerPlayer } from 'src/components/player/SoccerPlayer/SoccerPlayer';
 import { POSITION_LOCATIONS } from 'src/constants/position';
 import { PlayerDTO } from 'src/types/DetailObject';
 import styled from 'styled-components';
@@ -73,9 +73,6 @@ const S = {
   ImageWrap: styled.div<{ rotate: number | undefined }>`
     width: 5rem;
     height: 5rem;
-    /* border: ${({ rotate }) =>
-      rotate ? '1px solid silver' : '1px solid gold'}; */
     border-radius: 50%;
-    /* overflow: hidden; */
   `,
 };
