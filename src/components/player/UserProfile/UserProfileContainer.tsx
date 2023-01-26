@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-import { UserTopTierBox } from './TopTierBox';
-import { UserProfileBox } from './ProfileBox';
+import { UserTopTierBox } from './Box/TopTierBox';
+import { UserProfileBox } from './Box/ProfileBox';
 import { ParsedUrlQuery } from 'querystring';
-import { UserChartBox } from './UserChartBox';
+import { UserChartBox } from './Box/UserChartBox';
 import { RefetchButton } from 'src/components/common/Button/RefetchButton';
 
 export interface IParamsNickName extends ParsedUrlQuery {
@@ -46,10 +46,3 @@ const S = {
     align-self: ${({ alignSelf }) => alignSelf && alignSelf};
   `,
 };
-
-// export const Flex = styled.div`
-//   display: flex;
-//   align-items: flex-end;
-//   gap: 3rem;
-//   font-size: ${({ theme }) => theme.fontSizes.subTitle[18]};
-// `;

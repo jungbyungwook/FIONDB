@@ -7,7 +7,7 @@ import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import type { DehydratedState } from '@tanstack/react-query';
 
-import { Header, Footer } from '@components';
+import { Footer, Header } from 'src/components/common';
 import { GlobalStyles } from 'src/style/global';
 import theme from 'src/style/theme';
 import 'public/fonts/style.css';

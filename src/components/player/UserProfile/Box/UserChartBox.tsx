@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { OddsChart } from 'src/components/common/Chart/WinPercentChart';
 import { useStatisticsMatch } from 'src/hooks/useStatisticsMatch';
 import { useCaseUserProfile } from 'src/useCases/useCaseUserProfile';
-import { IParamsNickName } from '.';
+import { IParamsNickName } from '../UserProfileContainer';
 
 export const UserChartBox = () => {
   const router = useRouter();

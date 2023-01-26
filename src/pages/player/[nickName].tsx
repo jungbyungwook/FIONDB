@@ -3,9 +3,8 @@ import styled from 'styled-components';
 import { ParsedUrlQuery } from 'querystring';
 import { dehydrate, QueryClient } from 'react-query';
 
-import { Layout } from 'src/components/Layout';
 import { MatchResultBox } from 'src/components/player/MatchResultBox';
-import { UserProfileContainer } from 'src/components/player/UserProfile';
+import { UserProfileContainer } from 'src/components/player/UserProfile/UserProfileContainer';
 import {
   useMatchInfiniteQuery,
   usePrefetchMatchInfiniteQuery,
@@ -22,6 +21,7 @@ import {
   useGetSoccerPlayersMeta,
 } from 'src/pages/api/hooks/useGetMetaQuery';
 import { useIntersectionObserver } from 'src/pages/api/hooks/useIntersectionObserver';
+import { Layout } from 'src/components/common/Layout';
 
 type PagePropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 const Page = ({ nickName }: PagePropsType) => {
@@ -43,14 +43,14 @@ const Page = ({ nickName }: PagePropsType) => {
   ) {
     return (
       <Layout>
-        <StyleScetion>
+        <S.Scetion>
           <div>
             <UserProfileContainer
               accessId={userProfileQuery.data?.accessId}
               nickName={nickName}
             />
           </div>
-          <StyleUl>
+          <S.Ul>
             {matchListInfiniteQuery?.data?.pages.map((page) =>
               page.currentPageData.map((data) => (
                 <li key={data.matchId}>
@@ -58,13 +58,13 @@ const Page = ({ nickName }: PagePropsType) => {
                 </li>
               )),
             )}
-          </StyleUl>
-          <StyleBottomWrap>
+          </S.Ul>
+          <S.BottomWrap>
             <div ref={triggerRef}>
               {matchListInfiniteQuery?.isFetching ? 'loading' : ''}
             </div>
-          </StyleBottomWrap>
-        </StyleScetion>
+          </S.BottomWrap>
+        </S.Scetion>
       </Layout>
     );
   }
@@ -115,25 +115,25 @@ export const getServerSideProps: GetServerSideProps<IParams> = async (
   };
 };
 
-export const StyleScetion = styled.section`
-  width: 120rem;
-  margin: 0 auto;
-
-  @media screen {
-  }
-`;
-
-export const StyleUl = styled.ul`
-  display: grid;
-  padding: 0;
-  grid-row-gap: 0.8rem;
-  list-style: none;
-`;
-
-export const StyleBottomWrap = styled.div`
-  width: 100%;
-  text-align: center;
-  margin: 5rem 0;
-`;
-
 export default Page;
+
+export const S = {
+  Scetion: styled.section`
+    width: 120rem;
+    margin: 0 auto;
+
+    @media screen {
+    }
+  `,
+  Ul: styled.ul`
+    display: grid;
+    padding: 0;
+    grid-row-gap: 0.8rem;
+    list-style: none;
+  `,
+  BottomWrap: styled.div`
+    width: 100%;
+    text-align: center;
+    margin: 5rem 0;
+  `,
+};

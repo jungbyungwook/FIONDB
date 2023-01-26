@@ -1,11 +1,11 @@
+import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
 import { useGetMatchDivisionMeta } from 'src/pages/api/hooks/useGetMetaQuery';
 import { ImageWithFallback } from 'src/components/common/Image/ImageWithFallback';
 import { useCaseUserProfile } from 'src/useCases/useCaseUserProfile';
 
-import { IParamsNickName } from '..';
-import * as S from './style';
+import { IParamsNickName } from '../UserProfileContainer';
 
 export const UserTopTierBox = () => {
   const router = useRouter();
@@ -68,4 +68,28 @@ export const UserTopTierBox = () => {
   }
 
   return null;
+};
+
+const S = {
+  TopTierWrap: styled.div`
+    text-align: center;
+  `,
+  Flex: styled.div`
+    display: flex;
+    align-items: flex-end;
+    gap: 3rem;
+    font-size: ${({ theme }) => theme.fontSizes.subTitle[18]};
+  `,
+  FlexItem: styled.div<{ alignSelf?: 'start' | 'center' | 'end' }>`
+    align-self: ${({ alignSelf }) => alignSelf && alignSelf};
+  `,
+  TopTierTitle: styled.div`
+    margin-bottom: 1.2rem;
+    font-size: ${({ theme }) => theme.fontSizes.content[16]};
+  `,
+  TopTierMode: styled.div`
+    height: 30%;
+    margin-top: 1.2rem;
+    font-size: ${({ theme }) => theme.fontSizes.subTitle[20]};
+  `,
 };

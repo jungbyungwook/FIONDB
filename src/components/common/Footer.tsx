@@ -1,6 +1,4 @@
-import Image from 'next/image';
 import React from 'react';
-import type { FC } from 'react';
 import styled from 'styled-components';
 
 const Footer = () => {
@@ -20,9 +18,6 @@ const Footerwrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 200px;
-  /* position: absolute; */
-  /* bottom: 0; */
-  /* left: 0; */
   p {
     font-size: 16px;
     color: rgba(255, 255, 255, 0.8);

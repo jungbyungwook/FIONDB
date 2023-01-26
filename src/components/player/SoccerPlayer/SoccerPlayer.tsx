@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { IRenderBestPlayerDto } from 'src/useCases/changeServerDataIntoRenderData';
 import { GradeBadge } from 'src/components/common/Badge/GradeBadge';
 import { MvpBadge } from 'src/components/common/Badge/MvpBadge';
-import { SoccerPlayerImage } from 'src/components/player/SoccerPlayer/SoccerPlayerImage/SoccerPlayerImage';
-import { SoccerPlayerName } from 'src/components/player/SoccerPlayer/SoccerPlayerName/SoccerPlayerName';
+import { SoccerPlayerImage } from 'src/components/player/SoccerPlayer/SoccerPlayerImage';
+import { SoccerPlayerName } from 'src/components/player/SoccerPlayer/SoccerPlayerName';
 import { SeasonBadge } from 'src/components/common/Badge/SeasonBadge';
 import { useGetSeasonIdMeta } from 'src/hooks/useGetMetaQuery';
 import {
