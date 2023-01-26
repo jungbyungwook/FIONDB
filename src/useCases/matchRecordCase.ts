@@ -7,8 +7,8 @@ import { MatchInfo } from 'src/types/DetailObject';
 
 const getMatchPossession = (data: MatchInfo[]) => {
   const defaultPossessions = {
-    leftWin: [80, 20],
-    rightWin: [20, 80],
+    leftWin: [70, 30],
+    rightWin: [30, 70],
   };
 
   if (data.length === 1) return defaultPossessions.leftWin;

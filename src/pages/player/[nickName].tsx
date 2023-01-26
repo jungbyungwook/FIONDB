@@ -119,7 +119,7 @@ export default Page;
 
 export const S = {
   Scetion: styled.section`
-    width: 120rem;
+    width: 108rem;
     margin: 0 auto;
 
     @media screen {

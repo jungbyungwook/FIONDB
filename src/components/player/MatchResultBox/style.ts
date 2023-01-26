@@ -1,10 +1,27 @@
 import styled from 'styled-components';
 import { renderDownIntoUp } from 'src/style/keyframes';
 
+export const RelativeContainer = styled.div`
+  position: relative;
+  overflow: hidden;
+`;
 export const StyleSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+`;
+
+export const StyleResultBar = styled.div<{
+  isWin: boolean;
+}>`
+  position: absolute;
+  width: 0.8rem;
+  height: 100%;
+  z-index: 5;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  background-color: ${({ theme, isWin }) =>
+    isWin ? theme.colors.green.fionGreen : theme.colors.gray[600]};
 `;
 
 export const StyleWrap = styled.div`
@@ -27,14 +44,6 @@ export const StyleContainer = styled.div<{
   background-color: ${({ theme, backgroundColor }) =>
     backgroundColor ? backgroundColor : theme.colors.gray[900]};
   animation: ${renderDownIntoUp} 0.5s;
-`;
-
-export const StyleResultBar = styled.div<{
-  isWin: boolean;
-}>`
-  width: 0.8rem;
-  background-color: ${({ theme, isWin }) =>
-    isWin ? theme.colors.green.fionGreen : theme.colors.gray[600]};
 `;
 
 export const StyleTop = styled.div`

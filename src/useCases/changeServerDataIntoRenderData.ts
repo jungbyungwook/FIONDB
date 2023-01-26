@@ -15,8 +15,6 @@ export interface IRenderPlayerDto {
 }
 
 export interface IRenderBestPlayerDto {
-  id: number;
-  name: string;
   spPosition: string;
   spId: number;
   spGrade: number;
@@ -46,8 +44,6 @@ export const changeServerDataIntoRenderData = (
       // 🟡: 유저의 닉네임이 들어갈만한 최소 공간(점유율)
       possession: 70,
       bestPlayer: {
-        id: 0,
-        name: '',
         spPosition: '',
         spId: 0,
         spGrade: 0,
@@ -60,8 +56,6 @@ export const changeServerDataIntoRenderData = (
       // 🟡: 유저의 닉네임이 들어갈만한 최소 공간(점유율)
       possession: 30,
       bestPlayer: {
-        id: 0,
-        name: '',
         spPosition: '',
         spId: 0,
         spGrade: 0,

@@ -33,8 +33,12 @@ export const FormationFullCoat = ({
 
   return (
     <S.FlexWrap>
-      <FormationHalfCoat playerDto={searcherPlayers} />
-      <FormationHalfCoat rotate={180} playerDto={opponentPlayers} />
+      <FormationHalfCoat isMine playerDto={searcherPlayers} />
+      <FormationHalfCoat
+        isMine={false}
+        rotate={180}
+        playerDto={opponentPlayers}
+      />
     </S.FlexWrap>
   );
 };

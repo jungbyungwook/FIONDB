@@ -4,11 +4,16 @@ import { PlayerDTO } from 'src/types/DetailObject';
 import styled from 'styled-components';
 
 interface ForMationBoxProps {
+  isMine: boolean;
   playerDto: { [key: string]: PlayerDTO };
   rotate?: number;
 }
 
-export const FormationHalfCoat = ({ playerDto, rotate }: ForMationBoxProps) => {
+export const FormationHalfCoat = ({
+  isMine,
+  playerDto,
+  rotate,
+}: ForMationBoxProps) => {
   const positionsEntries = Object.entries(POSITION_LOCATIONS);
   const positionsList = rotate
     ? [...positionsEntries].reverse()
@@ -29,8 +34,10 @@ export const FormationHalfCoat = ({ playerDto, rotate }: ForMationBoxProps) => {
                 >
                   <S.ImageWrap rotate={rotate}>
                     <SoccerPlayer
+                      inFormation
                       playerDto={playerDto[position]}
-                      isMine={false}
+                      isMine={isMine}
+                      topOption={false}
                     />
                   </S.ImageWrap>
                 </S.GridItem>
@@ -46,7 +53,7 @@ export const FormationHalfCoat = ({ playerDto, rotate }: ForMationBoxProps) => {
 const S = {
   FormationWrap: styled.div`
     width: 50%;
-    padding: 5rem 1rem;
+    padding: 2rem 1rem;
   `,
   GridContainer: styled.div<{ type: 'column' | 'row'; rotate?: number }>`
     display: grid;
@@ -71,8 +78,9 @@ const S = {
     font-size: 1.2rem;
   `,
   ImageWrap: styled.div<{ rotate: number | undefined }>`
-    width: 5rem;
-    height: 5rem;
+    width: 6rem;
+    height: 6rem;
     border-radius: 50%;
+    margin-bottom: 50%;
   `,
 };

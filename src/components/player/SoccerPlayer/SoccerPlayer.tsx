@@ -16,10 +16,19 @@ import { PlayerDTO } from 'src/types/DetailObject';
 
 export interface SoccerPlayerProps {
   isMine: boolean;
+  inFormation: boolean;
   playerDto: IRenderBestPlayerDto | PlayerDTO;
+  topOption?: boolean;
+  contentOption?: boolean;
 }
 
-export const SoccerPlayer = ({ isMine, playerDto }: SoccerPlayerProps) => {
+export const SoccerPlayer = ({
+  isMine,
+  inFormation,
+  playerDto,
+  topOption = true,
+  contentOption = true,
+}: SoccerPlayerProps) => {
   const getSrc = (spId: number) => {
     return `https://fo4.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${spId}.png`;
   };
@@ -46,16 +55,19 @@ export const SoccerPlayer = ({ isMine, playerDto }: SoccerPlayerProps) => {
     <S.Container>
       <SoccerPlayerImage
         src={getSrc(playerDto.spId)}
-        top={<MvpBadge isMine={isMine} />}
+        top={topOption && <MvpBadge isMine={isMine} />}
         bottomLeft={<SeasonBadge seasonImageSrc={seasonDto?.seasonImg} />}
         bottomRight={<GradeBadge spGrade={playerDto?.spGrade} />}
+        isMine={isMine}
       />
-      <S.Content>
-        <S.Position position={positionCategory}>
-          {playerDto.spPosition}
-        </S.Position>
-        <SoccerPlayerName spId={playerDto.spId} />
-      </S.Content>
+      {contentOption && (
+        <S.Content inFormation={inFormation}>
+          <S.Position position={positionCategory} inFormation={inFormation}>
+            {playerDto.spPosition}
+          </S.Position>
+          <SoccerPlayerName spId={playerDto.spId} />
+        </S.Content>
+      )}
     </S.Container>
   );
 };
@@ -69,19 +81,25 @@ const S = {
     gap: 1.8rem;
     text-align: center;
   `,
-  Content: styled.div`
+  Content: styled.div<{ inFormation?: boolean }>`
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
     margin: 0 auto;
-    font-size: 1.2rem;
+    & > * {
+      font-size: ${({ theme, inFormation }) =>
+        inFormation ? '1rem' : theme.fontSizes.content[12]};
+    }
+
     font-weight: 400;
   `,
   Position: styled.div<{
     position?: PositionCategoryKeyType;
+    inFormation?: boolean;
   }>`
-    font-size: ${({ theme }) => theme.fontSizes.content[14]};
+    font-size: ${({ theme, inFormation }) =>
+      inFormation ? '1rem' : theme.fontSizes.content[14]};
     color: ${({ theme, position }) =>
       position === 'fw'
         ? theme.colors.position.fw
@@ -97,3 +115,5 @@ const S = {
     left: -28%;
   `,
 };
+
+export const SoccerPlayerInFormation = () => {};
