@@ -19,7 +19,7 @@ const Header = () => {
                   width: '236.95px',
                   height: '80px',
                 }}
-                src="/images/FION.DB.png"
+                src="/images/logo/FION.DB.png"
                 alt=""
               />
             </a>

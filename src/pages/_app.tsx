@@ -10,6 +10,7 @@ import type { DehydratedState } from '@tanstack/react-query';
 import { Header, Footer } from '@components';
 import { GlobalStyles } from 'src/style/global';
 import theme from 'src/style/theme';
+import 'public/fonts/style.css';
 
 function MyApp({
   Component,

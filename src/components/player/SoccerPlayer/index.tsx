@@ -11,8 +11,8 @@ import {
   PositionCategoryKeyType,
   POSITION_CATEGORY,
 } from 'src/constants/position';
-import * as S from './style';
 import { PlayerDTO } from 'src/types/DetailObject';
+import * as S from './style';
 
 export interface SoccerPlayerProps {
   isMine: boolean;

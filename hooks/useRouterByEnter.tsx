@@ -8,5 +8,10 @@ export const useRouterByEnter = (baseUrl: string, variable: string[]) => {
   const routerPushOnKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') router.push(fullUrl);
   };
-  return { routerPushOnKeyDown };
+
+  const routerClinkOnButton = (e: any) => {
+    router.push(fullUrl);
+  };
+
+  return { routerPushOnKeyDown, routerClinkOnButton };
 };
