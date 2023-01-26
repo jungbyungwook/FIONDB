@@ -16,7 +16,7 @@ export const BallPossessionBar = ({ playerDto, isMine }: Props) => {
       style={{
         width: playerDto.possession,
         backgroundColor: isMine
-          ? theme.colors.green[800]
+          ? theme.colors.gray[800]
           : theme.colors.gray[700],
       }}
       left={left}

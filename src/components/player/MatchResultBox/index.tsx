@@ -28,7 +28,7 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
 
   return (
     <S.RelativeContainer>
-      <S.StyleResultBar isWin={sortedData.matchResult === '승'} />
+      <S.StyleResultBar matchResult={sortedData.matchResult} />
       <S.StyleSection>
         <S.StyleWrap>
           <S.StyleContainer>

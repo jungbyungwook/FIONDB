@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { renderDownIntoUp } from 'src/style/keyframes';
+import { MatchResultType } from 'src/types/DetailObject';
+import theme from 'src/style/theme';
 
 export const RelativeContainer = styled.div`
   position: relative;
@@ -12,7 +14,7 @@ export const StyleSection = styled.div`
 `;
 
 export const StyleResultBar = styled.div<{
-  isWin: boolean;
+  matchResult: MatchResultType;
 }>`
   position: absolute;
   width: 0.8rem;
@@ -20,8 +22,12 @@ export const StyleResultBar = styled.div<{
   z-index: 5;
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
-  background-color: ${({ theme, isWin }) =>
-    isWin ? theme.colors.green.fionGreen : theme.colors.gray[600]};
+  background-color: ${({ theme, matchResult }) =>
+    matchResult === '승'
+      ? theme.colors.green.fionGreen
+      : matchResult === '무'
+      ? theme.colors.gray[600]
+      : theme.colors.position.fw};
 `;
 
 export const StyleWrap = styled.div`
