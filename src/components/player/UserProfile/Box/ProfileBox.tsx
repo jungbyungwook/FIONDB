@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import { ImageWithFallback } from 'src/components/common/Image/ImageWithFallback';
 import { soccerImageDefaultSrc } from 'src/useCases/matchRecordCase';
 import ProfileBackground from 'src/assets/svg/profile_background.svg';
-import { useStatisticsMatch } from 'src/hooks/useStatisticsMatch';
 import { useCaseUserProfile } from 'src/useCases/useCaseUserProfile';
 import { getSoccerPlayerImageSrc } from 'src/utils/getSoccerPlayerImageSrc';
 import type { IParamsNickName } from '../UserProfileContainer';
+import { useCaseStatisticsMatch } from 'src/useCases/useCaseStatisticsMatch';
 
 export const UserProfileBox = () => {
   const router = useRouter();
@@ -15,7 +15,7 @@ export const UserProfileBox = () => {
 
   const { useGetUserProfileQuery } = useCaseUserProfile();
   const { data: userProfileData } = useGetUserProfileQuery(nickName);
-  const { searcherMostPlayerSpId } = useStatisticsMatch(nickName);
+  const { searcherMostPlayerSpId } = useCaseStatisticsMatch(nickName);
 
   return (
     <S.UserProfileBox>

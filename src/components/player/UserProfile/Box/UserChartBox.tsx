@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
 import { OddsChart } from 'src/components/common/Chart/WinPercentChart';
-import { useStatisticsMatch } from 'src/hooks/useStatisticsMatch';
+import { useCaseStatisticsMatch } from 'src/useCases/useCaseStatisticsMatch';
 import { useCaseUserProfile } from 'src/useCases/useCaseUserProfile';
 import { IParamsNickName } from '../UserProfileContainer';
 
@@ -11,7 +11,7 @@ export const UserChartBox = () => {
 
   const userProfileQuery = useCaseUserProfile();
   const { data } = userProfileQuery.useGetUserProfileQuery(nickName);
-  const { getOdds } = useStatisticsMatch(nickName);
+  const { getOdds } = useCaseStatisticsMatch(nickName);
 
   const [win, tie, lose] = getOdds();
 

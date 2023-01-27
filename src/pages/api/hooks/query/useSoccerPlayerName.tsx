@@ -5,8 +5,6 @@ import { getSoccerPlayerNameBySpId } from 'src/useCases/getSoccerPlayerNameBySpI
 
 export const useSoccerPlayerName = (spId: number) => {
   const queryClient = useQueryClient();
-  // const queryClient = new QueryClient();
-  // const
   const data = queryClient.getQueryData(
     metaQueryKey.soccerPlayersMeta,
   ) as IMetaSpId[];

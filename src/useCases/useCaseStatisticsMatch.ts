@@ -4,7 +4,7 @@ import { pickBestPlayer } from 'src/useCases/matchRecordCase';
 import { useCaseMatchSearch } from 'src/useCases/useCaseMatchSearch';
 import { useCaseUserProfile } from 'src/useCases/useCaseUserProfile';
 
-export const useStatisticsMatch = (nickName: string) => {
+export const useCaseStatisticsMatch = (nickName: string) => {
   const [searcherMostPlayerSpId, setSearcherMostPlayerSpId] = useState(0);
 
   const userProfileCase = useCaseUserProfile();

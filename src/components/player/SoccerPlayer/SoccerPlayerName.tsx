@@ -1,4 +1,4 @@
-import { useSoccerPlayerName } from 'src/hooks/query/useSoccerPlayerName';
+import { useSoccerPlayerName } from 'src/pages/api/hooks/query/useSoccerPlayerName';
 
 export const SoccerPlayerName = ({ spId }: { spId: number }) => {
   const name = useSoccerPlayerName(spId);

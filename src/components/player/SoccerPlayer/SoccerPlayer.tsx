@@ -7,7 +7,7 @@ import { MvpBadge } from 'src/components/common/Badge/MvpBadge';
 import { SoccerPlayerImage } from 'src/components/player/SoccerPlayer/SoccerPlayerImage';
 import { SoccerPlayerName } from 'src/components/player/SoccerPlayer/SoccerPlayerName';
 import { SeasonBadge } from 'src/components/common/Badge/SeasonBadge';
-import { useGetSeasonIdMeta } from 'src/hooks/useGetMetaQuery';
+import { useGetSeasonIdMeta } from 'src/pages/api/hooks/useGetMetaQuery';
 import {
   PositionCategoryKeyType,
   POSITION_CATEGORY,

@@ -5,6 +5,7 @@ export const metaQueryKey = {
   matchTypeMeta: ['matchTypeMeta'],
   matchDivisionMeta: ['matchDivisionMeta'],
   soccerPlayersMeta: ['soccerPlayerMeta'],
+  seasonIdMeta: ['seasonIdMeta'],
 };
 
 export const metaQueryFunction = {
@@ -32,4 +33,8 @@ export const useGetSoccerPlayersMeta = () => {
     metaQueryKey.soccerPlayersMeta,
     () => metaQueryFunction.soccerPlayersMeta,
   );
+};
+
+export const useGetSeasonIdMeta = () => {
+  return useQuery(metaQueryKey.seasonIdMeta, () => metaAPI.getSeasonIdMeta());
 };
