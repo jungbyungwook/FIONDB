@@ -53,9 +53,11 @@ const Page = ({ nickName }: PagePropsType) => {
           <S.Ul>
             {matchListInfiniteQuery?.data?.pages.map((page) =>
               page.currentPageData.map((data) => (
-                <li key={data.matchId}>
-                  <MatchResultBox matchDetailData={data} nickName={nickName} />
-                </li>
+                <MatchResultBox
+                  key={data.matchId}
+                  matchDetailData={data}
+                  nickName={nickName}
+                />
               )),
             )}
           </S.Ul>

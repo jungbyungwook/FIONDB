@@ -8,7 +8,7 @@ import {
 
 type MatchResultProps = { matchResult: MatchResultType };
 
-export const RelativeContainer = styled.div`
+export const RelativeContainer = styled.li`
   position: relative;
   overflow: hidden;
 `;

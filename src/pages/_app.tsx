@@ -39,5 +39,5 @@ function MyApp({
 export default MyApp;
 
 const BackgroundWrapper = styled.div`
-  background-color: gray;
+  background-color: ${({ theme }) => theme.colors.gray[800]};
 `;

@@ -26,7 +26,7 @@ export const FormationSubPlayers = ({ matchDetailData }: Props) => {
   return (
     <S.Container>
       {mySubPlayers.map((subPlayer) => (
-        <S.ImageWrap rotate={undefined}>
+        <S.ImageWrap key={subPlayer.spId} rotate={undefined}>
           <SoccerPlayer
             playerDto={subPlayer}
             topOption={false}
