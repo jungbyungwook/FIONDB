@@ -63,7 +63,7 @@ const S = {
   `,
   ImageWrap: styled.div`
     position: relative;
-    overflow: auto;
+    overflow: hidden;
   `,
   BackgroundImageWrap: styled.div`
     position: absolute;
