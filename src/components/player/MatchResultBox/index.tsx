@@ -5,14 +5,13 @@ import {
   getDateByDateString,
   getMatchStringByMatchId,
 } from 'src/useCases/matchRecordCase';
-import { changeServerDataIntoRenderData } from 'src/useCases/changeServerDataIntoRenderData';
 import { SoccerPlayer } from 'src/components/player/SoccerPlayer/SoccerPlayer';
 import { BallPossessionBar } from 'src/components/common/Bar/BallPossessionBar';
 import { MATCH_RESULT_TEXT } from 'src/constants/matchResultText';
 import ArrowIcon from 'src/assets/svg/arrow.svg';
-
-import { FormationBoard } from '../Formation/FormationBoard';
-import { FormationFullCoat } from '../Formation/FormationFullCoat';
+import { changeServerDataIntoRenderData } from 'src/util/changeServerDataIntoRenderData';
+import { FormationBoard } from 'src/components/player/Formation/FormationBoard';
+import { FormationFullCoat } from 'src/components/player/Formation/FormationFullCoat';
 import * as S from './style';
 
 interface Props {

@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import styled from 'styled-components';
 
-import { IRenderBestPlayerDto } from 'src/useCases/changeServerDataIntoRenderData';
 import { GradeBadge } from 'src/components/common/Badge/GradeBadge';
 import { MvpBadge } from 'src/components/common/Badge/MvpBadge';
 import { SoccerPlayerImage } from 'src/components/player/SoccerPlayer/SoccerPlayerImage';
@@ -13,6 +12,7 @@ import {
 } from 'src/constants/position';
 import { PlayerDTO } from 'src/types/DetailObject';
 import { useCaseGetMetaData } from 'src/useCases/useCaseGetMetaData';
+import { IRenderBestPlayerDto } from 'src/util/changeServerDataIntoRenderData';
 
 export interface SoccerPlayerProps {
   isMine: boolean;

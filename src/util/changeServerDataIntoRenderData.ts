@@ -5,7 +5,10 @@ import type {
   MatchResultType,
 } from 'src/types/DetailObject';
 import { changeDateUtil } from 'src/util/chageDate';
-import { getMatchPossession, pickBestPlayer } from './matchRecordCase';
+import {
+  getMatchPossession,
+  pickBestPlayer,
+} from '../useCases/matchRecordCase';
 
 export interface IRenderPlayerDto {
   nickName: string;

@@ -1,5 +1,5 @@
 import theme from 'src/style/theme';
-import { IRenderPlayerDto } from 'src/useCases/changeServerDataIntoRenderData';
+import { IRenderPlayerDto } from 'src/util/changeServerDataIntoRenderData';
 import { PercentBarCommon } from './PercentBarCommon';
 
 interface Props {

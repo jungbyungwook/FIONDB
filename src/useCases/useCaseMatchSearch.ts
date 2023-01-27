@@ -3,7 +3,7 @@ import { QueryClient, useInfiniteQuery, useQueryClient } from 'react-query';
 import { matchAPI } from 'src/pages/api/match';
 import type { AccessId, IMetaSpId } from 'src/pages/api/type';
 import { metaQueryKey } from 'src/useCases/useCaseGetMetaData';
-import { getSoccerPlayerNameBySpId } from './getSoccerPlayerNameBySpId';
+import { getSoccerPlayerNameBySpId } from '../util/getSoccerPlayerNameBySpId';
 
 export const useCaseMatchSearch = () => {
   const useRefetchMatchList = (accessId: string) => {
