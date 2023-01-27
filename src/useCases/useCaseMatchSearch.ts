@@ -1,8 +1,6 @@
-// 검색시 필요한 query를 모두 넣어주자.
-
 import { QueryClient, useInfiniteQuery, useQueryClient } from 'react-query';
 
-import { matchAPI } from 'src/pages/api/player';
+import { matchAPI } from 'src/pages/api/player/match';
 import type { AccessId, IMetaSpId } from 'src/pages/api/player/type';
 import { metaQueryKey } from 'src/useCases/useCaseGetMetaData';
 import { getSoccerPlayerNameBySpId } from './getSoccerPlayerNameBySpId';

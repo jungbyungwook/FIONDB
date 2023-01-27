@@ -29,9 +29,6 @@ export const POSITION_CATEGORY: Record<PositionCategoryKeyType, string[]> = {
   ].filter((position) => position),
 };
 
-// export type PositionCategorType = typeof POSITION_CATEGORY;
-// export type PositionCategoryKeyType = keyof PositionCategorType;
-
 export const POSITION_TABLE: { [key: number]: string } = {
   0: 'GK',
   1: 'SW',

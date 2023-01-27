@@ -5,9 +5,9 @@ import { ImageWithFallback } from 'src/components/common/Image/ImageWithFallback
 import { soccerImageDefaultSrc } from 'src/useCases/matchRecordCase';
 import ProfileBackground from 'src/assets/svg/profile_background.svg';
 import { useCaseUserProfile } from 'src/useCases/useCaseUserProfile';
-import { getSoccerPlayerImageSrc } from 'src/utils/getSoccerPlayerImageSrc';
 import type { IParamsNickName } from '../UserProfileContainer';
 import { useCaseStatisticsMatch } from 'src/useCases/useCaseStatisticsMatch';
+import { getSoccerPlayerImageSrc } from 'src/util/getSoccerPlayerImageSrc';
 
 export const UserProfileBox = () => {
   const router = useRouter();

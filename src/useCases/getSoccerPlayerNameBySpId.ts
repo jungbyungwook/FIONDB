@@ -1,5 +1,5 @@
 import { IMetaSpId } from 'src/pages/api/player/type';
-import { binarySearch } from 'util/search';
+import { binarySearch } from 'src/util/search';
 
 export const getSoccerPlayerNameBySpId = (spId: number, data: IMetaSpId[]) => {
   if (!data) return;

@@ -4,7 +4,7 @@ import type {
   MatchInfo,
   MatchResultType,
 } from 'src/types/DetailObject';
-import { changeDateUtil } from 'util/chageDate';
+import { changeDateUtil } from 'src/util/chageDate';
 import { getMatchPossession, pickBestPlayer } from './matchRecordCase';
 
 export interface IRenderPlayerDto {

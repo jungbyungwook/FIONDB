@@ -1,7 +1,7 @@
-import { metaAPI } from 'src/pages/api/player';
-import { changeDateUtil } from 'util/chageDate';
+import { changeDateUtil } from 'src/util/chageDate';
 import { MatchInfo } from 'src/types/DetailObject';
 import { matchMetaData } from 'src/constants/matchMeta';
+import { metaAPI } from 'src/pages/api/player/meta';
 
 // 몰수패인 경우 패자의 possession이 0으로 나온는 문제를 해결
 // default값을 20으로 두어
