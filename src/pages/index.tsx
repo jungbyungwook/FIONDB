@@ -5,8 +5,8 @@ import Image from 'next/image';
 import styled from 'styled-components';
 
 import { Input } from 'src/components/common/Input/Input';
-import { useRouterByEnter } from 'hooks/useRouterByEnter';
 import { Layout } from 'src/components/common/Layout';
+import { useRouterByEnter } from 'src/hooks/useRouterByEnter';
 
 const Home: NextPage = () => {
   const [nickName, setNickName] = useState('');
