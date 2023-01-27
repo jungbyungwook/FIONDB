@@ -1,4 +1,4 @@
-import { AccessId, MatchId } from 'src/pages/api/player/type';
+import type { AccessId, MatchId } from 'src/pages/api/type';
 
 export const baseURL = {
   user: {

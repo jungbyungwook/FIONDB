@@ -1,6 +1,6 @@
 import { useQuery, QueryClient } from 'react-query';
 
-import { AccessId } from 'src/pages/api/player/type';
+import { AccessId } from 'src/pages/api/type';
 import { userAPI } from 'src/pages/api/user';
 
 export interface IUserProfile {

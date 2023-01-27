@@ -1,6 +1,7 @@
 import { api } from 'src/pages/api';
-import { baseURL } from 'src/pages/api/player/url';
-import type { MatchId, AccessId } from 'src/pages/api/player/type';
+import { MatchId, AccessId } from 'src/pages/api/type';
+import { baseURL } from 'src/pages/api/url';
+
 import type { IMatchDetailData } from 'src/types/DetailObject';
 
 export const matchAPI = {

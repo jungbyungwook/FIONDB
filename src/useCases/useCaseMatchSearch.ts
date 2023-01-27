@@ -1,7 +1,7 @@
 import { QueryClient, useInfiniteQuery, useQueryClient } from 'react-query';
 
-import { matchAPI } from 'src/pages/api/player/match';
-import type { AccessId, IMetaSpId } from 'src/pages/api/player/type';
+import { matchAPI } from 'src/pages/api/match';
+import type { AccessId, IMetaSpId } from 'src/pages/api/type';
 import { metaQueryKey } from 'src/useCases/useCaseGetMetaData';
 import { getSoccerPlayerNameBySpId } from './getSoccerPlayerNameBySpId';
 

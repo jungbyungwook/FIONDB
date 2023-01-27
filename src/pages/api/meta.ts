@@ -1,12 +1,13 @@
 import { api } from 'src/pages/api';
-import { baseURL } from 'src/pages/api/player/url';
+
 import type { AxiosResponse } from 'axios';
 import type {
   IMetaSpId,
   IMetaMatchType,
   IMetaDivision,
   IMetaSeasonId,
-} from 'src/pages/api/player/type';
+} from 'src/pages/api/type';
+import { baseURL } from 'src/pages/api/url';
 
 export const metaAPI = {
   getSoccerPlayerMeta: (): Promise<AxiosResponse<IMetaSpId[]>> => {

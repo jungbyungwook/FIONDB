@@ -1,11 +1,7 @@
 import { api } from 'src/pages/api';
-import { baseURL } from 'src/pages/api/player/url';
+import type { AccessId, IMaxDivision, NickName } from 'src/pages/api/type';
+import { baseURL } from 'src/pages/api/url';
 import { IUserProfile } from 'src/useCases/useCaseUserProfile';
-import type {
-  AccessId,
-  IMaxDivision,
-  NickName,
-} from 'src/pages/api/player/type';
 
 export const userAPI = {
   getUserProfile: async (nickName: NickName): Promise<IUserProfile> => {

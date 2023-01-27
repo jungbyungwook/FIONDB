@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { metaAPI } from 'src/pages/api/player/meta';
+import { metaAPI } from 'src/pages/api/meta';
 
 export const metaQueryKey = {
   matchTypeMeta: ['matchTypeMeta'],
