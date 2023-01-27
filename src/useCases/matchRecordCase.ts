@@ -1,6 +1,7 @@
 import { metaAPI } from 'src/pages/api/player';
 import { changeDateUtil } from 'util/chageDate';
 import { MatchInfo } from 'src/types/DetailObject';
+import { matchMetaData } from 'src/constants/matchMeta';
 
 // 몰수패인 경우 패자의 possession이 0으로 나온는 문제를 해결
 // default값을 20으로 두어
@@ -71,42 +72,3 @@ export {
 
 export const soccerImageDefaultSrc =
   'https://fo4.dn.nexoncdn.co.kr/live/externalAssets/common/players/not_found.png?rd=202211180250';
-
-const matchMetaData = [
-  {
-    matchtype: 30,
-    desc: '리그 친선',
-  },
-  {
-    matchtype: 40,
-    desc: '클래식 1on1',
-  },
-  {
-    matchtype: 50,
-    desc: '공식경기',
-  },
-  {
-    matchtype: 52,
-    desc: '감독모드',
-  },
-  {
-    matchtype: 60,
-    desc: '공식 친선',
-  },
-  {
-    matchtype: 204,
-    desc: '볼타 친선',
-  },
-  {
-    matchtype: 214,
-    desc: '볼타 공식',
-  },
-  {
-    matchtype: 224,
-    desc: '볼타 AI대전',
-  },
-  {
-    matchtype: 234,
-    desc: '볼타 커스텀',
-  },
-];

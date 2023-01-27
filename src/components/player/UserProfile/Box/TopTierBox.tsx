@@ -1,17 +1,18 @@
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
-import { useGetMatchDivisionMeta } from 'src/pages/api/hooks/useGetMetaQuery';
 import { ImageWithFallback } from 'src/components/common/Image/ImageWithFallback';
 import { useCaseUserProfile } from 'src/useCases/useCaseUserProfile';
 
 import { IParamsNickName } from '../UserProfileContainer';
+import { useCaseGetMetaData } from 'src/useCases/useCaseGetMetaData';
 
 export const UserTopTierBox = () => {
   const router = useRouter();
   const { nickName } = router.query as IParamsNickName;
 
   const { useGetUserProfileQuery, useGetTopTierQuery } = useCaseUserProfile();
+  const { useGetMatchDivisionMeta } = useCaseGetMetaData();
 
   const { data: userProfileData } = useGetUserProfileQuery(nickName);
   const { data: userTopTierData } = useGetTopTierQuery(

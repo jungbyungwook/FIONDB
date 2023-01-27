@@ -2,7 +2,8 @@ import { AxiosResponse } from 'axios';
 
 import { api } from 'src/pages/api';
 import { IMatchDetailData } from 'src/types/DetailObject';
-import { IUserProfile } from '../hooks/query/useGetUserProfileQuery';
+import { IUserProfile } from 'src/useCases/useCaseUserProfile';
+// import { IUserProfile } from '../hooks/query/useGetUserProfileQuery';
 import type {
   AccessId,
   IMaxDivision,

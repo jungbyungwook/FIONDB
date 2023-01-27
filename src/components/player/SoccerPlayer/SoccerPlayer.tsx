@@ -7,12 +7,12 @@ import { MvpBadge } from 'src/components/common/Badge/MvpBadge';
 import { SoccerPlayerImage } from 'src/components/player/SoccerPlayer/SoccerPlayerImage';
 import { SoccerPlayerName } from 'src/components/player/SoccerPlayer/SoccerPlayerName';
 import { SeasonBadge } from 'src/components/common/Badge/SeasonBadge';
-import { useGetSeasonIdMeta } from 'src/pages/api/hooks/useGetMetaQuery';
 import {
   PositionCategoryKeyType,
   POSITION_CATEGORY,
 } from 'src/constants/position';
 import { PlayerDTO } from 'src/types/DetailObject';
+import { useCaseGetMetaData } from 'src/useCases/useCaseGetMetaData';
 
 export interface SoccerPlayerProps {
   isMine: boolean;
@@ -32,6 +32,8 @@ export const SoccerPlayer = ({
   const getSrc = (spId: number) => {
     return `https://fo4.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${spId}.png`;
   };
+
+  const { useGetSeasonIdMeta } = useCaseGetMetaData();
   const { data, isLoading } = useGetSeasonIdMeta();
   const targetSeasonId = Number(playerDto.spId.toString().slice(0, 3));
   const seasonDto = data?.find(({ seasonId }) => seasonId === targetSeasonId);

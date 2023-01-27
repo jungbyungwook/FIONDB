@@ -5,29 +5,31 @@ import { dehydrate, QueryClient } from 'react-query';
 
 import { MatchResultBox } from 'src/components/player/MatchResultBox';
 import { UserProfileContainer } from 'src/components/player/UserProfile/UserProfileContainer';
+import { Layout } from 'src/components/common/Layout';
 import {
-  useMatchInfiniteQuery,
-  usePrefetchMatchInfiniteQuery,
-} from 'src/pages/api/hooks/query/useMatchInfiniteQuery';
-import { useGetTopTierQuery } from 'src/pages/api/hooks/query/useGetTopTierQuery';
-import {
-  useGetUserProfilePrefetchQuery,
-  useGetUserProfileQuery,
-} from 'src/pages/api/hooks/query/useGetUserProfileQuery';
-import { IUserProfile } from 'src/pages/api/hooks/query/useGetUserProfileQuery';
+  IUserProfile,
+  useCaseUserProfile,
+} from 'src/useCases/useCaseUserProfile';
 import {
   metaQueryFunction,
   metaQueryKey,
-  useGetSoccerPlayersMeta,
-} from 'src/pages/api/hooks/useGetMetaQuery';
-import { useIntersectionObserver } from 'src/pages/api/hooks/useIntersectionObserver';
-import { Layout } from 'src/components/common/Layout';
+  useCaseGetMetaData,
+} from 'src/useCases/useCaseGetMetaData';
+import { useCaseMatchSearch } from 'src/useCases/useCaseMatchSearch';
+import { useIntersectionObserver } from 'src/hooks/useIntersectionObserver';
 
 type PagePropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 const Page = ({ nickName }: PagePropsType) => {
+  const { useGetUserProfileQuery } = useCaseUserProfile();
   const userProfileQuery = useGetUserProfileQuery(nickName);
   // 여기서 useQuery를 이용해서 fetch 함수를 호출하고 내부 Component에서는 queryClient에 접근해서 getData만을 수행한다.
-  const topTierQuery = useGetTopTierQuery(userProfileQuery.data?.accessId);
+  const { useGetTopTierQuery } = useCaseUserProfile();
+  const { useMatchInfiniteQuery } = useCaseMatchSearch();
+  const { useGetSoccerPlayersMeta } = useCaseGetMetaData();
+
+  const topTierQuery = useGetTopTierQuery(
+    userProfileQuery.data?.accessId || '',
+  );
   const soccerPlayerMetaQuery = useGetSoccerPlayersMeta();
   const matchListInfiniteQuery = useMatchInfiniteQuery(
     userProfileQuery.data?.accessId,
@@ -83,10 +85,12 @@ export const getServerSideProps: GetServerSideProps<IParams> = async (
 ) => {
   const { nickName } = context.query as IParams;
   const queryClient = new QueryClient();
+  const { useGetUserProfilePrefetchQuery } = useCaseUserProfile();
   const prefetchUserProfileQuery = useGetUserProfilePrefetchQuery(
     nickName,
     queryClient,
   );
+  const { usePrefetchMatchInfiniteQuery } = useCaseMatchSearch();
 
   await prefetchUserProfileQuery();
   const userProfileData = queryClient.getQueryData([

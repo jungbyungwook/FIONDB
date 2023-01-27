@@ -2,6 +2,12 @@ import { useQuery, QueryClient } from 'react-query';
 import { userAPI } from 'src/pages/api/player';
 import { AccessId } from 'src/pages/api/player/type';
 
+export interface IUserProfile {
+  accessId: string;
+  nickname: string;
+  level: number;
+}
+
 export const useCaseUserProfile = () => {
   const useGetUserProfileQuery = (nickName: string) => {
     const queryKeys = ['userProfile', nickName];
