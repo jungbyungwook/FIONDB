@@ -22,7 +22,7 @@ export const UserProfileContainer = ({ accessId, nickName }: IProps) => {
       <UserTopTierBox />
       <UserChartBox />
       <S.FlexItem alignSelf="end">
-        <RefetchButton />
+        <RefetchButton accessId={accessId} />
       </S.FlexItem>
     </S.Section>
   );
