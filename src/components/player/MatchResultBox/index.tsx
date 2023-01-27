@@ -39,11 +39,7 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
                     <S.StyleMatchType>
                       {getMatchStringByMatchId(matchDetailData.matchType)}
                     </S.StyleMatchType>
-                    <S.StyleMatchResult
-                      isWin={
-                        MATCH_RESULT_TEXT[sortedData.matchResult] === '승리'
-                      }
-                    >
+                    <S.StyleMatchResult matchResult={sortedData.matchResult}>
                       {MATCH_RESULT_TEXT[sortedData.matchResult]}
                     </S.StyleMatchResult>
                   </S.StyleResultTitle>

@@ -2,7 +2,7 @@
 import type { AppProps } from 'next/app';
 import { useState } from 'react';
 import { RecoilRoot } from 'recoil';
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import type { DehydratedState } from '@tanstack/react-query';

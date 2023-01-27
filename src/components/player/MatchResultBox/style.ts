@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 import { renderDownIntoUp } from 'src/style/keyframes';
 import { MatchResultType } from 'src/types/DetailObject';
-import theme from 'src/style/theme';
+import {
+  getBackGroundColorByMatchResult,
+  getColorByMatchResult,
+} from 'src/style/util';
+
+type MatchResultProps = { matchResult: MatchResultType };
 
 export const RelativeContainer = styled.div`
   position: relative;
@@ -13,9 +18,7 @@ export const StyleSection = styled.div`
   gap: 1rem;
 `;
 
-export const StyleResultBar = styled.div<{
-  matchResult: MatchResultType;
-}>`
+export const StyleResultBar = styled.div<MatchResultProps>`
   position: absolute;
   width: 0.8rem;
   height: 100%;
@@ -23,11 +26,7 @@ export const StyleResultBar = styled.div<{
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
   background-color: ${({ theme, matchResult }) =>
-    matchResult === '승'
-      ? theme.colors.green.fionGreen
-      : matchResult === '무'
-      ? theme.colors.gray[600]
-      : theme.colors.position.fw};
+    getBackGroundColorByMatchResult(matchResult, theme)};
 `;
 
 export const StyleWrap = styled.div`
@@ -89,7 +88,6 @@ export const StyleRight = styled.div`
 export const StyleResultWrap = styled.div`
   display: flex;
   flex-direction: column;
-  /* justify-content: space-around; */
   justify-content: center;
   align-items: center;
   gap: 1.2rem;
@@ -106,8 +104,9 @@ export const StyleMatchType = styled.div`
   margin-bottom: 0.6rem;
 `;
 
-export const StyleMatchResult = styled.div<{ isWin: boolean }>`
-  color: ${({ theme, isWin }) => isWin && theme.colors.green.fionGreen};
+export const StyleMatchResult = styled.div<MatchResultProps>`
+  color: ${({ theme, matchResult }) =>
+    getColorByMatchResult(matchResult, theme)};
   font-size: ${({ theme }) => theme.fontSizes.subTitle[20]};
   border-bottom: ${({ theme }) => `1px solid ${theme.colors.gray[600]}`};
   padding-bottom: 1rem;
@@ -159,8 +158,6 @@ export const StyleRotateWrap = styled.div<{ isClick: boolean }>`
   transition: 0.2s;
   transform: ${({ isClick }) => (isClick ? 'rotate(0)' : 'rotate(180deg)')};
 `;
-
-// import styled from 'styled-components';
 
 export const MatchResultText = styled.div<{ resultType: '승리' | '패배' }>`
   font-size: ${({ theme }) => theme.fontSizes.subTitle[24]};
