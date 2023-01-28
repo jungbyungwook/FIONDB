@@ -24,10 +24,11 @@ IHeadMetaProps) => {
       <title>{title}</title>
       <meta charSet="UTF-8" />
       <meta name="description" content={description} />
-      <meta property="og:title" content={FION_DB_META.OG_TITLE} />
-      <meta property="og:type" content="website" />
-      <meta property="og:article:author" content={FION_DB_META.TITLE} />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta property="og:title" content={title} />
+      <meta property="og:type" content="website" />
+      <meta property="og:article:author" content={title} />
+      <meta property="og:description" content={description} />
       {/* <meta property="og:url" content={url} /> */}
       {/* <meta property="og:image" content={image} /> */}
       {/* <meta name="robots" content="인덱스, 팔로우"/> */}
