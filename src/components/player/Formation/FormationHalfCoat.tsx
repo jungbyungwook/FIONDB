@@ -1,7 +1,9 @@
+import styled from 'styled-components';
+
 import { SoccerPlayer } from 'src/components/player/SoccerPlayer/SoccerPlayer';
 import { POSITION_LOCATIONS } from 'src/constants/position';
 import { PlayerDTO } from 'src/types/DetailObject';
-import styled from 'styled-components';
+import GoalIcon from 'src/assets/svg/goal.svg';
 
 interface ForMationBoxProps {
   isMine: boolean;
@@ -24,8 +26,10 @@ export const FormationHalfCoat = ({
       <S.GridContainer type={'column'} rotate={rotate}>
         {positionsList.map(([key, positions], columnIndex) =>
           positions.map((position, rowIndex) => {
+            const soccerPlayer = playerDto?.[position] as PlayerDTO;
+
             return (
-              playerDto?.[position] && (
+              soccerPlayer && (
                 <S.GridItem
                   key={position}
                   className={position}
@@ -33,6 +37,13 @@ export const FormationHalfCoat = ({
                   rowNum={Number(rowIndex) + 1}
                 >
                   <S.ImageWrap rotate={rotate}>
+                    <S.AbsoluteGoalWrap>
+                      {soccerPlayer.status.goal ? (
+                        <>
+                          {<GoalIcon />} x {soccerPlayer.status.goal}
+                        </>
+                      ) : null}
+                    </S.AbsoluteGoalWrap>
                     <SoccerPlayer
                       inFormation
                       playerDto={playerDto[position]}
@@ -78,9 +89,21 @@ const S = {
     font-size: 1.2rem;
   `,
   ImageWrap: styled.div<{ rotate: number | undefined }>`
+    position: relative;
     width: 6rem;
     height: 6rem;
     border-radius: 50%;
     margin-bottom: 50%;
+  `,
+
+  AbsoluteGoalWrap: styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 2.5rem;
+    position: absolute;
+    top: -2.5rem;
+    color: ${({ theme }) => theme.colors.green.fionGreen};
   `,
 };

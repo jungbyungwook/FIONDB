@@ -22,6 +22,6 @@ export const BallPossessionBar = ({ playerDto, isMine }: Props) => {
       left={left}
       right={right}
       center={null}
-    ></PercentBarCommon>
+    />
   );
 };
