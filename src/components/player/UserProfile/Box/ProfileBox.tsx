@@ -28,7 +28,7 @@ export const UserProfileBox = () => {
           alt="user_profile_img"
           fallbackSrc={soccerImageDefaultSrc}
           src={getSoccerPlayerImageSrc(searcherMostPlayerSpId)}
-          width={300}
+          width={200}
           height={200}
           quality={100}
           placeholder="blur"
