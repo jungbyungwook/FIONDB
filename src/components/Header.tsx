@@ -18,6 +18,7 @@ const Header = () => {
                 style={{
                   width: '108.47px',
                   height: '20px',
+                  marginRight: '68px',
                 }}
                 src="/images/logo/FION.DB.png"
                 alt=""
@@ -132,7 +133,7 @@ const HeaderWrapper = styled.div`
     /* float: left; */
   }
   li + li {
-    margin-left: 48px;
+    margin-left: 32px;
   }
 `;
 
