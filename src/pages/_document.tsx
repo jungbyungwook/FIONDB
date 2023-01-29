@@ -1,4 +1,5 @@
 import Document, { Head, Html, Main, NextScript } from 'next/document';
+import { HeadMeta } from 'src/components/common/HeadMeta/HeadMeta';
 import { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends Document {
@@ -32,9 +33,7 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          {/* <meta property="og:type" content="website" />
-          <meta property="og:title" content="FionDB: 피파온라인4 전적검색" />
-          <meta property="og:description" content="피파온라인4 전적검색" /> */}
+          <HeadMeta />
           <style />
         </Head>
         <body>
