@@ -45,7 +45,7 @@ const Header = () => {
                       width: '100%',
                       height: '4px',
                       backgroundColor: '#abee02',
-                      top: 46,
+                      top: 32,
                     }}
                   />
                 </a>
@@ -84,7 +84,7 @@ const Header = () => {
                       width: '100%',
                       height: 4,
                       backgroundColor: '#abee02',
-                      top: 46,
+                      top: 32,
                     }}
                   />
                 </a>
@@ -114,7 +114,7 @@ const HeaderWrapper = styled.div`
   z-index: 9000;
   position: fixed;
   width: 100%;
-  height: 80px;
+  height: 50px;
 
   background-color: #212121;
   display: flex;
