@@ -25,7 +25,17 @@ const Home: NextPage = () => {
           style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
         >
           <HomeWrapper>
-            <Title>FION.DB</Title>
+            <SubLogo>
+              <img
+                style={{
+                  width: '108.47px',
+                  height: '20px',
+                }}
+                src="/images/logo/FION.DB.png"
+                alt=""
+              />
+            </SubLogo>
+
             <MainBanner>
               <Image
                 src="/images/banner/main-banner.png"
@@ -39,7 +49,7 @@ const Home: NextPage = () => {
                 isFocus={true}
                 onChange={onChangeWithNickName}
                 onKeyDown={routerPushOnKeyDown}
-                style={{ paddingLeft: 24, fontSize: 18 }}
+                style={{ paddingLeft: 16, fontSize: 16 }}
               />
 
               <SearchBtn onClick={routerClinkOnButton}>전적 보기</SearchBtn>
@@ -65,50 +75,41 @@ const HomeWrapper = styled.div`
   color: white;
   flex-direction: column;
   height: 1024px;
-  width: 790px;
+  width: 640px;
 `;
 
-const Title = styled.h1`
-  font-family: 'Chakra-Petch';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 62px;
-  line-height: 81px;
-  color: #a1db00;
-  margin: 0;
+const SubLogo = styled.div`
   margin-top: 100px;
+  margin-bottom: 8px;
+  margin-left: 2px;
 `;
 const MainBanner = styled.div`
   position: relative;
-  width: 790px;
-  height: 373px;
-  margin-bottom: 80px;
+  width: 640px;
+  height: 320px;
+  margin-bottom: 24px;
 `;
 const InputWrapper = styled.div`
-  width: 790px;
-  height: 73px;
+  width: 640px;
+  height: 56px;
   display: flex;
 `;
 
 const SearchBtn = styled.div`
   display: flex;
   margin-left: 13px;
-  width: 174px;
-  height: 73px;
+  width: 128px;
+  height: 56px;
   background: #212121;
   border-radius: 8px;
   justify-content: center;
   align-items: center;
 
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 33px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
 
   :hover {
     cursor: pointer;
   }
-`;
-
-const SubLogo = styled.div`
-  position: relative;
 `;
