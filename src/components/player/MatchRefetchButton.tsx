@@ -1,6 +1,7 @@
+import { useCaseMatchSearch } from 'src/useCases/useCaseMatchSearch';
 import styled from 'styled-components';
 
-import { useRefetchMatchList } from 'src/pages/api/hooks/query/useRefetchQuery';
+// import { useRefetchMatchList } from 'src/pages/api/hooks/query/useRefetchQuery';
 
 export const MatchRefetchButton = ({
   accessId,
@@ -9,6 +10,7 @@ export const MatchRefetchButton = ({
   accessId: string;
   text: string;
 }) => {
+  const { useRefetchMatchList } = useCaseMatchSearch();
   const { refetchQuery, queryState } = useRefetchMatchList(accessId);
   return (
     <S.Button onClick={refetchQuery}>

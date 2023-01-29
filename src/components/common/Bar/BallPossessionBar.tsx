@@ -1,5 +1,5 @@
 import theme from 'src/style/theme';
-import { IRenderPlayerDto } from 'src/useCases/changeServerDataIntoRenderData';
+import { IRenderPlayerDto } from 'src/util/changeServerDataIntoRenderData';
 import { PercentBarCommon } from './PercentBarCommon';
 
 interface Props {
@@ -16,12 +16,12 @@ export const BallPossessionBar = ({ playerDto, isMine }: Props) => {
       style={{
         width: playerDto.possession,
         backgroundColor: isMine
-          ? theme.colors.green[800]
+          ? theme.colors.gray[800]
           : theme.colors.gray[700],
       }}
       left={left}
       right={right}
       center={null}
-    ></PercentBarCommon>
+    />
   );
 };

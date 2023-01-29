@@ -16,7 +16,7 @@ interface MatchInfo {
   player: PlayerDTO[];
 }
 
-export type MatchResultType = '승' | '패' | '무';
+export type MatchResultType = '승' | '무' | '패';
 interface MatchDetailDTO {
   seasonId: number; //	시즌 ID
   matchResult: MatchResultType; //	매치 결과 (“승”, “무”, “패”)

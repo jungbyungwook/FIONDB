@@ -21,3 +21,12 @@ export const renderUpIntoDown = keyframes`
     transform: translateZ(0)
   }
 `;
+
+export const rotate359 = keyframes`
+from {
+  tranform: rotate(0deg);;
+}
+to {
+  transform: rotate(-359deg);
+}
+`;

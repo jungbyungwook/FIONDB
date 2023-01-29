@@ -2,12 +2,12 @@
 import type { AppProps } from 'next/app';
 import { useState } from 'react';
 import { RecoilRoot } from 'recoil';
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import type { DehydratedState } from '@tanstack/react-query';
 
-import { Header, Footer } from '@components';
+import { Footer, Header } from 'src/components/common';
 import { GlobalStyles } from 'src/style/global';
 import theme from 'src/style/theme';
 import 'public/fonts/style.css';
@@ -39,5 +39,5 @@ function MyApp({
 export default MyApp;
 
 const BackgroundWrapper = styled.div`
-  background-color: gray;
+  background-color: ${({ theme }) => theme.colors.gray[800]};
 `;

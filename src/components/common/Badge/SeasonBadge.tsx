@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { ImageWithFallback } from 'src/components/ui/Image/ImageWithFallback';
+import { ImageWithFallback } from 'src/components/common/Image/ImageWithFallback';
 import theme from 'src/style/theme';
 import { Badge } from './Badge';
 
@@ -16,6 +16,7 @@ export const SeasonBadge = ({ seasonImageSrc }: Props) => {
       <StyleImageWrap>
         <ImageWithFallback
           src={seasonImageSrc}
+          alt="seson_badge"
           fallbackSrc={seasonImageSrc}
           width={25}
           height={20}

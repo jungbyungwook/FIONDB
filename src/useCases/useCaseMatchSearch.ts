@@ -1,11 +1,9 @@
-// 검색시 필요한 query를 모두 넣어주자.
-
 import { QueryClient, useInfiniteQuery, useQueryClient } from 'react-query';
-import { metaQueryKey } from 'src/hooks/useGetMetaQuery';
 
-import { matchAPI } from 'src/pages/api/player';
-import type { AccessId, IMetaSpId } from 'src/pages/api/player/type';
-import { getSoccerPlayerNameBySpId } from './getSoccerPlayerNameBySpId';
+import { matchAPI } from 'src/pages/api/match';
+import type { AccessId, IMetaSpId } from 'src/pages/api/type';
+import { metaQueryKey } from 'src/useCases/useCaseGetMetaData';
+import { getSoccerPlayerNameBySpId } from '../util/getSoccerPlayerNameBySpId';
 
 export const useCaseMatchSearch = () => {
   const useRefetchMatchList = (accessId: string) => {

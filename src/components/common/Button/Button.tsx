@@ -46,4 +46,8 @@ const StyledButton = styled.button<Pick<Props, 'style'>>`
   background-color: ${({ theme, style }) =>
     style?.backgroundColor ? style?.backgroundColor : theme.colors.gray[800]};
   font-size: ${({ theme }) => theme.fontSizes.subTitle[18]};
+  &:hover {
+    cursor: pointer;
+    opacity: 0.7;
+  }
 `;

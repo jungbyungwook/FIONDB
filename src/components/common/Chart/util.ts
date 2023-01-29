@@ -9,5 +9,3 @@ export const getWinPercent = (data: number[]) => {
   // (승리) ÷ (경기수) x 100%
   return Math.ceil((winCount / totalCount) * 100);
 };
-
-// const MATCH_RESULT_LIST = ['승리', '무승부', '패배'];
