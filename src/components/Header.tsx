@@ -16,8 +16,8 @@ const Header = () => {
             <a>
               <img
                 style={{
-                  width: '236.95px',
-                  height: '80px',
+                  width: '108.47px',
+                  height: '20px',
                 }}
                 src="/images/logo/FION.DB.png"
                 alt=""
@@ -32,9 +32,9 @@ const Header = () => {
                 <a
                   style={{
                     fontWeight: 400,
-                    fontSize: '28px',
+                    fontSize: '20px',
                     color: '#ABEE02',
-                    lineHeight: '32px',
+                    lineHeight: '23px',
                     position: 'relative',
                   }}
                 >
@@ -43,9 +43,9 @@ const Header = () => {
                     style={{
                       position: 'absolute',
                       width: '100%',
-                      height: 6,
+                      height: '4px',
                       backgroundColor: '#abee02',
-                      top: 48,
+                      top: 46,
                     }}
                   />
                 </a>
@@ -54,9 +54,9 @@ const Header = () => {
               <a
                 style={{
                   fontWeight: 400,
-                  fontSize: '28px',
+                  fontSize: '20px',
                   color: '#ABEE02',
-                  lineHeight: '32px',
+                  lineHeight: '23px',
                 }}
               >
                 전적 검색
@@ -71,9 +71,9 @@ const Header = () => {
                 <a
                   style={{
                     fontWeight: 400,
-                    fontSize: '28px',
+                    fontSize: '20px',
                     color: '#ABEE02',
-                    lineHeight: '32px',
+                    lineHeight: '23px',
                     position: 'relative',
                   }}
                 >
@@ -82,9 +82,9 @@ const Header = () => {
                     style={{
                       position: 'absolute',
                       width: '100%',
-                      height: 6,
+                      height: 4,
                       backgroundColor: '#abee02',
-                      top: 48,
+                      top: 46,
                     }}
                   />
                 </a>
@@ -93,9 +93,9 @@ const Header = () => {
               <a
                 style={{
                   fontWeight: 400,
-                  fontSize: '28px',
+                  fontSize: '20px',
                   color: '#ABEE02',
-                  lineHeight: '32px',
+                  lineHeight: '23px',
                 }}
               >
                 랭킹
