@@ -11,6 +11,7 @@ type MatchResultProps = { matchResult: MatchResultType };
 export const RelativeContainer = styled.li`
   position: relative;
   width: 100%;
+  animation: ${renderDownIntoUp} 0.5s;
 `;
 
 export const StyleSection = styled.div`
@@ -57,7 +58,6 @@ export const StyleContainer = styled.div<{
   color: white;
   background-color: ${({ theme, backgroundColor }) =>
     backgroundColor ? backgroundColor : theme.colors.gray[900]};
-  animation: ${renderDownIntoUp} 0.5s;
 `;
 
 export const StyleTop = styled.div`

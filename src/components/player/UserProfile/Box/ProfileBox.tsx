@@ -29,6 +29,7 @@ export const ProfileImageBox = () => {
         quality={100}
         placeholder="blur"
         blurDataURL={getSoccerPlayerImageSrc(searcherMostPlayerSpId)}
+        priority
       />
     </S.ImageWrap>
   );

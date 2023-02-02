@@ -52,11 +52,11 @@ const Page = ({ nickName }: PagePropsType) => {
       if (windowSize.width <= DEVICE_SIZE.PC) {
         return setMedia(DEVICE.mobile);
       }
-      return setMedia('pc');
+      return setMedia(DEVICE.pc);
     }
   }, [windowSize]);
 
-  if (userProfileQuery.status === 'loading') return <div>loading...</div>;
+  if (userProfileQuery.status === 'loading') return null;
   if (
     userProfileQuery.status === 'success' &&
     soccerPlayerMetaQuery.status === 'success'
@@ -188,3 +188,9 @@ export const S = {
     margin: 5rem 0;
   `,
 };
+function useLayoutffect(
+  arg0: () => void,
+  arg1: { width: number | undefined; height: number | undefined }[],
+) {
+  throw new Error('Function not implemented.');
+}

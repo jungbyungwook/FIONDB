@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { debounce } from 'src/util/debounce';
 
 type InitialWindowSizeType = {
   width: undefined | number;
@@ -20,11 +21,12 @@ export const useCheckWindowSize = () => {
         height: window.innerHeight,
       });
     };
+    const debounceHandleResize = debounce(handleResize);
 
     handleResize();
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', debounceHandleResize);
 
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', debounceHandleResize);
   }, []);
 
   return {
