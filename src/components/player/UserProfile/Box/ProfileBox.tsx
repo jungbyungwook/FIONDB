@@ -28,8 +28,7 @@ export const UserProfileBox = () => {
           alt="user_profile_img"
           fallbackSrc={soccerImageDefaultSrc}
           src={getSoccerPlayerImageSrc(searcherMostPlayerSpId)}
-          width={200}
-          height={200}
+          layout="fill"
           quality={100}
           placeholder="blur"
           blurDataURL={getSoccerPlayerImageSrc(searcherMostPlayerSpId)}
@@ -64,6 +63,13 @@ const S = {
   ImageWrap: styled.div`
     position: relative;
     overflow: hidden;
+    width: 25rem;
+    height: 20rem;
+
+    @media ${({ theme }) => theme.media.small} {
+      width: 20rem;
+      height: 12rem;
+    }
   `,
   BackgroundImageWrap: styled.div`
     position: absolute;
@@ -82,9 +88,16 @@ const S = {
   `,
   NickName: styled.h4`
     margin: 0;
+    @media ${({ theme }) => theme.media.small} {
+      font-size: ${({ theme }) => theme.fontSizes.subTitle[24]};
+    }
   `,
   Level: styled.div`
     font-size: 1.5rem;
+
+    @media ${({ theme }) => theme.media.small} {
+      font-size: ${({ theme }) => theme.fontSizes.content[16]};
+    }
   `,
   RefetchButton: styled.div`
     margin-top: 1rem;
