@@ -2,6 +2,8 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import styled from 'styled-components';
 import { ParsedUrlQuery } from 'querystring';
 import { dehydrate, QueryClient } from 'react-query';
+import { useAtom } from 'jotai';
+import { useEffect } from 'react';
 
 import { MatchResultBox } from 'src/components/player/MatchResultBox';
 import { UserProfileContainer } from 'src/components/player/UserProfile/UserProfileContainer';
@@ -17,6 +19,10 @@ import {
 } from 'src/useCases/useCaseGetMetaData';
 import { useCaseMatchSearch } from 'src/useCases/useCaseMatchSearch';
 import { useIntersectionObserver } from 'src/hooks/useIntersectionObserver';
+import { useCheckWindowSize } from 'src/hooks/useCheckWindowSize';
+import { mediaAtom } from 'src/atoms/device';
+import { DEVICE } from 'src/constants/device';
+import { DEVICE_SIZE } from 'src/style/media';
 
 type PagePropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 const Page = ({ nickName }: PagePropsType) => {
@@ -37,6 +43,18 @@ const Page = ({ nickName }: PagePropsType) => {
   const triggerRef = useIntersectionObserver(() =>
     matchListInfiniteQuery?.fetchNextPage(),
   );
+
+  const { windowSize } = useCheckWindowSize();
+  const [media, setMedia] = useAtom(mediaAtom);
+
+  useEffect(() => {
+    if (windowSize.width) {
+      if (windowSize.width <= DEVICE_SIZE.PC) {
+        return setMedia(DEVICE.mobile);
+      }
+      return setMedia('pc');
+    }
+  }, [windowSize]);
 
   if (userProfileQuery.status === 'loading') return <div>loading...</div>;
   if (

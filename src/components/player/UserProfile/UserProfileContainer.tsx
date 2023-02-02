@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useAtomValue } from 'jotai';
 
 import { UserTopTierBox } from './Box/TopTierBox';
 import { ParsedUrlQuery } from 'querystring';
@@ -8,8 +9,8 @@ import {
   ProfileImageBox,
   ProfileDataBox,
 } from 'src/components/player/UserProfile/Box/ProfileBox';
-import { useCheckWindowSize } from 'src/hooks/useCheckWindowSize';
-import { DEVICE_SIZE } from 'src/style/media';
+import { DEVICE } from 'src/constants/device';
+import { mediaAtom } from 'src/atoms/device';
 
 export interface IParamsNickName extends ParsedUrlQuery {
   nickName: string;
@@ -20,15 +21,13 @@ interface IProps {
   nickName: string;
 }
 
-export const UserProfileContainer = ({ accessId, nickName }: IProps) => {
-  const { windowSize } = useCheckWindowSize();
-
-  console.log(windowSize);
+export const UserProfileContainer = ({ accessId }: IProps) => {
+  const media = useAtomValue(mediaAtom);
 
   const pcUserProfileItems = [
     <S.UserProfileBox>
       <ProfileImageBox />
-      <ProfileDataBox media={'pc'} />
+      <ProfileDataBox media={media} />
     </S.UserProfileBox>,
     <UserTopTierBox />,
     <UserChartBox />,
@@ -37,13 +36,11 @@ export const UserProfileContainer = ({ accessId, nickName }: IProps) => {
     <ProfileImageBox />,
     <UserChartBox />,
     <UserTopTierBox />,
-    <ProfileDataBox media={'mobile'} />,
+    <ProfileDataBox media={media} />,
   ];
 
   const userProfileItems =
-    windowSize.width && windowSize.width <= DEVICE_SIZE.PC
-      ? mobileUserProfileItems
-      : pcUserProfileItems;
+    media === DEVICE.mobile ? mobileUserProfileItems : pcUserProfileItems;
 
   return (
     <S.Section>

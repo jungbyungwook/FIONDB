@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useAtomValue } from 'jotai';
 
 import type { IMatchDetailData } from 'src/types/DetailObject';
 import {
@@ -12,6 +13,7 @@ import ArrowIcon from 'src/assets/svg/arrow.svg';
 import { changeServerDataIntoRenderData } from 'src/util/changeServerDataIntoRenderData';
 import { FormationBoard } from 'src/components/player/Formation/FormationBoard';
 import { FormationFullCoat } from 'src/components/player/Formation/FormationFullCoat';
+import { mediaAtom } from 'src/atoms/device';
 import * as S from './style';
 
 interface Props {
@@ -22,8 +24,52 @@ interface Props {
 export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
   const sortedData = changeServerDataIntoRenderData(matchDetailData, nickName);
   const [isOpenFormation, setIsOpenFormation] = useState(false);
+  const media = useAtomValue(mediaAtom);
 
   const toggle = () => setIsOpenFormation((pre) => !pre);
+
+  const matchResultContent = {
+    matchType: (
+      <S.StyleMatchType>
+        {getMatchStringByMatchId(matchDetailData.matchType)}
+      </S.StyleMatchType>
+    ),
+    matchResult: (
+      <S.StyleMatchResult matchResult={sortedData.matchResult}>
+        {media === 'pc'
+          ? MATCH_RESULT_TEXT[sortedData.matchResult]
+          : MATCH_RESULT_TEXT[sortedData.matchResult][0]}
+      </S.StyleMatchResult>
+    ),
+    matchDate: (
+      <S.StyleMatchDate>
+        {getDateByDateString(matchDetailData.matchDate)}
+      </S.StyleMatchDate>
+    ),
+  };
+
+  const centerContent = {
+    pc: (
+      <>
+        <S.StyleGoalsWrap>
+          <S.StyleGoals>{sortedData.leftPlayer.goalCount}</S.StyleGoals>
+          <S.StyleVS>vs</S.StyleVS>
+          <S.StyleGoals>{sortedData.rightPlayer.goalCount}</S.StyleGoals>
+        </S.StyleGoalsWrap>
+      </>
+    ),
+    mobile: (
+      <>
+        {matchResultContent.matchResult}
+        <S.StyleGoalsWrap>
+          <S.StyleGoals>{sortedData.leftPlayer.goalCount}</S.StyleGoals>
+          <S.StyleVS>vs</S.StyleVS>
+          <S.StyleGoals>{sortedData.rightPlayer.goalCount}</S.StyleGoals>
+        </S.StyleGoalsWrap>
+        {matchResultContent.matchDate}
+      </>
+    ),
+  };
 
   return (
     <S.RelativeContainer>
@@ -35,16 +81,10 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
               <S.StyleLeft>
                 <S.StyleResultWrap>
                   <S.StyleResultTitle>
-                    <S.StyleMatchType>
-                      {getMatchStringByMatchId(matchDetailData.matchType)}
-                    </S.StyleMatchType>
-                    <S.StyleMatchResult matchResult={sortedData.matchResult}>
-                      {MATCH_RESULT_TEXT[sortedData.matchResult]}
-                    </S.StyleMatchResult>
+                    {matchResultContent.matchType}
+                    {matchResultContent.matchResult}
                   </S.StyleResultTitle>
-                  <S.StyleMatchDate>
-                    {getDateByDateString(matchDetailData.matchDate)}
-                  </S.StyleMatchDate>
+                  {matchResultContent.matchDate}
                 </S.StyleResultWrap>
                 <S.StyleLeftPlayer>
                   <SoccerPlayer
@@ -54,15 +94,7 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
                   />
                 </S.StyleLeftPlayer>
               </S.StyleLeft>
-              <S.StyleCenter>
-                <S.StyleGoalsWrap>
-                  <S.StyleGoals>{sortedData.leftPlayer.goalCount}</S.StyleGoals>
-                  <S.StyleVS>vs</S.StyleVS>
-                  <S.StyleGoals>
-                    {sortedData.rightPlayer.goalCount}
-                  </S.StyleGoals>
-                </S.StyleGoalsWrap>
-              </S.StyleCenter>
+              <S.StyleCenter>{centerContent[media]}</S.StyleCenter>
               <S.StyleRight>
                 <S.StyleRightPlayer>
                   <SoccerPlayer
@@ -71,12 +103,12 @@ export const MatchResultBox = ({ matchDetailData, nickName }: Props) => {
                     inFormation={false}
                   />
                 </S.StyleRightPlayer>
-                <S.StyleDetail onClick={toggle}>
-                  <S.StyleRotateWrap isClick={isOpenFormation}>
-                    <ArrowIcon width={'2rem'} height={'2rem'} fill="white" />
-                  </S.StyleRotateWrap>
-                </S.StyleDetail>
               </S.StyleRight>
+              <S.StyleDetail onClick={toggle}>
+                <S.StyleRotateWrap isClick={isOpenFormation}>
+                  <ArrowIcon width={'2rem'} height={'2rem'} fill="white" />
+                </S.StyleRotateWrap>
+              </S.StyleDetail>
             </S.StyleTop>
             <S.StyleBottom>
               <BallPossessionBar playerDto={sortedData.leftPlayer} isMine />

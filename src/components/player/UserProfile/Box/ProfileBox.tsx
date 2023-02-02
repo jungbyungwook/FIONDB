@@ -8,6 +8,7 @@ import { useCaseUserProfile } from 'src/useCases/useCaseUserProfile';
 import { useCaseStatisticsMatch } from 'src/useCases/useCaseStatisticsMatch';
 import { getSoccerPlayerImageSrc } from 'src/util/getSoccerPlayerImageSrc';
 import type { IParamsNickName } from 'src/components/player/UserProfile/UserProfileContainer';
+import { DEVICE, DeviceType } from 'src/constants/device';
 
 export const ProfileImageBox = () => {
   const router = useRouter();
@@ -34,7 +35,7 @@ export const ProfileImageBox = () => {
 };
 
 interface IProfileDataBoxProps {
-  media: 'mobile' | 'pc';
+  media: DeviceType;
 }
 
 export const ProfileDataBox = ({ media }: IProfileDataBoxProps) => {
@@ -44,7 +45,7 @@ export const ProfileDataBox = ({ media }: IProfileDataBoxProps) => {
   const { data: userProfileData } = useGetUserProfileQuery(nickName);
 
   const content =
-    media === 'mobile' ? (
+    media === DEVICE.mobile ? (
       <>
         <S.TopTierText>최고등급 구해야함</S.TopTierText>
         <S.NickName>{userProfileData?.nickname}</S.NickName>
