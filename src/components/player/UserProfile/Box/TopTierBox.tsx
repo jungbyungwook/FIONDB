@@ -43,24 +43,24 @@ export const UserTopTierBox = () => {
 
     const rankIds = choiceOfficialAndCoachGameImageIndex();
 
-    // ToDo: fallbackSrc를 결정해주어야 함
     return (
       <S.TopTierWrap>
         <S.Flex>
           <S.FlexItem>
             <S.TopTierTitle>공식모드</S.TopTierTitle>
-            {rankIds.map((rankId, index) => (
-              <ImageWithFallback
-                key={`${rankId}${index}`}
-                alt="티어아이콘"
-                width={95}
-                height={95}
-                fallbackSrc={`https://ssl.nexon.com/s2/game/fo4/obt/rank/large/update_2009/ico_rank0.png`}
-                src={`https://ssl.nexon.com/s2/game/fo4/obt/rank/large/update_2009/ico_rank${rankId}.png`}
-                blurDataURL={`https://ssl.nexon.com/s2/game/fo4/obt/rank/large/update_2009/ico_rank${rankId}.png`}
-                placeholder="blur"
-              />
-            ))}
+            <S.TopTierImage>
+              {rankIds.map((rankId, index) => (
+                <ImageWithFallback
+                  key={`${rankId}${index}`}
+                  alt="티어아이콘"
+                  layout="fill"
+                  fallbackSrc={`https://ssl.nexon.com/s2/game/fo4/obt/rank/large/update_2009/ico_rank0.png`}
+                  src={`https://ssl.nexon.com/s2/game/fo4/obt/rank/large/update_2009/ico_rank${rankId}.png`}
+                  blurDataURL={`https://ssl.nexon.com/s2/game/fo4/obt/rank/large/update_2009/ico_rank${rankId}.png`}
+                  placeholder="blur"
+                />
+              ))}
+            </S.TopTierImage>
             <S.TopTierMode>최고등급</S.TopTierMode>
           </S.FlexItem>
         </S.Flex>
@@ -87,6 +87,16 @@ const S = {
   TopTierTitle: styled.div`
     margin-bottom: 1.2rem;
     font-size: ${({ theme }) => theme.fontSizes.content[16]};
+  `,
+  TopTierImage: styled.div`
+    position: relative;
+    width: 9.5rem;
+    height: 9.5rem;
+
+    @media ${({ theme }) => theme.media.small} {
+      width: 8rem;
+      height: 8rem;
+    }
   `,
   TopTierMode: styled.div`
     height: 30%;
