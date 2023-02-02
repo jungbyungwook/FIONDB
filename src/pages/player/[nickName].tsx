@@ -92,7 +92,9 @@ export const getServerSideProps: GetServerSideProps<IParams> = async (
   );
   const { usePrefetchMatchInfiniteQuery } = useCaseMatchSearch();
 
+  const startUserProfileTime = new Date().getTime();
   await prefetchUserProfileQuery();
+  const endUserProfileTime = new Date().getTime();
   const userProfileData = queryClient.getQueryData([
     'userProfile',
     nickName,
@@ -107,10 +109,36 @@ export const getServerSideProps: GetServerSideProps<IParams> = async (
     };
   }
 
+  const preFetchUserProfileTime = endUserProfileTime - startUserProfileTime;
+  console.log(
+    `Result Time Fetch User Profile :  ${preFetchUserProfileTime} ms`,
+  );
+
+  const startTime1 = new Date().getTime();
   await usePrefetchMatchInfiniteQuery(userProfileData.accessId, queryClient);
+  const endTime1 = new Date().getTime();
+
+  const prefetchMatchDataTime = endTime1 - startTime1;
+  console.log(`Result Time Prefetch MatchData :  ${prefetchMatchDataTime} ms`);
+
+  const startTime2 = new Date().getTime();
   await queryClient.prefetchQuery(
     metaQueryKey.soccerPlayersMeta,
     () => metaQueryFunction.soccerPlayersMeta,
+  );
+  const endTime2 = new Date().getTime();
+
+  const prefetchSoccerPlayerMetaTime = endTime2 - startTime2;
+  console.log(
+    `Result Time Prefetch SoccerPlayerMeta :  ${prefetchSoccerPlayerMetaTime} ms`,
+  );
+
+  console.log(
+    `totelTime: ${
+      preFetchUserProfileTime +
+      prefetchMatchDataTime +
+      prefetchSoccerPlayerMetaTime
+    } ms `,
   );
 
   return {
