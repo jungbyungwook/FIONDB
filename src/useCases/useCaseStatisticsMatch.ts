@@ -38,7 +38,7 @@ export const useCaseStatisticsMatch = (nickName: string) => {
   };
 
   const getSearcherMostPlayerSpId = () => {
-    if (!matchPages) return;
+    if (!matchPages || !matchPages[0].currentPageData.length) return;
 
     const searcherBestPlayers = matchPages.flatMap(({ currentPageData }) => {
       const searcherMatchInfos = currentPageData.map(
