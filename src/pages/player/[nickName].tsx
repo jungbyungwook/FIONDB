@@ -46,12 +46,10 @@ const Page = ({ nickName }: PagePropsType) => {
     return (
       <Layout>
         <S.Scetion>
-          <div>
-            <UserProfileContainer
-              accessId={userProfileQuery.data?.accessId}
-              nickName={nickName}
-            />
-          </div>
+          <UserProfileContainer
+            accessId={userProfileQuery.data?.accessId}
+            nickName={nickName}
+          />
           <S.Ul>
             {matchListInfiniteQuery?.data?.pages.map((page) =>
               page.currentPageData.map((data) => (
@@ -156,7 +154,8 @@ export const S = {
     width: 108rem;
     margin: 0 auto;
 
-    @media screen {
+    @media ${({ theme }) => theme.media.small} {
+      width: 36rem;
     }
   `,
   Ul: styled.ul`
