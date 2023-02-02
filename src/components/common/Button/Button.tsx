@@ -50,4 +50,10 @@ const StyledButton = styled.button<Pick<Props, 'style'>>`
     cursor: pointer;
     opacity: 0.7;
   }
+
+  @media ${({ theme }) => theme.media.small} {
+    width: 100%;
+    height: 100%;
+    font-size: ${({ theme }) => theme.fontSizes.content[12]};
+  }
 `;

@@ -1,5 +1,5 @@
-const DEVICE_SIZE = {
-  PC: '1024',
+export const DEVICE_SIZE = {
+  PC: 1024,
 };
 
 export const media = {

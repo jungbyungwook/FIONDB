@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { OddsChart } from 'src/components/common/Chart/WinPercentChart';
 import { useCaseStatisticsMatch } from 'src/useCases/useCaseStatisticsMatch';
 import { useCaseUserProfile } from 'src/useCases/useCaseUserProfile';
+import styled from 'styled-components';
 import { IParamsNickName } from '../UserProfileContainer';
 
 export const UserChartBox = () => {
@@ -19,8 +20,20 @@ export const UserChartBox = () => {
     <div>
       <OddsChart
         data={[win, tie, lose]}
-        bottom={<div>{`${win}승 ${tie}무 ${lose}패`}</div>}
+        bottom={
+          <S.OddsChartBottom>{`${win}승 ${tie}무 ${lose}패`}</S.OddsChartBottom>
+        }
       />
     </div>
   );
+};
+
+const S = {
+  OddsChartBottom: styled.div`
+    font-size: ${({ theme }) => theme.fontSizes.content[16]};
+
+    @media ${({ theme }) => theme.media.small} {
+      font-size: ${({ theme }) => theme.fontSizes.content[12]};
+    }
+  `,
 };

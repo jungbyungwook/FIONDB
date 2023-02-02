@@ -16,20 +16,29 @@ export const RefetchButton = ({ accessId }: IProps) => {
   const { refetchQuery, queryState } = useRefetchMatchList(accessId);
 
   return (
-    <Button
-      center={TEXT}
-      right={
-        <S.rotateImageWrap isFetching={queryState?.isFetching}>
-          <ReStartSVG />
-        </S.rotateImageWrap>
-      }
-      onClick={refetchQuery}
-    />
+    <S.RefetchButtonContainer>
+      <Button
+        center={TEXT}
+        right={
+          <S.RotateImageWrap isFetching={queryState?.isFetching}>
+            <ReStartSVG />
+          </S.RotateImageWrap>
+        }
+        onClick={refetchQuery}
+      />
+    </S.RefetchButtonContainer>
   );
 };
 
 const S = {
-  rotateImageWrap: styled.div<{ isFetching: boolean | undefined }>`
+  RefetchButtonContainer: styled.div`
+    @media ${({ theme }) => theme.media.small} {
+      width: 32rem;
+      height: 4rem;
+      font-size: ${({ theme }) => theme.fontSizes.content[12]};
+    }
+  `,
+  RotateImageWrap: styled.div<{ isFetching: boolean | undefined }>`
     ${({ isFetching }) =>
       isFetching &&
       css`

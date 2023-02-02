@@ -87,6 +87,10 @@ const S = {
   TopTierTitle: styled.div`
     margin-bottom: 1.2rem;
     font-size: ${({ theme }) => theme.fontSizes.content[16]};
+
+    @media ${({ theme }) => theme.media.small} {
+      display: none;
+    }
   `,
   TopTierImage: styled.div`
     position: relative;
@@ -102,5 +106,9 @@ const S = {
     height: 30%;
     margin-top: 1.2rem;
     font-size: ${({ theme }) => theme.fontSizes.subTitle[20]};
+
+    @media ${({ theme }) => theme.media.small} {
+      display: none;
+    }
   `,
 };

@@ -37,7 +37,7 @@ export const OddsChart = (props: Props) => {
                 data: props.data,
                 backgroundColor: [
                   theme.colors.green.fionGreen,
-                  theme.colors.gray[600], // 무승부는 보여줄것인가?
+                  theme.colors.gray[600],
                   theme.colors.gray[600],
                 ],
                 borderWidth: 0,
