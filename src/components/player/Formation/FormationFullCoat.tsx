@@ -2,9 +2,10 @@ import styled from 'styled-components';
 
 import { POSITION_TABLE } from 'src/constants/position';
 import { MatchInfo, PlayerDTO } from 'src/types/DetailObject';
-import soccerCoatUrl from 'src/assets/png/soccer_coat.png';
 import { renderUpIntoDown } from 'src/style/keyframes';
 import { FormationHalfCoat } from 'src/components/player/Formation/FormationHalfCoat';
+import soccerCoatUrl from 'src/assets/png/soccer_coat.png';
+import mobileSoccerCoatUrl from 'src/assets/png/mobile_soccer_coat.png';
 
 interface FormationContainerProps {
   matchDetailData: MatchInfo[];
@@ -49,6 +50,15 @@ const S = {
     height: 60rem;
     background-image: url(${soccerCoatUrl.src});
     background-size: 100% 100%;
+
     animation: ${renderUpIntoDown} 1s;
+
+    @media ${({ theme }) => theme.media.small} {
+      display: block;
+      width: 34rem;
+      height: 60rem;
+      margin: 0 auto;
+      background-image: url(${mobileSoccerCoatUrl.src});
+    }
   `,
 };

@@ -28,6 +28,10 @@ const S = {
     height: 80rem;
     background-color: ${({ theme }) => theme.colors.gray[900]};
     border-radius: 1rem;
+
+    @media ${({ theme }) => theme.media.small} {
+      width: 100%;
+    }
   `,
   BoardTitle: styled.div`
     display: flex;
@@ -37,12 +41,20 @@ const S = {
     height: 5rem;
     margin: 0 auto;
     font-size: ${({ theme }) => theme.fontSizes.subTitle[20]};
+
+    @media ${({ theme }) => theme.media.small} {
+      height: 4rem;
+    }
   `,
   BoardTable: styled.div`
     height: 10rem;
   `,
   BoardFooter: styled.div`
     height: 20rem;
+
+    @media ${({ theme }) => theme.media.small} {
+      height: 13rem;
+    }
   `,
   BoardFooterTitle: styled.div`
     font-size: ${({ theme }) => theme.fontSizes.subTitle[20]};
