@@ -31,12 +31,10 @@ const Page = ({ nickName }: PagePropsType) => {
   // 여기서 useQuery를 이용해서 fetch 함수를 호출하고 내부 Component에서는 queryClient에 접근해서 getData만을 수행한다.
   const { useGetTopTierQuery } = useCaseUserProfile();
   const { useMatchInfiniteQuery } = useCaseMatchSearch();
-  const { useGetSoccerPlayersMeta } = useCaseGetMetaData();
 
   const topTierQuery = useGetTopTierQuery(
     userProfileQuery.data?.accessId || '',
   );
-  const soccerPlayerMetaQuery = useGetSoccerPlayersMeta();
   const matchListInfiniteQuery = useMatchInfiniteQuery(
     userProfileQuery.data?.accessId,
   );
@@ -57,10 +55,7 @@ const Page = ({ nickName }: PagePropsType) => {
   }, [windowSize]);
 
   if (userProfileQuery.status === 'loading') return null;
-  if (
-    userProfileQuery.status === 'success' &&
-    soccerPlayerMetaQuery.status === 'success'
-  ) {
+  if (userProfileQuery.status === 'success') {
     return (
       <Layout>
         <S.Scetion>
@@ -137,24 +132,8 @@ export const getServerSideProps: GetServerSideProps<IParams> = async (
   const prefetchMatchDataTime = endTime1 - startTime1;
   console.log(`Result Time Prefetch MatchData :  ${prefetchMatchDataTime} ms`);
 
-  const startTime2 = new Date().getTime();
-  await queryClient.prefetchQuery(
-    metaQueryKey.soccerPlayersMeta,
-    () => metaQueryFunction.soccerPlayersMeta,
-  );
-  const endTime2 = new Date().getTime();
-
-  const prefetchSoccerPlayerMetaTime = endTime2 - startTime2;
   console.log(
-    `Result Time Prefetch SoccerPlayerMeta :  ${prefetchSoccerPlayerMetaTime} ms`,
-  );
-
-  console.log(
-    `totelTime: ${
-      preFetchUserProfileTime +
-      prefetchMatchDataTime +
-      prefetchSoccerPlayerMetaTime
-    } ms `,
+    `totelTime: ${preFetchUserProfileTime + prefetchMatchDataTime} ms `,
   );
 
   return {
@@ -177,6 +156,7 @@ export const S = {
     }
   `,
   Ul: styled.ul`
+    width: 100%;
     display: grid;
     padding: 0;
     grid-row-gap: 0.8rem;
@@ -188,9 +168,3 @@ export const S = {
     margin: 5rem 0;
   `,
 };
-function useLayoutffect(
-  arg0: () => void,
-  arg1: { width: number | undefined; height: number | undefined }[],
-) {
-  throw new Error('Function not implemented.');
-}
