@@ -1,17 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { FionDbIcon } from 'src/components/common/SvgIcons/FionDbIcon';
+
 const Footer = () => {
   return (
     <Footerwrapper>
-      <img
-        style={{
-          width: '108.47px',
-          height: '20px',
-        }}
-        src="/images/logo/FION.DB.png"
-        alt=""
-      />
+      <FionDbIcon />
       <p>Data based on NEXON DEVELOPERS</p>
     </Footerwrapper>
   );
