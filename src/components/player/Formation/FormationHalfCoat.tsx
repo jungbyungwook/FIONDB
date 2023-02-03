@@ -100,6 +100,7 @@ const S = {
     }
   `,
   ImageWrap: styled.div`
+    position: relative;
     width: 6rem;
     height: 6rem;
     border-radius: 50%;
@@ -122,8 +123,8 @@ const S = {
     color: ${({ theme }) => theme.colors.green.fionGreen};
 
     @media ${({ theme }) => theme.media.small} {
-      top: 2.3rem;
-      left: 5rem;
+      top: 1.5rem;
+      left: 4.5rem;
     }
   `,
 };
