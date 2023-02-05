@@ -9,6 +9,7 @@ import { useCaseStatisticsMatch } from 'src/useCases/useCaseStatisticsMatch';
 import { getSoccerPlayerImageSrc } from 'src/util/getSoccerPlayerImageSrc';
 import type { IParamsNickName } from 'src/components/player/UserProfile/UserProfileContainer';
 import { DEVICE, DeviceType } from 'src/constants/device';
+import { useGetOfficialMatchToptierDivision } from 'src/hooks/useGetOfficialMatchToptierDivision';
 
 export const ProfileImageBox = () => {
   const router = useRouter();
@@ -44,11 +45,16 @@ export const ProfileDataBox = ({ media }: IProfileDataBoxProps) => {
   const { nickName } = router.query as IParamsNickName;
   const { useGetUserProfileQuery } = useCaseUserProfile();
   const { data: userProfileData } = useGetUserProfileQuery(nickName);
+  const { userOfficialMatchDivision } =
+    useGetOfficialMatchToptierDivision(nickName);
 
   const content =
     media === DEVICE.mobile ? (
       <>
-        <S.TopTierText>최고등급 구해야함</S.TopTierText>
+        <S.TopTierText>
+          최고등급(
+          {userOfficialMatchDivision?.divisionName || '...'})
+        </S.TopTierText>
         <S.NickName>{userProfileData?.nickname}</S.NickName>
         <S.FlexItem>
           <S.Level>Lv. {userProfileData?.level}</S.Level>
