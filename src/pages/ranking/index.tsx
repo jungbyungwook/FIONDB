@@ -141,7 +141,7 @@ const UserRankingBox = (props: any) => {
 
 const Ranking: NextPage = () => {
   return (
-    <>
+    <BackgroundWrapper>
       <RankingWrapper>
         <RankingScore>랭킹점수</RankingScore>
         <RankingList>
@@ -236,15 +236,35 @@ const Ranking: NextPage = () => {
             rating={i.rating}
           />
         ))}
+        <div
+          style={{
+            position: 'absolute',
+            left: 0,
+            bottom: 0,
+            zIndex: 1,
+          }}
+        >
+          <Backgorund>
+            <Image
+              src="/images/background/ranking.png"
+              alt="최고등급"
+              layout="fill"
+            />
+          </Backgorund>
+        </div>
       </RankingWrapper>
-    </>
+    </BackgroundWrapper>
   );
 };
 
 export default Ranking;
 
+const BackgroundWrapper = styled.div`
+  position: relative;
+`;
+
 const RankingWrapper = styled.div`
-  /* background-color: blue; */
+  background-color: '#D9D9D900';
 
   padding-top: 50px;
   display: flex;
@@ -272,6 +292,7 @@ const UserRankingData = styled.ul`
 
   margin-bottom: 0;
   padding-bottom: 0;
+  z-index: 2;
 `;
 
 const RankingScore = styled.h1`
@@ -304,4 +325,10 @@ const Rating = styled.div`
   position: relative;
   width: 6rem;
   height: 6rem;
+`;
+
+const Backgorund = styled.div`
+  position: relative;
+  width: 91rem;
+  height: 48rem;
 `;
