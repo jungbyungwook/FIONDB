@@ -38,7 +38,7 @@ const Home: NextPage = () => {
 
             <MainBanner>
               <Image
-                src="/images/banner/main-banner.png"
+                src="/images/banner/main-banner2.png"
                 alt="메인 배너 이미지"
                 layout="fill"
               />
