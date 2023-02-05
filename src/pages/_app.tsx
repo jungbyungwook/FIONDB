@@ -44,5 +44,5 @@ function MyApp({
 export default MyApp;
 
 const BackgroundWrapper = styled.div`
-  background-color: ${({ theme }) => theme.colors.gray[800]};
+  background-color: ${({ theme }) => theme.colors.background};
 `;
