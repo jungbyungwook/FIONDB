@@ -17,14 +17,12 @@ export const UserChartBox = () => {
   const [win, tie, lose] = getOdds();
 
   return (
-    <div>
-      <OddsChart
-        data={[win, tie, lose]}
-        bottom={
-          <S.OddsChartBottom>{`${win}승 ${tie}무 ${lose}패`}</S.OddsChartBottom>
-        }
-      />
-    </div>
+    <OddsChart
+      data={[win, tie, lose]}
+      bottom={
+        <S.OddsChartBottom>{`${win}승 ${tie}무 ${lose}패`}</S.OddsChartBottom>
+      }
+    />
   );
 };
 

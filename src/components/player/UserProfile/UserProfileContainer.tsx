@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { useAtomValue } from 'jotai';
 
 import { UserTopTierBox } from './Box/TopTierBox';
-import { ParsedUrlQuery } from 'querystring';
 import { UserChartBox } from './Box/UserChartBox';
+import { ParsedUrlQuery } from 'querystring';
 import { RefetchButton } from 'src/components/common/Button/RefetchButton';
 import {
   ProfileImageBox,

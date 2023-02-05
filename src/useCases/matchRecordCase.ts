@@ -1,6 +1,6 @@
 import { changeDateUtil } from 'src/util/chageDate';
 import { MatchInfo } from 'src/types/DetailObject';
-import { matchMetaData } from 'src/constants/matchMeta';
+import { MATCH_META_DATA } from 'src/constants/matchMeta';
 
 // 몰수패인 경우 패자의 possession이 0으로 나온는 문제를 해결
 // default값을 20으로 두어
@@ -43,7 +43,9 @@ const pickBestPlayer = (data: MatchInfo) => {
 
 const getMatchStringByMatchId = (matchId: number) => {
   const matchMap = new Map();
-  matchMetaData.forEach(({ matchtype, desc }) => matchMap.set(matchtype, desc));
+  MATCH_META_DATA.forEach(({ matchtype, desc }) =>
+    matchMap.set(matchtype, desc),
+  );
 
   return matchMap.get(matchId);
 };

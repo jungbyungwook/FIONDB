@@ -28,10 +28,11 @@ type PagePropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 const Page = ({ nickName }: PagePropsType) => {
   const { useGetUserProfileQuery } = useCaseUserProfile();
   const userProfileQuery = useGetUserProfileQuery(nickName);
-  // 여기서 useQuery를 이용해서 fetch 함수를 호출하고 내부 Component에서는 queryClient에 접근해서 getData만을 수행한다.
+
   const { useGetTopTierQuery } = useCaseUserProfile();
   const { useMatchInfiniteQuery } = useCaseMatchSearch();
 
+  // 여기서 useQuery를 이용해서 fetch 함수를 호출하고 내부 Component에서는 queryClient에 접근해서 getData만을 수행한다.
   const topTierQuery = useGetTopTierQuery(
     userProfileQuery.data?.accessId || '',
   );

@@ -3,9 +3,9 @@ import { useRouter } from 'next/router';
 
 import { ImageWithFallback } from 'src/components/common/Image/ImageWithFallback';
 import { useCaseUserProfile } from 'src/useCases/useCaseUserProfile';
-
-import { IParamsNickName } from '../UserProfileContainer';
 import { useCaseGetMetaData } from 'src/useCases/useCaseGetMetaData';
+import { IParamsNickName } from '../UserProfileContainer';
+import { MATCH_META_DATA } from 'src/constants/matchMeta';
 
 export const UserTopTierBox = () => {
   const router = useRouter();
@@ -23,7 +23,7 @@ export const UserTopTierBox = () => {
 
   if (matchDivisionMetaQuery.status === 'success') {
     const choiceOfficialAndCoachGameImageIndex = (
-      matchDivisionCodes = [50],
+      matchDivisionCodes = [MATCH_META_DATA[2].matchtype],
     ) => {
       const { data: matchDivisionData } = matchDivisionMetaQuery.data;
 
@@ -47,7 +47,7 @@ export const UserTopTierBox = () => {
       <S.TopTierWrap>
         <S.Flex>
           <S.FlexItem>
-            <S.TopTierTitle>공식모드</S.TopTierTitle>
+            <S.TopTierTitle>{MATCH_META_DATA[2].desc}</S.TopTierTitle>
             <S.TopTierImage>
               {rankIds.map((rankId, index) => (
                 <ImageWithFallback
