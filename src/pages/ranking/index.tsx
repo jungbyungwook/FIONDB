@@ -1,60 +1,66 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
-import Image from 'next/image';
 import styled from 'styled-components';
+import { Doughnut } from 'react-chartjs-2';
+import theme from 'src/style/theme';
+import { Chart, ArcElement } from 'chart.js';
+import Image from 'next/image';
+
+Chart.register(ArcElement);
 
 const dummyData = [
   {
     ranking: 1,
-    profileImg: '프로필 이미지',
     nickname: '피굽남BenQ김승환',
     record: '34전 1승 6패',
-    Odds: '82.9%',
+    rankingScore: 3000,
+    Odds: 82,
     rating: '등급1',
   },
   {
     ranking: 2,
-    profileImg: '프로필 이미지',
     nickname: 'VIsualUTA',
     record: '37전 1승 5패',
-    Odds: '86%',
+    rankingScore: 2000,
+    Odds: 86,
     rating: '등급2',
   },
   {
     ranking: 3,
-    profileImg: '프로필 이미지',
     nickname: ' PGxKT곽준혁',
     record: '45전 0승 13패',
-    Odds: '77.6%',
+    rankingScore: 1000,
+    Odds: 77,
     rating: '등급3',
   },
 ];
 
 const UserRankingBox = (props: any) => {
-  const { ranking, profileImg, nickname, record, Odds, rating } = props;
+  const { ranking, nickname, record, rankingScore, Odds, rating } = props;
+
+  const options = {
+    cutout: '90%',
+  };
 
   return (
     <UserRankingData>
       <li
         style={{
           width: '80px',
-          fontStyle: 'normal',
-          fontWeight: '700px',
-          fontSize: '32px',
-          lineHeight: '37px',
-          marginRight: '24px',
+          fontWeight: 700,
+          fontSize: '24px',
+          lineHeight: '28px',
+          marginLeft: '50px',
         }}
       >
         {ranking}
       </li>
       <li>
-        <ul style={{ width: '320px', listStyle: 'none', marginRight: '24px' }}>
+        <ul style={{ width: '280px', listStyle: 'none' }}>
           <li
             style={{
-              fontStyle: 'normal',
               fontWeight: '400px',
-              fontSize: '20px',
-              lineHeight: '23px',
+              fontSize: '16px',
+              lineHeight: '18px',
             }}
           >
             {nickname}
@@ -62,10 +68,9 @@ const UserRankingBox = (props: any) => {
           <li
             style={{
               fontFamily: 'Noto Sans',
-              fontStyle: 'normal',
               fontWeight: 400,
-              fontSize: '18px',
-              lineHeight: '25px',
+              fontSize: '16px',
+              lineHeight: '22px',
             }}
           >
             100,000,000 BP
@@ -75,24 +80,68 @@ const UserRankingBox = (props: any) => {
       <li
         style={{
           width: '200px',
-          fontStyle: 'normal',
           fontWeight: 400,
-          fontSize: '20px',
-          lineHeight: '23px',
-          marginRight: '24px',
+          fontSize: '16px',
+          lineHeight: '18px',
+          marginLeft: '30px',
         }}
       >
         {record}
       </li>
-      <li style={{ width: '80px', marginRight: '24px' }}>{Odds}</li>
-      <li style={{ width: '120px' }}>{rating}</li>
+      <li
+        style={{
+          width: '200px',
+          fontWeight: 400,
+          fontSize: '16px',
+          lineHeight: '22px',
+          paddingLeft: 30,
+        }}
+      >
+        {rankingScore}
+      </li>
+      <li style={{ width: '120px' }}>
+        <DoughnutContainer>
+          <Doughnut
+            style={{ width: '60px', height: '60px' }}
+            options={options}
+            data={{
+              datasets: [
+                {
+                  data: [Odds, 100 - Odds],
+                  backgroundColor: [
+                    theme.colors.green.fionGreen,
+                    theme.colors.gray[600],
+                    theme.colors.gray[600],
+                  ],
+                  borderWidth: 0,
+                },
+              ],
+            }}
+          />
+          <div
+            style={{
+              position: 'absolute',
+              left: 14,
+              top: 21,
+              fontWeight: 500,
+              fontSize: '16px',
+              lineHeight: '22px',
+            }}
+          >{`${Odds}%`}</div>
+        </DoughnutContainer>
+      </li>
+      <li style={{ width: '120px' }}>
+        <Rating>
+          <Image src="/images/icon/rank.png" alt="최고등급" layout="fill" />
+        </Rating>
+      </li>
     </UserRankingData>
   );
 };
 
 const Ranking: NextPage = () => {
   return (
-    <>
+    <BackgroundWrapper>
       <RankingWrapper>
         <RankingScore>랭킹점수</RankingScore>
         <RankingList>
@@ -102,7 +151,10 @@ const Ranking: NextPage = () => {
               flexDirection: 'row',
               justifyContent: 'center',
               width: '80px',
-              marginRight: '24px',
+              fontWeight: 400,
+              fontSize: '20px',
+              lineHeight: '23px',
+              // marginRight: '24px',
             }}
           >
             순위
@@ -112,9 +164,11 @@ const Ranking: NextPage = () => {
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'center',
-              width: '320px',
-              marginRight: '24px',
+              width: '280px',
               alignItems: 'center',
+              fontWeight: 400,
+              fontSize: '20px',
+              lineHeight: '23px',
             }}
           >
             구단주
@@ -125,7 +179,9 @@ const Ranking: NextPage = () => {
               flexDirection: 'row',
               justifyContent: 'center',
               width: '200px',
-              marginRight: '24px',
+              fontWeight: 400,
+              fontSize: '20px',
+              lineHeight: '23px',
             }}
           >
             전적
@@ -135,8 +191,23 @@ const Ranking: NextPage = () => {
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'center',
-              width: '80px',
-              marginRight: '24px',
+              width: '200px',
+              fontWeight: 400,
+              fontSize: '20px',
+              lineHeight: '23px',
+            }}
+          >
+            랭킹점수
+          </li>
+          <li
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              width: '120px',
+              fontWeight: 400,
+              fontSize: '20px',
+              lineHeight: '23px',
             }}
           >
             승률
@@ -147,7 +218,9 @@ const Ranking: NextPage = () => {
               flexDirection: 'row',
               justifyContent: 'center',
               width: '120px',
-              marginRight: '65px',
+              fontWeight: 400,
+              fontSize: '20px',
+              lineHeight: '23px',
             }}
           >
             최고등급
@@ -156,45 +229,53 @@ const Ranking: NextPage = () => {
         {dummyData.map((i) => (
           <UserRankingBox
             ranking={i.ranking}
-            profileImg={i.profileImg}
             nickname={i.nickname}
             record={i.record}
             Odds={i.Odds}
+            rankingScore={i.rankingScore}
             rating={i.rating}
           />
         ))}
+        <div
+          style={{
+            position: 'absolute',
+            left: 0,
+            bottom: 0,
+            zIndex: 1,
+          }}
+        >
+          <Backgorund>
+            <Image
+              src="/images/background/ranking.png"
+              alt="최고등급"
+              layout="fill"
+            />
+          </Backgorund>
+        </div>
       </RankingWrapper>
-    </>
+    </BackgroundWrapper>
   );
 };
 
 export default Ranking;
 
-const RankingWrapper = styled.div`
-  /* display: flex;
-  color: white;
-  flex-direction: column;
-  align-items: center;
-  height: 744px;
-  padding-top: 100px;
-  
-  ul {
-    list-style: none;
-    color: white;
-    font-size: 20px;
-  }
-  li {
-    float: left;
-  }
-  li + li {
-    margin-left: 150px;
-  } */
+const BackgroundWrapper = styled.div`
+  position: relative;
+`;
 
-  padding-top: 142.5px;
+const RankingWrapper = styled.div`
+  background-color: '#D9D9D900';
+
+  padding-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 17px;
+
+  padding-bottom: 291px;
+
+  ul {
+    margin-top: 4px;
+  }
 `;
 
 const UserRankingData = styled.ul`
@@ -206,19 +287,21 @@ const UserRankingData = styled.ul`
   list-style: none;
 
   background: #212121;
-  width: 1200px;
-  height: 112px;
+  width: 1080px;
+  height: 84px;
+
   margin-bottom: 0;
+  padding-bottom: 0;
+  z-index: 2;
 `;
 
 const RankingScore = styled.h1`
-  margin: 0;
-  padding: 0;
-
-  font-style: normal;
   font-weight: 400;
-  font-size: 32px;
-  line-height: 37px;
+  font-size: 28px;
+  line-height: 32px;
+
+  margin-top: 62.5px;
+  margin-bottom: 62.5px;
 `;
 
 const RankingList = styled.ul`
@@ -227,12 +310,25 @@ const RankingList = styled.ul`
 
   li {
     font-weight: 400;
-    font-size: 24px;
-    line-height: 28px;
+    font-size: 20px;
+    line-height: 23px;
   }
-  /* width: 1200px; */
+`;
 
-  /* width: 1200px; */
-  /* align-items: center; */
-  /* justify-content: center; */
+const DoughnutContainer = styled.div`
+  position: relative;
+  width: 6rem;
+  height: 6rem;
+`;
+
+const Rating = styled.div`
+  position: relative;
+  width: 6rem;
+  height: 6rem;
+`;
+
+const Backgorund = styled.div`
+  position: relative;
+  width: 91rem;
+  height: 48rem;
 `;
