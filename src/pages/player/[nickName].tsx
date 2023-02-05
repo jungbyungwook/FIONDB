@@ -132,6 +132,10 @@ export const getServerSideProps: GetServerSideProps<IParams> = async (
   const prefetchMatchDataTime = endTime1 - startTime1;
   console.log(`Result Time Prefetch MatchData :  ${prefetchMatchDataTime} ms`);
 
+  await queryClient.prefetchQuery(
+    metaQueryKey.soccerPlayersMeta,
+    metaQueryFunction.soccerPlayersMeta,
+  );
   console.log(
     `totelTime: ${preFetchUserProfileTime + prefetchMatchDataTime} ms `,
   );
