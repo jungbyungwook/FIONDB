@@ -1,40 +1,45 @@
 import type { NextPage } from 'next';
 import styled from 'styled-components';
 import { Doughnut } from 'react-chartjs-2';
+import theme from 'src/style/theme';
+import { Chart, ArcElement } from 'chart.js';
+import Image from 'next/image';
+
+Chart.register(ArcElement);
 
 const dummyData = [
   {
     ranking: 1,
-    profileImg: '프로필 이미지',
     nickname: '피굽남BenQ김승환',
     record: '34전 1승 6패',
-    rankingScore: 1000,
-    Odds: '82.9%',
+    rankingScore: 3000,
+    Odds: 82,
     rating: '등급1',
   },
   {
     ranking: 2,
-    profileImg: '프로필 이미지',
     nickname: 'VIsualUTA',
     record: '37전 1승 5패',
-    rankingScore: 1000,
-    Odds: '86%',
+    rankingScore: 2000,
+    Odds: 86,
     rating: '등급2',
   },
   {
     ranking: 3,
-    profileImg: '프로필 이미지',
     nickname: ' PGxKT곽준혁',
     record: '45전 0승 13패',
     rankingScore: 1000,
-    Odds: '77.6%',
+    Odds: 77,
     rating: '등급3',
   },
 ];
 
 const UserRankingBox = (props: any) => {
-  const { ranking, profileImg, nickname, record, rankingScore, Odds, rating } =
-    props;
+  const { ranking, nickname, record, rankingScore, Odds, rating } = props;
+
+  const options = {
+    cutout: '90%',
+  };
 
   return (
     <UserRankingData>
@@ -89,13 +94,47 @@ const UserRankingBox = (props: any) => {
           fontWeight: 400,
           fontSize: '16px',
           lineHeight: '22px',
-          marginLeft: '40px',
+          paddingLeft: 30,
         }}
       >
         {rankingScore}
       </li>
-      <li style={{ width: '120px' }}>{Odds}</li>
-      <li style={{ width: '120px' }}>{rating}</li>
+      <li style={{ width: '120px' }}>
+        <DoughnutContainer>
+          <Doughnut
+            style={{ width: '60px', height: '60px' }}
+            options={options}
+            data={{
+              datasets: [
+                {
+                  data: [Odds, 100 - Odds],
+                  backgroundColor: [
+                    theme.colors.green.fionGreen,
+                    theme.colors.gray[600],
+                    theme.colors.gray[600],
+                  ],
+                  borderWidth: 0,
+                },
+              ],
+            }}
+          />
+          <div
+            style={{
+              position: 'absolute',
+              left: 14,
+              top: 21,
+              fontWeight: 500,
+              fontSize: '16px',
+              lineHeight: '22px',
+            }}
+          >{`${Odds}%`}</div>
+        </DoughnutContainer>
+      </li>
+      <li style={{ width: '120px' }}>
+        <Rating>
+          <Image src="/images/icon/rank.png" alt="최고등급" layout="fill" />
+        </Rating>
+      </li>
     </UserRankingData>
   );
 };
@@ -190,7 +229,6 @@ const Ranking: NextPage = () => {
         {dummyData.map((i) => (
           <UserRankingBox
             ranking={i.ranking}
-            profileImg={i.profileImg}
             nickname={i.nickname}
             record={i.record}
             Odds={i.Odds}
@@ -254,4 +292,16 @@ const RankingList = styled.ul`
     font-size: 20px;
     line-height: 23px;
   }
+`;
+
+const DoughnutContainer = styled.div`
+  position: relative;
+  width: 6rem;
+  height: 6rem;
+`;
+
+const Rating = styled.div`
+  position: relative;
+  width: 6rem;
+  height: 6rem;
 `;
