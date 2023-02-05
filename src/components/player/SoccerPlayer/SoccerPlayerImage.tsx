@@ -73,6 +73,11 @@ const S = {
         : `1px solid ${theme.colors.gray[600]}`};
     border-radius: ${({ type }) => (type === 'circle' ? '50%' : null)};
     overflow: hidden;
+
+    @media ${({ theme }) => theme.media.small} {
+      width: 6rem;
+      height: 6rem;
+    }
   `,
   TopAbsolute: styled.div`
     position: absolute;

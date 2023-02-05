@@ -32,14 +32,12 @@ export const OddsChart = (props: Props) => {
         <Doughnut
           options={options}
           data={{
-            // labels:,
             datasets: [
               {
-                // label: '',
                 data: props.data,
                 backgroundColor: [
                   theme.colors.green.fionGreen,
-                  theme.colors.gray[600], // 무승부는 보여줄것인가?
+                  theme.colors.gray[600],
                   theme.colors.gray[600],
                 ],
                 borderWidth: 0,
@@ -59,11 +57,20 @@ const S = {
     flex-direction: column;
     gap: 1rem;
     text-align: center;
+
+    @media ${({ theme }) => theme.media.small} {
+      font-size: ${({ theme }) => theme.fontSizes.content[12]};
+    }
   `,
   DoughnutContainer: styled.div`
     position: relative;
     width: 15rem;
     height: 15rem;
+
+    @media ${({ theme }) => theme.media.small} {
+      width: 10rem;
+      height: 10rem;
+    }
   `,
   Absolute: styled.div<{ cutoutPercent: string }>`
     display: flex;
@@ -77,5 +84,9 @@ const S = {
     left: ${({ cutoutPercent }) => cutoutPercent};
     border-radius: 100%;
     font-size: ${({ theme }) => theme.fontSizes.subTitle[24]};
+
+    @media ${({ theme }) => theme.media.small} {
+      font-size: ${({ theme }) => theme.fontSizes.content[16]};
+    }
   `,
 };

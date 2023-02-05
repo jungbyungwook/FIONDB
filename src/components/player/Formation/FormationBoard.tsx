@@ -13,7 +13,7 @@ export const FormationBoard = ({ children, matchDetailData }: Props) => {
   return (
     <S.FormationBoard>
       <S.BoardTitle>스쿼드 정보</S.BoardTitle>
-      <S.BoardTable>{/*  TODO: 선수가치 총합등이 들어갈 부분 */}</S.BoardTable>
+      {/* <S.BoardTable> TODO: 선수가치 총합등이 들어갈 부분</S.BoardTable> */}
       {children}
       <S.BoardFooter>
         <S.BoardFooterTitle>교체선수</S.BoardFooterTitle>
@@ -25,9 +25,13 @@ export const FormationBoard = ({ children, matchDetailData }: Props) => {
 
 const S = {
   FormationBoard: styled.div`
-    height: 90rem;
+    height: 80rem;
     background-color: ${({ theme }) => theme.colors.gray[900]};
     border-radius: 1rem;
+
+    @media ${({ theme }) => theme.media.small} {
+      width: 100%;
+    }
   `,
   BoardTitle: styled.div`
     display: flex;
@@ -37,13 +41,20 @@ const S = {
     height: 5rem;
     margin: 0 auto;
     font-size: ${({ theme }) => theme.fontSizes.subTitle[20]};
-    border-bottom: 1px solid ${({ theme }) => theme.colors.gray[600]};
+
+    @media ${({ theme }) => theme.media.small} {
+      height: 4rem;
+    }
   `,
   BoardTable: styled.div`
     height: 10rem;
   `,
   BoardFooter: styled.div`
     height: 20rem;
+
+    @media ${({ theme }) => theme.media.small} {
+      height: 13rem;
+    }
   `,
   BoardFooterTitle: styled.div`
     font-size: ${({ theme }) => theme.fontSizes.subTitle[20]};

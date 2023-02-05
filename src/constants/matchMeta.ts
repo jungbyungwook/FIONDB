@@ -1,4 +1,4 @@
-export const matchMetaData = [
+export const MATCH_META_DATA = [
   {
     matchtype: 30,
     desc: '리그 친선',
@@ -35,4 +35,4 @@ export const matchMetaData = [
     matchtype: 234,
     desc: '볼타 커스텀',
   },
-];
+] as const;

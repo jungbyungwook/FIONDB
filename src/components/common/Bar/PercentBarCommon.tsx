@@ -50,4 +50,8 @@ const StyleFlex = styled.div`
 `;
 const StyleFlexItem = styled.span`
   font-size: ${({ theme }) => theme.fontSizes.content[14]};
+
+  @media ${({ theme }) => theme.media.small} {
+    font-size: ${({ theme }) => theme.fontSizes.content[12]};
+  }
 `;

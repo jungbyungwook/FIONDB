@@ -35,19 +35,28 @@ export const Button = ({
 const StyledButton = styled.button<Pick<Props, 'style'>>`
   display: flex;
   justify-content: center;
-  gap: 1rem;
   align-items: center;
+  gap: 1rem;
+
   width: ${({ style }) =>
     style?.width ? pixelToRem(style?.width) : pixelToRem(145)};
   height: ${({ style }) =>
     style?.height ? pixelToRem(style?.height) : pixelToRem(50)};
+
   border-radius: 0.5rem;
   padding: 1.3rem;
   background-color: ${({ theme, style }) =>
     style?.backgroundColor ? style?.backgroundColor : theme.colors.gray[800]};
   font-size: ${({ theme }) => theme.fontSizes.subTitle[18]};
+
   &:hover {
     cursor: pointer;
     opacity: 0.7;
+  }
+
+  @media ${({ theme }) => theme.media.small} {
+    width: 100%;
+    height: 100%;
+    font-size: ${({ theme }) => theme.fontSizes.content[12]};
   }
 `;
