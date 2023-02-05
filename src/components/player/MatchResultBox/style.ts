@@ -20,6 +20,7 @@ export const StyleSection = styled.div`
   height: 18rem;
   flex-direction: column;
   gap: 1rem;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.16);
 
   @media ${({ theme }) => theme.media.small} {
     height: 13.5rem;
