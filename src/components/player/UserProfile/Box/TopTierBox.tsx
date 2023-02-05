@@ -3,9 +3,9 @@ import { useRouter } from 'next/router';
 
 import { ImageWithFallback } from 'src/components/common/Image/ImageWithFallback';
 import { useCaseUserProfile } from 'src/useCases/useCaseUserProfile';
-
-import { IParamsNickName } from '../UserProfileContainer';
 import { useCaseGetMetaData } from 'src/useCases/useCaseGetMetaData';
+import { IParamsNickName } from '../UserProfileContainer';
+import { MATCH_META_DATA } from 'src/constants/matchMeta';
 
 export const UserTopTierBox = () => {
   const router = useRouter();
@@ -23,7 +23,7 @@ export const UserTopTierBox = () => {
 
   if (matchDivisionMetaQuery.status === 'success') {
     const choiceOfficialAndCoachGameImageIndex = (
-      matchDivisionCodes = [50],
+      matchDivisionCodes = [MATCH_META_DATA[2].matchtype],
     ) => {
       const { data: matchDivisionData } = matchDivisionMetaQuery.data;
 
@@ -43,24 +43,24 @@ export const UserTopTierBox = () => {
 
     const rankIds = choiceOfficialAndCoachGameImageIndex();
 
-    // ToDo: fallbackSrc를 결정해주어야 함
     return (
       <S.TopTierWrap>
         <S.Flex>
           <S.FlexItem>
-            <S.TopTierTitle>공식모드</S.TopTierTitle>
-            {rankIds.map((rankId, index) => (
-              <ImageWithFallback
-                key={`${rankId}${index}`}
-                alt="티어아이콘"
-                width={95}
-                height={95}
-                fallbackSrc={`https://ssl.nexon.com/s2/game/fo4/obt/rank/large/update_2009/ico_rank0.png`}
-                src={`https://ssl.nexon.com/s2/game/fo4/obt/rank/large/update_2009/ico_rank${rankId}.png`}
-                blurDataURL={`https://ssl.nexon.com/s2/game/fo4/obt/rank/large/update_2009/ico_rank${rankId}.png`}
-                placeholder="blur"
-              />
-            ))}
+            <S.TopTierTitle>{MATCH_META_DATA[2].desc}</S.TopTierTitle>
+            <S.TopTierImage>
+              {rankIds.map((rankId, index) => (
+                <ImageWithFallback
+                  key={`${rankId}${index}`}
+                  alt="티어아이콘"
+                  layout="fill"
+                  fallbackSrc={`https://ssl.nexon.com/s2/game/fo4/obt/rank/large/update_2009/ico_rank0.png`}
+                  src={`https://ssl.nexon.com/s2/game/fo4/obt/rank/large/update_2009/ico_rank${rankId}.png`}
+                  blurDataURL={`https://ssl.nexon.com/s2/game/fo4/obt/rank/large/update_2009/ico_rank${rankId}.png`}
+                  placeholder="blur"
+                />
+              ))}
+            </S.TopTierImage>
             <S.TopTierMode>최고등급</S.TopTierMode>
           </S.FlexItem>
         </S.Flex>
@@ -87,10 +87,28 @@ const S = {
   TopTierTitle: styled.div`
     margin-bottom: 1.2rem;
     font-size: ${({ theme }) => theme.fontSizes.content[16]};
+
+    @media ${({ theme }) => theme.media.small} {
+      display: none;
+    }
+  `,
+  TopTierImage: styled.div`
+    position: relative;
+    width: 9.5rem;
+    height: 9.5rem;
+
+    @media ${({ theme }) => theme.media.small} {
+      width: 8rem;
+      height: 8rem;
+    }
   `,
   TopTierMode: styled.div`
     height: 30%;
     margin-top: 1.2rem;
     font-size: ${({ theme }) => theme.fontSizes.subTitle[20]};
+
+    @media ${({ theme }) => theme.media.small} {
+      display: none;
+    }
   `,
 };

@@ -2,6 +2,8 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import styled from 'styled-components';
 import { ParsedUrlQuery } from 'querystring';
 import { dehydrate, QueryClient } from 'react-query';
+import { useAtom } from 'jotai';
+import { useEffect } from 'react';
 
 import { MatchResultBox } from 'src/components/player/MatchResultBox';
 import { UserProfileContainer } from 'src/components/player/UserProfile/UserProfileContainer';
@@ -17,20 +19,23 @@ import {
 } from 'src/useCases/useCaseGetMetaData';
 import { useCaseMatchSearch } from 'src/useCases/useCaseMatchSearch';
 import { useIntersectionObserver } from 'src/hooks/useIntersectionObserver';
+import { useCheckWindowSize } from 'src/hooks/useCheckWindowSize';
+import { mediaAtom } from 'src/atoms/device';
+import { DEVICE } from 'src/constants/device';
+import { DEVICE_SIZE } from 'src/style/media';
 
 type PagePropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 const Page = ({ nickName }: PagePropsType) => {
   const { useGetUserProfileQuery } = useCaseUserProfile();
   const userProfileQuery = useGetUserProfileQuery(nickName);
-  // 여기서 useQuery를 이용해서 fetch 함수를 호출하고 내부 Component에서는 queryClient에 접근해서 getData만을 수행한다.
+
   const { useGetTopTierQuery } = useCaseUserProfile();
   const { useMatchInfiniteQuery } = useCaseMatchSearch();
-  const { useGetSoccerPlayersMeta } = useCaseGetMetaData();
 
+  // 여기서 useQuery를 이용해서 fetch 함수를 호출하고 내부 Component에서는 queryClient에 접근해서 getData만을 수행한다.
   const topTierQuery = useGetTopTierQuery(
     userProfileQuery.data?.accessId || '',
   );
-  const soccerPlayerMetaQuery = useGetSoccerPlayersMeta();
   const matchListInfiniteQuery = useMatchInfiniteQuery(
     userProfileQuery.data?.accessId,
   );
@@ -38,20 +43,27 @@ const Page = ({ nickName }: PagePropsType) => {
     matchListInfiniteQuery?.fetchNextPage(),
   );
 
-  if (userProfileQuery.status === 'loading') return <div>loading...</div>;
-  if (
-    userProfileQuery.status === 'success' &&
-    soccerPlayerMetaQuery.status === 'success'
-  ) {
+  const { windowSize } = useCheckWindowSize();
+  const [media, setMedia] = useAtom(mediaAtom);
+
+  useEffect(() => {
+    if (windowSize.width) {
+      if (windowSize.width <= DEVICE_SIZE.PC) {
+        return setMedia(DEVICE.mobile);
+      }
+      return setMedia(DEVICE.pc);
+    }
+  }, [windowSize]);
+
+  if (userProfileQuery.status === 'loading') return null;
+  if (userProfileQuery.status === 'success') {
     return (
       <Layout>
         <S.Scetion>
-          <div>
-            <UserProfileContainer
-              accessId={userProfileQuery.data?.accessId}
-              nickName={nickName}
-            />
-          </div>
+          <UserProfileContainer
+            accessId={userProfileQuery.data?.accessId}
+            nickName={nickName}
+          />
           <S.Ul>
             {matchListInfiniteQuery?.data?.pages.map((page) =>
               page.currentPageData.map((data) => (
@@ -121,24 +133,12 @@ export const getServerSideProps: GetServerSideProps<IParams> = async (
   const prefetchMatchDataTime = endTime1 - startTime1;
   console.log(`Result Time Prefetch MatchData :  ${prefetchMatchDataTime} ms`);
 
-  const startTime2 = new Date().getTime();
   await queryClient.prefetchQuery(
     metaQueryKey.soccerPlayersMeta,
-    () => metaQueryFunction.soccerPlayersMeta,
+    metaQueryFunction.soccerPlayersMeta,
   );
-  const endTime2 = new Date().getTime();
-
-  const prefetchSoccerPlayerMetaTime = endTime2 - startTime2;
   console.log(
-    `Result Time Prefetch SoccerPlayerMeta :  ${prefetchSoccerPlayerMetaTime} ms`,
-  );
-
-  console.log(
-    `totelTime: ${
-      preFetchUserProfileTime +
-      prefetchMatchDataTime +
-      prefetchSoccerPlayerMetaTime
-    } ms `,
+    `totelTime: ${preFetchUserProfileTime + prefetchMatchDataTime} ms `,
   );
 
   return {
@@ -156,10 +156,12 @@ export const S = {
     width: 108rem;
     margin: 0 auto;
 
-    @media screen {
+    @media ${({ theme }) => theme.media.small} {
+      width: 36rem;
     }
   `,
   Ul: styled.ul`
+    width: 100%;
     display: grid;
     padding: 0;
     grid-row-gap: 0.8rem;

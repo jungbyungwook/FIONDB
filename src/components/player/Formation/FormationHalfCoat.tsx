@@ -23,7 +23,7 @@ export const FormationHalfCoat = ({
 
   return (
     <S.FormationWrap>
-      <S.GridContainer type={'column'} rotate={rotate}>
+      <S.GridContainer type={'column'}>
         {positionsList.map(([key, positions], columnIndex) =>
           positions.map((position, rowIndex) => {
             const soccerPlayer = playerDto?.[position] as PlayerDTO;
@@ -36,7 +36,7 @@ export const FormationHalfCoat = ({
                   columnNum={Number(columnIndex) + 1}
                   rowNum={Number(rowIndex) + 1}
                 >
-                  <S.ImageWrap rotate={rotate}>
+                  <S.ImageWrap>
                     <S.AbsoluteGoalWrap>
                       {soccerPlayer.status.goal ? (
                         <>
@@ -65,8 +65,14 @@ const S = {
   FormationWrap: styled.div`
     width: 50%;
     padding: 2rem 1rem;
+
+    @media ${({ theme }) => theme.media.small} {
+      width: 100%;
+      height: 50%;
+      padding: 0.5rem 1rem;
+    }
   `,
-  GridContainer: styled.div<{ type: 'column' | 'row'; rotate?: number }>`
+  GridContainer: styled.div<{ type: 'column' | 'row' }>`
     display: grid;
     width: 100%;
     height: 100%;
@@ -84,16 +90,26 @@ const S = {
     gap: 1rem;
     grid-column: ${(props) => props.columnNum};
     grid-row: ${(props) => props.rowNum};
-    text-align: center;
 
+    text-align: center;
     font-size: 1.2rem;
+
+    @media ${({ theme }) => theme.media.small} {
+      grid-column: ${(props) => props.rowNum};
+      grid-row: ${(props) => props.columnNum};
+    }
   `,
-  ImageWrap: styled.div<{ rotate: number | undefined }>`
+  ImageWrap: styled.div`
     position: relative;
     width: 6rem;
     height: 6rem;
     border-radius: 50%;
     margin-bottom: 50%;
+
+    @media ${({ theme }) => theme.media.small} {
+      width: 6rem;
+      height: 5.5rem;
+    }
   `,
 
   AbsoluteGoalWrap: styled.div`
@@ -105,5 +121,10 @@ const S = {
     position: absolute;
     top: -2.5rem;
     color: ${({ theme }) => theme.colors.green.fionGreen};
+
+    @media ${({ theme }) => theme.media.small} {
+      top: 1.5rem;
+      left: 4.5rem;
+    }
   `,
 };

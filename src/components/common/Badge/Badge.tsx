@@ -48,9 +48,12 @@ const StyledBadge = styled.div<{
   width: ${({ width }) => (width ? pixelToRem(width) : pixelToRem(39))};
   height: ${({ height }) => (height ? pixelToRem(height) : pixelToRem(25))};
   padding: 0.4rem 0.8rem;
-  /* border: 1px solid ${({ theme }) => theme.colors.green[600]}; */
   border-radius: 0.4rem;
   background-color: ${({ theme, backgroundColor }) => backgroundColor};
   color: ${({ theme, color }) => color};
   font-weight: bold;
+
+  @media ${({ theme }) => theme.media.small} {
+    font-size: 1rem;
+  }
 `;

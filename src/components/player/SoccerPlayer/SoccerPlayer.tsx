@@ -110,6 +110,11 @@ const S = {
         : position === 'df'
         ? theme.colors.position.df
         : null};
+
+    @media ${({ theme }) => theme.media.small} {
+      font-size: ${({ theme, inFormation }) =>
+        inFormation ? '1rem' : theme.fontSizes.content[12]};
+    }
   `,
   Status: styled.div``,
   AbsoluteDiv: styled.div`

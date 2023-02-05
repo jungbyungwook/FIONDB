@@ -1,7 +1,6 @@
 // 모든페이지에 적용되는 파일
 import type { AppProps } from 'next/app';
 import { useState } from 'react';
-import { RecoilRoot } from 'recoil';
 import styled, { ThemeProvider } from 'styled-components';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
@@ -16,28 +15,34 @@ function MyApp({
   Component,
   pageProps,
 }: AppProps<{ dehydratedState: DehydratedState }>) {
-  const [queryClient] = useState(() => new QueryClient());
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: 1,
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
+
   return (
-    <RecoilRoot>
-      <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          <ThemeProvider theme={theme}>
-            <BackgroundWrapper>
-              <Header />
-              <GlobalStyles />
-              <Component {...pageProps} />
-              <Footer />
-            </BackgroundWrapper>
-          </ThemeProvider>
-        </Hydrate>
-        <ReactQueryDevtools />
-      </QueryClientProvider>
-    </RecoilRoot>
+    <QueryClientProvider client={queryClient}>
+      <Hydrate state={pageProps.dehydratedState}>
+        <ThemeProvider theme={theme}>
+          <BackgroundWrapper>
+            <Header />
+            <GlobalStyles />
+            <Component {...pageProps} />
+            <Footer />
+          </BackgroundWrapper>
+        </ThemeProvider>
+      </Hydrate>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   );
 }
 
 export default MyApp;
 
 const BackgroundWrapper = styled.div`
-  background-color: ${({ theme }) => theme.colors.gray[800]};
+  background-color: ${({ theme }) => theme.colors.background};
 `;

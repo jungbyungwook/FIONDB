@@ -5,43 +5,71 @@ import { ImageWithFallback } from 'src/components/common/Image/ImageWithFallback
 import { soccerImageDefaultSrc } from 'src/useCases/matchRecordCase';
 import ProfileBackground from 'src/assets/svg/profile_background.svg';
 import { useCaseUserProfile } from 'src/useCases/useCaseUserProfile';
-import type { IParamsNickName } from '../UserProfileContainer';
 import { useCaseStatisticsMatch } from 'src/useCases/useCaseStatisticsMatch';
 import { getSoccerPlayerImageSrc } from 'src/util/getSoccerPlayerImageSrc';
+import type { IParamsNickName } from 'src/components/player/UserProfile/UserProfileContainer';
+import { DEVICE, DeviceType } from 'src/constants/device';
+import { useGetOfficialMatchToptierDivision } from 'src/hooks/useGetOfficialMatchToptierDivision';
 
-export const UserProfileBox = () => {
+export const ProfileImageBox = () => {
   const router = useRouter();
   const { nickName } = router.query as IParamsNickName;
-
-  const { useGetUserProfileQuery } = useCaseUserProfile();
-  const { data: userProfileData } = useGetUserProfileQuery(nickName);
   const { searcherMostPlayerSpId } = useCaseStatisticsMatch(nickName);
 
   return (
-    <S.UserProfileBox>
-      <S.ImageWrap>
-        <S.BackgroundImageWrap>
-          <ProfileBackground />
-        </S.BackgroundImageWrap>
-        <ImageWithFallback
-          key={searcherMostPlayerSpId}
-          alt="user_profile_img"
-          fallbackSrc={soccerImageDefaultSrc}
-          src={getSoccerPlayerImageSrc(searcherMostPlayerSpId)}
-          width={200}
-          height={200}
-          quality={100}
-          placeholder="blur"
-          blurDataURL={getSoccerPlayerImageSrc(searcherMostPlayerSpId)}
-        />
-      </S.ImageWrap>
-      <S.UserProfileDataWrap>
+    <S.ImageWrap>
+      <S.BackgroundImageWrap>
+        <ProfileBackground />
+      </S.BackgroundImageWrap>
+      <ImageWithFallback
+        key={searcherMostPlayerSpId}
+        alt="user_profile_img"
+        fallbackSrc={soccerImageDefaultSrc}
+        src={getSoccerPlayerImageSrc(searcherMostPlayerSpId)}
+        layout="fill"
+        quality={100}
+        placeholder="blur"
+        blurDataURL={getSoccerPlayerImageSrc(searcherMostPlayerSpId)}
+        priority
+      />
+    </S.ImageWrap>
+  );
+};
+
+interface IProfileDataBoxProps {
+  media: DeviceType;
+}
+
+export const ProfileDataBox = ({ media }: IProfileDataBoxProps) => {
+  const router = useRouter();
+  const { nickName } = router.query as IParamsNickName;
+  const { useGetUserProfileQuery } = useCaseUserProfile();
+  const { data: userProfileData } = useGetUserProfileQuery(nickName);
+  const { userOfficialMatchDivision } =
+    useGetOfficialMatchToptierDivision(nickName);
+
+  const content =
+    media === DEVICE.mobile ? (
+      <>
+        <S.TopTierText>
+          최고등급(
+          {userOfficialMatchDivision?.divisionName || '...'})
+        </S.TopTierText>
+        <S.NickName>{userProfileData?.nickname}</S.NickName>
+        <S.FlexItem>
+          <S.Level>Lv. {userProfileData?.level}</S.Level>
+          <S.Level>00 위</S.Level>
+        </S.FlexItem>
+      </>
+    ) : (
+      <>
         <S.NickName>{userProfileData?.nickname}</S.NickName>
         <S.Level>Lv. {userProfileData?.level}</S.Level>
         <S.Level>00 위</S.Level>
-      </S.UserProfileDataWrap>
-    </S.UserProfileBox>
-  );
+      </>
+    );
+
+  return <S.UserProfileDataWrap>{content}</S.UserProfileDataWrap>;
 };
 
 const S = {
@@ -64,6 +92,13 @@ const S = {
   ImageWrap: styled.div`
     position: relative;
     overflow: hidden;
+    width: 25rem;
+    height: 20rem;
+
+    @media ${({ theme }) => theme.media.small} {
+      width: 20rem;
+      height: 12rem;
+    }
   `,
   BackgroundImageWrap: styled.div`
     position: absolute;
@@ -79,14 +114,33 @@ const S = {
     justify-content: start;
     gap: 1rem;
     text-align: left;
+
+    @media ${({ theme }) => theme.media.small} {
+      gap: 0.4rem;
+    }
+  `,
+  TopTierText: styled.div`
+    font-size: ${({ theme }) => theme.fontSizes.content[16]};
   `,
   NickName: styled.h4`
     margin: 0;
+    @media ${({ theme }) => theme.media.small} {
+      width: 17.5rem;
+      font-size: ${({ theme }) => theme.fontSizes.subTitle[24]};
+    }
   `,
   Level: styled.div`
     font-size: 1.5rem;
+
+    @media ${({ theme }) => theme.media.small} {
+      font-size: ${({ theme }) => theme.fontSizes.content[16]};
+    }
   `,
   RefetchButton: styled.div`
     margin-top: 1rem;
+  `,
+  FlexItem: styled.div`
+    display: flex;
+    gap: 1.6rem;
   `,
 };

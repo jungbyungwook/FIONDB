@@ -11,7 +11,7 @@ export const metaQueryKey = {
 export const metaQueryFunction = {
   matchTypeMeta: metaAPI.getMatchTypeMeta(),
   matchDivisionMeta: metaAPI.getMatchDivisionMeta(),
-  soccerPlayersMeta: metaAPI.getSoccerPlayerMeta(),
+  soccerPlayersMeta: metaAPI.getSoccerPlayerMeta,
 };
 
 export const useCaseGetMetaData = () => {
@@ -32,7 +32,7 @@ export const useCaseGetMetaData = () => {
   const useGetSoccerPlayersMeta = () => {
     return useQuery(
       metaQueryKey.soccerPlayersMeta,
-      () => metaQueryFunction.soccerPlayersMeta,
+      metaQueryFunction.soccerPlayersMeta,
     );
   };
 

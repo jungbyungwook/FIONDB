@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { Input } from 'src/components/common/Input/Input';
 import { Layout } from 'src/components/common/Layout';
 import { useRouterByEnter } from 'src/hooks/useRouterByEnter';
+import { FionDbIcon } from 'src/components/common/SvgIcons/FionDbIcon';
 
 const Home: NextPage = () => {
   const [nickName, setNickName] = useState('');
@@ -26,16 +27,8 @@ const Home: NextPage = () => {
         >
           <HomeWrapper>
             <SubLogo>
-              <img
-                style={{
-                  width: '108.47px',
-                  height: '20px',
-                }}
-                src="/images/logo/FION.DB.png"
-                alt=""
-              />
+              <FionDbIcon />
             </SubLogo>
-
             <MainBanner>
               <Image
                 src="/images/banner/main-banner.png"

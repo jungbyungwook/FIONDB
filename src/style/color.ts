@@ -1,4 +1,5 @@
 export const colors = {
+  background: '#2B2B2B',
   position: {
     fw: '#CE535D',
     mf: '#79CD8C',

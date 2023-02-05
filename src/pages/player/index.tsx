@@ -1,7 +1,6 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
 import styled from 'styled-components';
-// import TestMatchResultBox from 'src/components/player/TestMatchResultBox';
 
 // 해당 url로 들어오면 잘못된 url이다.
 // 전적검색시 필요한 nickName을 입력하지 않은 상태이기 때문이다.

@@ -13,15 +13,14 @@ export const SeasonBadge = ({ seasonImageSrc }: Props) => {
 
   if (seasonImageSrc) {
     return (
-      <StyleImageWrap>
+      <S.ImageWrap>
         <ImageWithFallback
           src={seasonImageSrc}
           alt="seson_badge"
           fallbackSrc={seasonImageSrc}
-          width={25}
-          height={20}
+          layout="fill"
         />
-      </StyleImageWrap>
+      </S.ImageWrap>
     );
   }
 
@@ -36,7 +35,17 @@ export const SeasonBadge = ({ seasonImageSrc }: Props) => {
   );
 };
 
-const StyleImageWrap = styled.div`
-  border-radius: 0.3rem;
-  overflow: hidden;
-`;
+const S = {
+  ImageWrap: styled.div`
+    position: relative;
+    width: 2.5rem;
+    height: 2rem;
+    border-radius: 0.3rem;
+    overflow: hidden;
+
+    @media ${({ theme }) => theme.media.small} {
+      width: 3rem;
+      height: 2rem;
+    }
+  `,
+};
