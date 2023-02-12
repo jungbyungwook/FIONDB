@@ -144,7 +144,7 @@ const Logo = styled.img`
     /* height: 100px; */
     width: 86.78;
     height: 16;
-    /* margin-right: 26px; */
+    margin-right: 20px;
   }
 `;
 
