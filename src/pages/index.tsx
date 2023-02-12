@@ -31,7 +31,7 @@ const Home: NextPage = () => {
             </SubLogo>
             <MainBanner>
               <Image
-                src="/images/banner/main-banner.png"
+                src="/images/banner/main-banner2.png"
                 alt="메인 배너 이미지"
                 layout="fill"
               />
@@ -69,23 +69,40 @@ const HomeWrapper = styled.div`
   flex-direction: column;
   height: 1024px;
   width: 640px;
+
+  @media (max-width: 1023px) {
+    align-items: center;
+  }
 `;
 
 const SubLogo = styled.div`
   margin-top: 100px;
   margin-bottom: 8px;
   margin-left: 2px;
+
+  @media (max-width: 1023px) {
+    display: none;
+  }
 `;
 const MainBanner = styled.div`
   position: relative;
   width: 640px;
   height: 320px;
   margin-bottom: 24px;
+
+  @media (max-width: 1023px) {
+    width: 90vw;
+    height: 46vw;
+    margin-top: 10vw;
+  }
 `;
 const InputWrapper = styled.div`
   width: 640px;
   height: 56px;
   display: flex;
+  @media (max-width: 1023px) {
+    width: 90vw;
+  }
 `;
 
 const SearchBtn = styled.div`

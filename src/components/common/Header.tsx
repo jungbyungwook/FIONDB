@@ -14,15 +14,7 @@ const Header = () => {
         <li>
           <Link href="/">
             <a>
-              <img
-                style={{
-                  width: '108.47px',
-                  height: '20px',
-                  marginRight: '68px',
-                }}
-                src="/images/logo/FION.DB.png"
-                alt=""
-              />
+              <Logo src="/images/logo/FION.DB.png" alt="" />
             </a>
           </Link>
         </li>
@@ -30,7 +22,7 @@ const Header = () => {
           <Link href="/">
             {router.route === '/' ? (
               <LinkWrapper>
-                <a
+                <RecordSearchA
                   style={{
                     fontWeight: 400,
                     fontSize: '20px',
@@ -40,7 +32,7 @@ const Header = () => {
                   }}
                 >
                   전적 검색
-                  <div
+                  <CurrentPositionBar
                     style={{
                       position: 'absolute',
                       width: '100%',
@@ -49,7 +41,7 @@ const Header = () => {
                       top: 32,
                     }}
                   />
-                </a>
+                </RecordSearchA>
               </LinkWrapper>
             ) : (
               <a
@@ -141,4 +133,33 @@ const LinkWrapper = styled.div`
   /* padding-bottom: 4px;
   border-bottom: solid #abee02;
   border-width: 6px; */
+`;
+
+const Logo = styled.img`
+  width: 108.47px;
+  height: 20px;
+  margin-right: 68px;
+
+  @media (max-width: 1023px) {
+    /* height: 100px; */
+    width: 86.78;
+    height: 16;
+    margin-right: 20px;
+  }
+`;
+
+const RecordSearchA = styled.a`
+  font-weight: 400;
+  font-size: 20px;
+  color: '#ABEE02';
+  line-height: 23px;
+  position: 'relative';
+`;
+
+const CurrentPositionBar = styled.div`
+  position: 'absolute';
+  width: '100%';
+  height: 4px;
+  background-color: '#abee02';
+  top: 32;
 `;
