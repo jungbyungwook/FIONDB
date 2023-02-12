@@ -92,7 +92,8 @@ const MainBanner = styled.div`
 
   @media (max-width: 1023px) {
     width: 90vw;
-    height: 40vw;
+    height: 46vw;
+    margin-top: 10vw;
   }
 `;
 const InputWrapper = styled.div`
