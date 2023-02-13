@@ -1,10 +1,10 @@
 // 모든페이지에 적용되는 파일
 import type { AppProps } from 'next/app';
-import { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import type { DehydratedState } from '@tanstack/react-query';
+import { GoogleAnalytics } from 'nextjs-google-analytics';
 
 import { Footer, Header } from 'src/components/common';
 import { GlobalStyles } from 'src/style/global';
@@ -31,6 +31,7 @@ function MyApp({
           <BackgroundWrapper>
             <Header />
             <GlobalStyles />
+            <GoogleAnalytics trackPageViews />
             <Component {...pageProps} />
             <Footer />
           </BackgroundWrapper>
