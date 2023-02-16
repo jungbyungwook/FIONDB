@@ -37,19 +37,19 @@ export const FormationHalfCoat = ({
                   rowNum={Number(rowIndex) + 1}
                 >
                   <S.ImageWrap>
-                    <S.AbsoluteGoalWrap>
-                      {soccerPlayer.status.goal ? (
-                        <>
-                          {<GoalIcon />} x {soccerPlayer.status.goal}
-                        </>
-                      ) : null}
-                    </S.AbsoluteGoalWrap>
                     <SoccerPlayer
                       inFormation
                       playerDto={playerDto[position]}
                       isMine={isMine}
                       topOption={false}
                     />
+                    <S.AbsoluteGoalWrap>
+                      {soccerPlayer.status.goal ? (
+                        <>
+                          <GoalIcon /> x {soccerPlayer.status.goal}
+                        </>
+                      ) : null}
+                    </S.AbsoluteGoalWrap>
                   </S.ImageWrap>
                 </S.GridItem>
               )
@@ -81,6 +81,15 @@ const S = {
     row-gap: 1rem;
     column-gap: 1rem;
     font-size: 2rem;
+
+    @media ${({ theme }) => theme.media.small} {
+      row-gap: 0.5rem;
+      column-gap: 0rem;
+
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(8, 3.7rem);
+      align-items: center;
+    }
   `,
   GridItem: styled.div<{ columnNum: number; rowNum: number }>`
     display: flex;
@@ -107,8 +116,7 @@ const S = {
     margin-bottom: 50%;
 
     @media ${({ theme }) => theme.media.small} {
-      width: 6rem;
-      height: 5.5rem;
+      height: 0;
     }
   `,
 
@@ -123,8 +131,9 @@ const S = {
     color: ${({ theme }) => theme.colors.green.fionGreen};
 
     @media ${({ theme }) => theme.media.small} {
-      top: 1.5rem;
-      left: 4.5rem;
+      top: 0.3rem;
+      left: 2.6rem;
+      font-size: 1rem;
     }
   `,
 };

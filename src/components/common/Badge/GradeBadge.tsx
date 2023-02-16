@@ -1,11 +1,14 @@
+import styled from 'styled-components';
+
 import theme from 'src/style/theme';
 import { Badge } from './Badge';
 
 interface Props {
   spGrade?: number;
+  inFormation: boolean;
 }
 
-export const GradeBadge = ({ spGrade }: Props) => {
+export const GradeBadge = ({ spGrade, inFormation }: Props) => {
   const gradeColor = theme.colors.grade;
 
   const color =
@@ -20,6 +23,14 @@ export const GradeBadge = ({ spGrade }: Props) => {
     ? gradeColor.silver
     : gradeColor.gold;
 
+  if (inFormation) {
+    return (
+      <S.Badge color={color} backgroundColor={backgroundColor}>
+        {spGrade}
+      </S.Badge>
+    );
+  }
+
   return (
     <Badge
       center={spGrade}
@@ -29,4 +40,25 @@ export const GradeBadge = ({ spGrade }: Props) => {
       height={22}
     />
   );
+};
+
+const S = {
+  Badge: styled.div<{ color: string; backgroundColor: string | undefined }>`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    color: ${({ color }) => color};
+    font-weight: bold;
+    background-color: ${({ backgroundColor }) => backgroundColor};
+    border-radius: 0.5rem;
+
+    @media ${({ theme }) => theme.media.small} {
+      font-size: 1rem;
+      width: 1.4rem;
+      height: 1.2rem;
+      border-radius: 0.2rem;
+    }
+  `,
 };

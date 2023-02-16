@@ -56,10 +56,18 @@ export const SoccerPlayer = ({
   return (
     <S.Container>
       <SoccerPlayerImage
+        inFormation={inFormation}
         src={getSrc(playerDto.spId)}
         top={topOption && <MvpBadge isMine={isMine} />}
-        bottomLeft={<SeasonBadge seasonImageSrc={seasonDto?.seasonImg} />}
-        bottomRight={<GradeBadge spGrade={playerDto?.spGrade} />}
+        bottomLeft={
+          <SeasonBadge
+            inFormation={inFormation}
+            seasonImageSrc={seasonDto?.seasonImg}
+          />
+        }
+        bottomRight={
+          <GradeBadge spGrade={playerDto?.spGrade} inFormation={inFormation} />
+        }
         isMine={isMine}
       />
       {contentOption && (
@@ -67,7 +75,11 @@ export const SoccerPlayer = ({
           <S.Position position={positionCategory} inFormation={inFormation}>
             {playerDto.spPosition}
           </S.Position>
-          <SoccerPlayerName spId={playerDto.spId} />
+          <SoccerPlayerName
+            spId={playerDto.spId}
+            inFormation={inFormation}
+            position={positionCategory}
+          />
         </S.Content>
       )}
     </S.Container>
@@ -82,6 +94,10 @@ const S = {
     position: relative;
     gap: 1.8rem;
     text-align: center;
+
+    @media ${({ theme }) => theme.media.small} {
+      gap: 1rem;
+    }
   `,
   Content: styled.div<{ inFormation?: boolean }>`
     display: flex;
@@ -112,8 +128,7 @@ const S = {
         : null};
 
     @media ${({ theme }) => theme.media.small} {
-      font-size: ${({ theme, inFormation }) =>
-        inFormation ? '1rem' : theme.fontSizes.content[12]};
+      display: none;
     }
   `,
   Status: styled.div``,
