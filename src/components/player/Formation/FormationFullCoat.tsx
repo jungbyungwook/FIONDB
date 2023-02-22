@@ -55,7 +55,7 @@ const S = {
     @media ${({ theme }) => theme.media.small} {
       display: block;
       width: 34rem;
-      height: 80rem;
+      height: 110rem;
       margin: 0 0.8rem;
       background-image: url(${mobileSoccerCoatUrl.src});
     }

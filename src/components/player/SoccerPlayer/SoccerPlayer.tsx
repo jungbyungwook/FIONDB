@@ -22,6 +22,10 @@ export interface SoccerPlayerProps {
   contentOption?: boolean;
 }
 
+const getSrc = (spId: number) => {
+  return `https://fo4.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${spId}.png`;
+};
+
 export const SoccerPlayer = ({
   isMine,
   inFormation,
@@ -29,10 +33,6 @@ export const SoccerPlayer = ({
   topOption = true,
   contentOption = true,
 }: SoccerPlayerProps) => {
-  const getSrc = (spId: number) => {
-    return `https://fo4.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${spId}.png`;
-  };
-
   const { useGetSeasonIdMeta } = useCaseGetMetaData();
   const { data, isLoading } = useGetSeasonIdMeta();
   const targetSeasonId = Number(playerDto.spId.toString().slice(0, 3));
@@ -96,7 +96,8 @@ const S = {
     text-align: center;
 
     @media ${({ theme }) => theme.media.small} {
-      gap: 1rem;
+      gap: 0.8rem;
+      height: 4.5rem;
     }
   `,
   Content: styled.div<{ inFormation?: boolean }>`
@@ -138,4 +139,4 @@ const S = {
   `,
 };
 
-export const SoccerPlayerInFormation = () => {};
+// export const SoccerPlayerInFormation = () => {};

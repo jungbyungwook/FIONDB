@@ -87,7 +87,7 @@ const S = {
       column-gap: 0rem;
 
       grid-template-columns: repeat(5, 1fr);
-      grid-template-rows: repeat(8, 3.7rem);
+      grid-template-rows: repeat(8, 1fr);
       align-items: center;
     }
   `,
@@ -106,6 +106,8 @@ const S = {
     @media ${({ theme }) => theme.media.small} {
       grid-column: ${(props) => props.rowNum};
       grid-row: ${(props) => props.columnNum};
+      height: 5.5rem;
+      margin-bottom: 1rem;
     }
   `,
   ImageWrap: styled.div`
