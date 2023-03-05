@@ -15,7 +15,6 @@ import {
 import {
   metaQueryFunction,
   metaQueryKey,
-  useCaseGetMetaData,
 } from 'src/useCases/useCaseGetMetaData';
 import { useCaseMatchSearch } from 'src/useCases/useCaseMatchSearch';
 import { useIntersectionObserver } from 'src/hooks/useIntersectionObserver';
@@ -23,6 +22,8 @@ import { useCheckWindowSize } from 'src/hooks/useCheckWindowSize';
 import { mediaAtom } from 'src/atoms/device';
 import { DEVICE } from 'src/constants/device';
 import { DEVICE_SIZE } from 'src/style/media';
+import { HeadMeta } from 'src/components/common/HeadMeta/HeadMeta';
+import { GoalLoadingSpinner } from 'src/components/common/Spinner/GoalLoadingSpinner';
 
 type PagePropsType = InferGetServerSidePropsType<typeof getServerSideProps>;
 const Page = ({ nickName }: PagePropsType) => {
@@ -59,6 +60,7 @@ const Page = ({ nickName }: PagePropsType) => {
   if (userProfileQuery.status === 'success') {
     return (
       <Layout>
+        <HeadMeta title={nickName} />
         <S.Scetion>
           <UserProfileContainer
             accessId={userProfileQuery.data?.accessId}
@@ -77,7 +79,7 @@ const Page = ({ nickName }: PagePropsType) => {
           </S.Ul>
           <S.BottomWrap>
             <div ref={triggerRef}>
-              {matchListInfiniteQuery?.isFetching ? 'loading' : ''}
+              {matchListInfiniteQuery?.isFetching ? <GoalLoadingSpinner /> : ''}
             </div>
           </S.BottomWrap>
         </S.Scetion>
