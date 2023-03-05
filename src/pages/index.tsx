@@ -8,19 +8,25 @@ import { Input } from 'src/components/common/Input/Input';
 import { Layout } from 'src/components/common/Layout';
 import { useRouterByEnter } from 'src/hooks/useRouterByEnter';
 import { FionDbIcon } from 'src/components/common/SvgIcons/FionDbIcon';
+import { GoalLoadingSpinnerContainer } from 'src/components/common/Spinner/GoalLoadingSpinnerContainer';
+import { GoalLoadingSpinner } from 'src/components/common/Spinner/GoalLoadingSpinner';
 
 const Home: NextPage = () => {
   const [nickName, setNickName] = useState('');
-  const { routerPushOnKeyDown, routerClinkOnButton } = useRouterByEnter(
-    'player',
-    [nickName],
-  );
+  const { isRouting, routerPushOnKeyDown, routerClinkOnButton } =
+    useRouterByEnter('player', [nickName]);
 
   const onChangeWithNickName = (e: ChangeEvent<HTMLInputElement>) =>
     setNickName(e.target.value);
 
   return (
     <BackgroundWrapper>
+      {isRouting && (
+        <GoalLoadingSpinnerContainer>
+          <GoalLoadingSpinner width={100} height={100} />
+        </GoalLoadingSpinnerContainer>
+      )}
+
       <Layout>
         <div
           style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
