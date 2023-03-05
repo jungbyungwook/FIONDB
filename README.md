@@ -44,15 +44,16 @@
 | <div align='center'><img src="https://user-images.githubusercontent.com/66128037/222958641-db44e6f7-1073-4704-a33a-60404356da8f.png" width=500px ><br /><img src="https://user-images.githubusercontent.com/66128037/222958878-4172f16b-b525-428d-89f4-9c82f2fd64da.png" width=500px height=100% ></div> | <div align='center'></div> |
 | * 검색한 유저의 최근 경기기록 조회<br />* 각 경기의 mvp선수, 포메이션 제공<br />|* 반응형 웹 UI<br />| 
 
+<br /><br />
+
 ## 프로젝트 팀원 역할 분담
 
-| 이름   | 담당 업무                |
-| ------ | ------------------------ |
-| 이원형 | 팀장/ 백엔드/프론트 개발 |
-| 정병욱 | 백엔드/프론트 개발              |
-
-| 이희재 | 프론트 개발              |
-| 조서영 | 프론트 개발              |
+| 이름(깃헙)| 담당 업무 | |
+| ------ | ------------------------ | ----- |
+| [정병욱](https://github.com/jungbyungwook) | Front, Backend | 개발 환경, 랜딩, 랭킹 페이지 |
+| [안영민](https://github.com/ahn0min) | Front | 전적 검색 페이지 |
+| [이종열](https://github.com/jongyeol12) | Front | 랜딩, 랭킹 페이지|
+| 백진하 | Design | UI디자인, 반응형 웹 디자인 |
 
 
 <br /><br /><br /><br /><br /><br /><br /><br />
