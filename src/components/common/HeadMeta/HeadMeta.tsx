@@ -14,14 +14,16 @@ const FION_DB_META = {
 };
 
 export const HeadMeta = ({
-  title = FION_DB_META.TITLE, // 콘텐츠 제목
+  title,
   description = FION_DB_META.DESCRIPTION,
 }: // url,
 // image,
 IHeadMetaProps) => {
   return (
-    <>
-      <title>{title}</title>
+    <Head>
+      <title>
+        {title ? `${title} - ${FION_DB_META.TITLE}` : FION_DB_META.TITLE}
+      </title>
       <meta charSet="UTF-8" />
       <meta name="description" content={description} />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,6 +34,6 @@ IHeadMetaProps) => {
       {/* <meta property="og:url" content={url} /> */}
       {/* <meta property="og:image" content={image} /> */}
       {/* <meta name="robots" content="인덱스, 팔로우"/> */}
-    </>
+    </Head>
   );
 };
