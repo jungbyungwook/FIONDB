@@ -6,8 +6,9 @@ export const useRakingListQuery = () => {
   return useInfiniteQuery(
     ['RANKINGLIST'],
     async ({ pageParam = 1 }) => {
+      // dev : `http://localhost:3000/api/ranking?page=${pageParam}`,
       const result = await axios.get(
-        `http://localhost:3000/api/ranking?page=${pageParam}`,
+        `https://fion-db.vercel.app/api/ranking?page=${pageParam}`,
       );
       return result;
     },
