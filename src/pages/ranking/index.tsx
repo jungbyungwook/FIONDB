@@ -5,24 +5,36 @@ import theme from 'src/style/theme';
 import { Chart, ArcElement } from 'chart.js';
 import Image from 'next/image';
 import { NickName } from '../api/type';
+import { useRakingListQuery } from '../../useCases/useCaseRanking';
+import { useEffect, useState } from 'react';
+import { useIntersectionObserver } from 'src/hooks/useIntersectionObserver';
 
 Chart.register(ArcElement);
 
-const Item = () => {
+const Item = ({
+  rankNo = 0,
+  nickname = '',
+  clubValue = '',
+  rankingScore = '',
+  record = '',
+  odds = '',
+  rankBest = '',
+}) => {
   const options = {
     cutout: '90%',
   };
+  const recordList = record.replace(/ /g, '').split('|');
 
   const Odds = 20;
   return (
     <ItemContainer>
-      <RankingItem>1</RankingItem>
+      <RankingItem>{rankNo}</RankingItem>
       <OwnerItemContainer>
-        <NickNameText>닉네임</NickNameText>
-        <ClubValueText>1000000bp</ClubValueText>
+        <NickNameText>{nickname}</NickNameText>
+        <ClubValueText>{clubValue}</ClubValueText>
       </OwnerItemContainer>
-      <RankingScoreItem>1000000</RankingScoreItem>
-      <RecordItem>nn전 n승 n패</RecordItem>
+      <RankingScoreItem>{rankingScore}</RankingScoreItem>
+      <RecordItem>{`${recordList[0]}승 ${recordList[1]}무 ${recordList[2]}패`}</RecordItem>
       <OddsItem>
         <DoughnutContainer>
           <Doughnut
@@ -41,24 +53,36 @@ const Item = () => {
               ],
             }}
           />
-          <DoughnutOdds>{`${Odds}%`}</DoughnutOdds>
+          <DoughnutOdds>{`${Math.floor(
+            Number(odds.replace('%', '')),
+          )}%`}</DoughnutOdds>
         </DoughnutContainer>
       </OddsItem>
       <HighestGradeItem>
-        <div
-          style={{
-            width: 60,
-            height: 60,
-            backgroundColor: '#D9D9D9',
-            borderRadius: 100,
-          }}
-        />
+        <RankingBestImg src={rankBest} alt="" />
       </HighestGradeItem>
     </ItemContainer>
   );
 };
 
 const Ranking: NextPage = () => {
+  const [data, setData] = useState<any>(null);
+  const res = useRakingListQuery();
+
+  const triggerRef = useIntersectionObserver(() => {
+    res.fetchNextPage();
+  });
+
+  useEffect(() => {
+    if (res.isSuccess) {
+      setData(res.data);
+    }
+  }, [res.data]);
+
+  if (res.isLoading) {
+    return null;
+  }
+
   return (
     <BackgroundWrapper>
       <RankingWrapper>
@@ -71,11 +95,27 @@ const Ranking: NextPage = () => {
           <OddsText>승률</OddsText>
           <HighestGradeText>최고등급</HighestGradeText>
         </List>
-        <Item />
-        <Item />
-        <Item />
-        <Item />
-        <Item />
+        {data &&
+          data.map((item: any) => {
+            return (
+              <div>
+                {item.data.map((item2: any) => {
+                  return (
+                    <Item
+                      rankNo={item2.rank_no}
+                      nickname={item2.nickname}
+                      clubValue={item2.club_value}
+                      rankingScore={item2.ranking_score}
+                      record={item2.record}
+                      odds={item2.Odds}
+                      rankBest={item2.rank_best}
+                    />
+                  );
+                })}
+              </div>
+            );
+          })}
+        <div ref={triggerRef}>{res?.isFetching ? 'loading' : ''}</div>
         <BackgorundWrapper>
           <Backgorund>
             <Image
@@ -173,6 +213,7 @@ const HighestGradeText = styled.div`
 `;
 
 const ItemContainer = styled.div`
+  position: relative;
   display: flex;
   background-color: #212121;
   width: 108rem;
@@ -289,9 +330,15 @@ const Backgorund = styled.div`
 
 const DoughnutOdds = styled.div`
   position: absolute;
-  right: 1.1rem;
+  right: 1.2rem;
   top: 2.1rem;
   font-weight: 500;
   font-size: 16px;
   line-height: 22px;
+`;
+
+const RankingBestImg = styled.img`
+  width: 60;
+  height: 60;
+  border-radius: 100;
 `;

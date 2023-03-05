@@ -40,7 +40,7 @@ const ranking = async (page: string) => {
   });
 
   const data = ulList.filter((n: any) => n.rank_no);
-  return data;
+  return { data, nextPage: Number(page) + 1 };
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
