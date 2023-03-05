@@ -30,7 +30,7 @@ export const FormationSubPlayers = ({ matchDetailData }: Props) => {
           <SoccerPlayer
             playerDto={subPlayer}
             topOption={false}
-            contentOption={false}
+            contentOption
             inFormation
             isMine
           />
@@ -47,8 +47,13 @@ const S = {
     gap: 2rem;
   `,
   ImageWrap: styled.div<{ rotate: number | undefined }>`
-    width: 5.5rem;
-    height: 5.5rem;
+    width: 11rem;
+    height: 6rem;
     border-radius: 50%;
+
+    @media ${({ theme }) => theme.media.small} {
+      width: 3rem;
+      height: 2.5rem;
+    }
   `,
 };

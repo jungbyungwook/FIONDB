@@ -22,6 +22,10 @@ export interface SoccerPlayerProps {
   contentOption?: boolean;
 }
 
+const getSrc = (spId: number) => {
+  return `https://fo4.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${spId}.png`;
+};
+
 export const SoccerPlayer = ({
   isMine,
   inFormation,
@@ -29,10 +33,6 @@ export const SoccerPlayer = ({
   topOption = true,
   contentOption = true,
 }: SoccerPlayerProps) => {
-  const getSrc = (spId: number) => {
-    return `https://fo4.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${spId}.png`;
-  };
-
   const { useGetSeasonIdMeta } = useCaseGetMetaData();
   const { data, isLoading } = useGetSeasonIdMeta();
   const targetSeasonId = Number(playerDto.spId.toString().slice(0, 3));
@@ -56,10 +56,18 @@ export const SoccerPlayer = ({
   return (
     <S.Container>
       <SoccerPlayerImage
+        inFormation={inFormation}
         src={getSrc(playerDto.spId)}
         top={topOption && <MvpBadge isMine={isMine} />}
-        bottomLeft={<SeasonBadge seasonImageSrc={seasonDto?.seasonImg} />}
-        bottomRight={<GradeBadge spGrade={playerDto?.spGrade} />}
+        bottomLeft={
+          <SeasonBadge
+            inFormation={inFormation}
+            seasonImageSrc={seasonDto?.seasonImg}
+          />
+        }
+        bottomRight={
+          <GradeBadge spGrade={playerDto?.spGrade} inFormation={inFormation} />
+        }
         isMine={isMine}
       />
       {contentOption && (
@@ -67,7 +75,11 @@ export const SoccerPlayer = ({
           <S.Position position={positionCategory} inFormation={inFormation}>
             {playerDto.spPosition}
           </S.Position>
-          <SoccerPlayerName spId={playerDto.spId} />
+          <SoccerPlayerName
+            spId={playerDto.spId}
+            inFormation={inFormation}
+            position={positionCategory}
+          />
         </S.Content>
       )}
     </S.Container>
@@ -82,6 +94,11 @@ const S = {
     position: relative;
     gap: 1.8rem;
     text-align: center;
+
+    @media ${({ theme }) => theme.media.small} {
+      gap: 0.8rem;
+      height: 4.5rem;
+    }
   `,
   Content: styled.div<{ inFormation?: boolean }>`
     display: flex;
@@ -112,8 +129,7 @@ const S = {
         : null};
 
     @media ${({ theme }) => theme.media.small} {
-      font-size: ${({ theme, inFormation }) =>
-        inFormation ? '1rem' : theme.fontSizes.content[12]};
+      display: none;
     }
   `,
   Status: styled.div``,
@@ -123,4 +139,4 @@ const S = {
   `,
 };
 
-export const SoccerPlayerInFormation = () => {};
+// export const SoccerPlayerInFormation = () => {};
