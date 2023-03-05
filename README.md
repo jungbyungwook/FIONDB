@@ -48,7 +48,7 @@
 
 ## 프로젝트 팀원 역할 분담
 
-| 이름(깃헙)| 담당 업무 | |
+| 이름 | 담당 업무 | |
 | ------ | ------------------------ | ----- |
 | [정병욱](https://github.com/jungbyungwook) | Front, Backend | 개발 환경, 랜딩, 랭킹 페이지 |
 | [안영민](https://github.com/ahn0min) | Front | 전적 검색 페이지 |
