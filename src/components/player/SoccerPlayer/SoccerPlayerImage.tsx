@@ -15,6 +15,7 @@ export interface SoccerPlayerImageProps
   right?: ReactNode;
   bottomLeft?: ReactNode;
   bottomRight?: ReactNode;
+  inFormation: boolean;
   isMine?: boolean;
   type?: RadiusType;
 }
@@ -27,21 +28,19 @@ export const SoccerPlayerImage = ({
   bottomLeft,
   bottomRight,
   isMine = false,
+  inFormation,
   type = 'circle',
   src,
-  width = 70,
-  height = 70,
 }: SoccerPlayerImageProps) => {
   return (
     <S.Container>
       <S.TopAbsolute>{top}</S.TopAbsolute>
-      <S.Border isMine={isMine} type={type}>
+      <S.Border isMine={isMine} type={type} inFormation={inFormation}>
         <ImageWithFallback
           src={src}
           fallbackSrc={soccerImageDefaultSrc}
           alt="soccer_image"
-          width={width}
-          height={height}
+          layout="fill"
           objectFit="contain"
           placeholder="blur"
           blurDataURL={soccerImageDefaultSrc}
@@ -64,9 +63,14 @@ const S = {
   Container: styled.div`
     position: relative;
   `,
-  Border: styled.div<{ isMine: boolean; type: RadiusType }>`
+  Border: styled.div<{
+    isMine: boolean;
+    type: RadiusType;
+    inFormation: boolean;
+  }>`
     position: relative;
-    width: fit-content;
+    width: ${({ inFormation }) => (inFormation ? '6rem' : '7rem')};
+    height: ${({ inFormation }) => (inFormation ? '6rem' : '7rem')};
     border: ${({ theme, isMine }) =>
       isMine
         ? `1px solid ${theme.colors.green[600]}`
@@ -75,8 +79,8 @@ const S = {
     overflow: hidden;
 
     @media ${({ theme }) => theme.media.small} {
-      width: 6rem;
-      height: 6rem;
+      width: ${({ inFormation }) => inFormation && '3rem'};
+      height: ${({ inFormation }) => inFormation && '3rem'};
     }
   `,
   TopAbsolute: styled.div`

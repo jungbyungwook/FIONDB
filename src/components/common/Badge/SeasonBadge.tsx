@@ -1,17 +1,29 @@
 import styled from 'styled-components';
 
 import { ImageWithFallback } from 'src/components/common/Image/ImageWithFallback';
-import theme from 'src/style/theme';
-import { Badge } from './Badge';
 
 interface Props {
   seasonImageSrc?: string;
+  inFormation: boolean;
 }
 
-export const SeasonBadge = ({ seasonImageSrc }: Props) => {
-  const color = theme.colors;
+export const SeasonBadge = ({ seasonImageSrc, inFormation }: Props) => {
+  if (!seasonImageSrc) {
+    return null;
+  }
 
-  if (seasonImageSrc) {
+  if (inFormation) {
+    return (
+      <S.InFormationImageWrap>
+        <ImageWithFallback
+          src={seasonImageSrc}
+          alt="seson_badge"
+          fallbackSrc={seasonImageSrc}
+          layout="fill"
+        />
+      </S.InFormationImageWrap>
+    );
+  } else {
     return (
       <S.ImageWrap>
         <ImageWithFallback
@@ -23,16 +35,6 @@ export const SeasonBadge = ({ seasonImageSrc }: Props) => {
       </S.ImageWrap>
     );
   }
-
-  return (
-    <Badge
-      center={''}
-      color={color.gray[100]}
-      backgroundColor={color.gray[900]}
-      width={22}
-      height={22}
-    />
-  );
 };
 
 const S = {
@@ -46,6 +48,19 @@ const S = {
     @media ${({ theme }) => theme.media.small} {
       width: 3rem;
       height: 2rem;
+    }
+  `,
+
+  InFormationImageWrap: styled.div`
+    position: relative;
+    width: 2.5rem;
+    height: 2rem;
+    border-radius: 0.3rem;
+    overflow: hidden;
+
+    @media ${({ theme }) => theme.media.small} {
+      width: 1.4rem;
+      height: 1.1rem;
     }
   `,
 };

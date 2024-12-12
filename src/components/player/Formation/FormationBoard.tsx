@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { FormationSubPlayers } from 'src/components/player/Formation/FormationSubPlayers';
 import { MatchInfo } from 'src/types/DetailObject';
+import { PositionCategoryKeyType } from 'src/constants/position';
 
 interface Props {
   children: ReactNode;
@@ -13,7 +14,11 @@ export const FormationBoard = ({ children, matchDetailData }: Props) => {
   return (
     <S.FormationBoard>
       <S.BoardTitle>스쿼드 정보</S.BoardTitle>
-      {/* <S.BoardTable> TODO: 선수가치 총합등이 들어갈 부분</S.BoardTable> */}
+      <S.Positions>
+        <S.Position position="fw">● FW</S.Position>
+        <S.Position position="mf">● MF</S.Position>
+        <S.Position position="df">● DF</S.Position>
+      </S.Positions>
       {children}
       <S.BoardFooter>
         <S.BoardFooterTitle>교체선수</S.BoardFooterTitle>
@@ -31,6 +36,7 @@ const S = {
 
     @media ${({ theme }) => theme.media.small} {
       width: 100%;
+      height: 100%;
     }
   `,
   BoardTitle: styled.div`
@@ -45,6 +51,21 @@ const S = {
     @media ${({ theme }) => theme.media.small} {
       height: 4rem;
     }
+  `,
+  Positions: styled.ul`
+    display: none;
+
+    @media ${({ theme }) => theme.media.small} {
+      display: flex;
+      align-items: center;
+      height: 4rem;
+      padding-left: 2rem;
+      gap: 1.2rem;
+      list-style: none;
+    }
+  `,
+  Position: styled.li<{ position: PositionCategoryKeyType }>`
+    color: ${({ theme, position }) => theme.colors.position[position]};
   `,
   BoardTable: styled.div`
     height: 10rem;

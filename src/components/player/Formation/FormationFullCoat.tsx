@@ -11,7 +11,6 @@ interface FormationContainerProps {
   matchDetailData: MatchInfo[];
 }
 
-// 정렬해서 넘겨주자.
 export const FormationFullCoat = ({
   matchDetailData,
 }: FormationContainerProps) => {
@@ -56,8 +55,8 @@ const S = {
     @media ${({ theme }) => theme.media.small} {
       display: block;
       width: 34rem;
-      height: 60rem;
-      margin: 0 auto;
+      height: 110rem;
+      margin: 0 0.8rem;
       background-image: url(${mobileSoccerCoatUrl.src});
     }
   `,

@@ -10,9 +10,8 @@ import type {
 import { baseURL } from 'src/pages/api/url';
 
 export const metaAPI = {
-  getSoccerPlayerMeta: (): Promise<AxiosResponse<IMetaSpId[]>> => {
-    return api.get(baseURL.meta.getMetaSpId).then((response) => response.data);
-  },
+  getSoccerPlayerMeta: (): Promise<AxiosResponse<IMetaSpId[]>> =>
+    api.get(baseURL.meta.getMetaSpId).then((response) => response.data),
   getMatchTypeMeta: (): Promise<AxiosResponse<IMetaMatchType[]>> =>
     api.get(baseURL.meta.getMetaMatchType),
   getMatchDivisionMeta: (): Promise<AxiosResponse<IMetaDivision[]>> =>
